@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap');
+
+:root {
+    --cor-primaria: #000000;
+    --cor-secundaria: #F6F6F6;
+    --cor-terciaria: #22d4fd;
+
+    --fonte-primaria: "Krona One", sans-serif;
+    --fonte-secundaria: "Montserrat", sans-serif;
+    --fonte-terciaria: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fonte-secundaria);
+    background-image: url('../assets/BackSite.png');
+    background-size: cover;
+    background-attachment: fixed; /* Mantém a imagem fixa ao rolar a página */
+    background-repeat: no-repeat;
+    background-position: center center;
+    
+    margin: 0;
+    padding: 0;
+}
+
+.cabecalho {
+    padding: 2% 14%;
+}
+
+.cabecalho__menu {
+    display: flex;
+    gap: 80px;
+}
+
+.cabecalho__menu__link {
+    font-family: var(--fonte-terciaria);
+    font-size: 22px;
+    font-weight: 499;
+    font-style: bold;
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    
+}
+
+.apresentacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 0px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.apresentacao__conteudo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+   
+
+}
+
+.titulo-destaque {
+    color: var(--cor-terciaria);
+}
+
+.apresentacao__conteudo__titulo {
+    font-family: var(--fonte-secundaria);
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    text-align: justify;
+    color: var(--cor-secundaria);
+}
+
+.apresentacao__conteudo__paragrafo {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    font-family: var(--fonte-secundaria);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    text-align: justify;
+    color: var(--cor-secundaria);
+}
+
+.apresentacao__links__subtitulos {
+    font-family: var(--fonte-secundaria);
+    font-weight: 499;
+    font-style: normal;
+    color: var(--cor-terciaria);
+    text-decoration: none;
+}
+
+.apresentacao__links {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+}
+
+.apresentacao__links__navegacao {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    border: 2px solid var(--cor-terciaria);
+    width: 50%;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 22px;
+    font-family: var(--cor-secundaria);
+    font-weight: 600;
+    font-style: normal;
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    align-items: center;
+    padding: 21px;
+    color:var(--cor-secundaria)
+}
+
+.fotoprincipal {
+   
+    width: 108%; /* Garante que a imagem ocupe todo o espaço disponível */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove espaços extras ao redor da imagem */
+    
+    
+    
+}
+
+.apresentacao__foto {
+    display: flex;
+    justify-content: center;
+    border: 3px solid var(--cor-terciaria);
+    width: 401px;
+    height: 431px;
+    border-radius: 8px;
+    align-items: center;
+    overflow: hidden; 
+    
+    
+   
+}
+
+
+.apresentacao__links__navegacao:hover {
+    background-color: var(--cor-terciaria);
+    cursor: grab;
+    border: 2px solid var(--cor-terciaria);
+    color: var(--cor-primaria);
+}
+
+.rodape {
+    font-family: var(--fonte-secundaria);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    background-color: #22D4FD;
+    height: 30px;
+    font-size: 19px;
+    color: black;
+    padding: 10px 10px;
+    height:40px;
+    
+    
+}
+
+
+@media (max-width: 700px) {
+    .cabecalho {
+        padding: 10%;
+    }
+    .cabecalho__menu {
+        justify-content: center;
+    }
+    .apresentacao {
+        flex-direction: column-reverse;
+        padding: 7%;
+    }
+    .apresentacao__conteudo {
+        width: 100%;
+    }
+}
