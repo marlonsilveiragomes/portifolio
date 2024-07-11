@@ -8,11 +8,12 @@ O site ainda está em atualização, porém já está disponivel a ultima versao
 
 Estrutura:
 
->assets ![contém as imagens do projeto]
->styles ![contém arquivo estilos CSS]
-<>about.html ![contém o codigo html da página sobre[em manutenção]
-<>curriculo.html ![contém o código html da página curriculo
-<>index.html ![contém o código html da página principal, início]
+>assets ![contém as imagens do projeto](assets).
+>styles ![contém arquivo estilos CSS](styles).
+>DOC PORTIFÓLIO READ.md
+<>about.html ![contém o codigo html da página sobre[em manutenção](about.html).
+<>curriculo.html ![contém o código html da página curriculo](curriculo.html).
+<>index.html ![contém o código html da página principal, início](index.html).
 
 
 Ultimas atualizaçõe:
