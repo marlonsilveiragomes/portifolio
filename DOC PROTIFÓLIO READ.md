@@ -22,6 +22,9 @@ Página início antiga:  ![imagem página antiga](assets/backFotoAntiga.png)
 
 Página Início atualizada: ![imagem página antiga](assets/atualizacaoBackFoto.png)
 
+Retirar o padding do .paresentação com intuito de torna a visualização responsiva.
+
+
 
 
 
