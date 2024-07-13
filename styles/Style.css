@@ -188,10 +188,13 @@ body {
     .apresentacao {
         flex-direction: column-reverse;
         padding: 7%;
-        width: 40%;
+        
         
     }
     .apresentacao__conteudo {
         width: 7%;
+    }
+    .apresentacao__foto {
+        width: 40%;
     }
 }
