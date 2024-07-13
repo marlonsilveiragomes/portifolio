@@ -77,7 +77,7 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 30px;
-    text-align: justify;
+    text-align: center;
     color: var(--cor-secundaria);
 }
 
@@ -89,7 +89,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-    text-align: justify;
+    text-align: center;
     color: var(--cor-secundaria);
 }
 
@@ -188,8 +188,10 @@ body {
     .apresentacao {
         flex-direction: column-reverse;
         padding: 7%;
+        width: 40%;
+        
     }
     .apresentacao__conteudo {
-        width: 40%;
+        width: 7%;
     }
 }
