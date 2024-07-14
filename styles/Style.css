@@ -36,6 +36,7 @@ body {
 .cabecalho__menu {
     display: flex;
     gap: 80px;
+    
 }
 
 .cabecalho__menu__link {
@@ -205,7 +206,8 @@ body {
         padding: 10%;
     }
     .cabecalho__menu {
-        justify-content: center;
+        flex-direction: row;
+        justify-content:space-around;
     }
     .apresentacao {
         flex-direction: column-reverse;
@@ -225,7 +227,7 @@ body {
         padding: 5%;
     }
     .cabecalho__menu {
-        flex-direction: column;
+        flex-direction:row;
         align-items: center;
         gap: 20px;
     }
