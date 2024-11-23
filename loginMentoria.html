@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculo</title>
+    <link rel="stylesheet" href="/styles/Style.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            <a class="cabecalho__menu__link" href="index.html">Inicio</a>
+            <a class="cabecalho__menu__link" href="about.html">Sobre mim</a>
+            <a class="cabecalho__menu__link" href="curriculo.html">Curriculo</a>
+            <a class="cabecalho__menu__link" href="loginMentoria.html">Mentoria de Impacto</a>
+        </nav>
+        </header>
+        <main class="apresentacao"> 
+            <section class="apresentacao__conteudo">
+                <h1 class="apresentacao__conteudo__titulo">Mentoria de Impacto! 
+                </h1><p class="apresentacao__conteudo__paragrafo">Olá, Seja Bem-vinda a
+                <strong class="titulo-destaque">Mentoria de Impacto!</strong> Uma parceria entre Dev-Marlon-Gomes,  
+                Impact Hub e Salto Aceleradora. Aqui você acessa todo material necessário para alavancar <strong class="titulo-destaque">Seu Negócio!</strong> </p>
+                <h2 class="apresentacao__conteudo__titulo">Entre com seu Login e Senha:</h2>
+                <form id="loginForm" onsubmit="return validateLogin()">
+                    <div class="form-group">
+                        <label for="username">Usuário:</label>
+                        <input type="text" id="username" placeholder="Usuário" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" placeholder="Senha" required>
+                    </div>
+                    <button type="submit">Entrar</button>
+                    <p id="errorMessage" style="color: red; display: none;">Usuário ou senha inválidos.</p>
+                    <p id="successMessage" style="color: rgb(120, 247, 137); display: none;"></p>
+                </form>
+               
+            </section>
+        <div class="apresentacao__foto">
+            <img class=" fotoprincipal" src="assets/mentorHub.png" alt = "foto principal">  
+        </main>    
+    <footer>
+        <p class="rodape__mentoria">Desenvolvido por Marlon Silveira Gomes</p>
+    </footer>
+    <div class="whats">
+        <a href=" https://wa.me/5548991180829" target="_blank">
+        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
+    </a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
+            
