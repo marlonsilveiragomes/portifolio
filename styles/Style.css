@@ -27,8 +27,15 @@ body {
     background-position: center center;
     margin: 0;
     padding: 0;
-    
+    display: flex; /* ✅ Organiza os elementos de forma flexível */
+    flex-direction: column; /* ✅ Mantém o layout em coluna */
+    min-height: 100vh; /* ✅ Garante altura mínima da tela */
 }
+main {
+    flex-grow: 1; /* ✅ Faz o conteúdo expandir e empurrar o rodapé para baixo */
+}
+
+
 
 .cabecalho {
     padding: 2% 14%;
@@ -241,59 +248,9 @@ body {
     color: var(--cor-primaria);
 }
 
-.rodape {
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    display: flex;
-    justify-content: center;
-    background-color: #22D4FD;
-    height: 30px;
-    font-size: 19px;
-    color: black;
-    padding: 10px 10px;
-    height:40px;
-    margin-top: 120px;
-    
-    
-}
-
-
-.rodape__sobre {
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    display: flex;
-    justify-content: center;
-    background-color: #22D4FD;
-    height: 30px;
-    font-size: 19px;
-    color: black;
-    padding: 10px 10px;
-    height:40px;
-    margin-top: 200px;
-    
-}
-
-.rodape__curriculo {
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    display: flex;
-    justify-content: center;
-    background-color: #22D4FD;
-    height: 30px;
-    font-size: 19px;
-    color: black;
-    padding: 10px 10px;
-    height:40px;
-    
-    
-}
-
+.rodape,
+.rodape__sobre,
+.rodape__curriculo,
 .rodape__mentoria {
     font-family: var(--fonte-secundaria);
     font-optical-sizing: auto;
@@ -301,15 +258,15 @@ body {
     font-style: normal;
     display: flex;
     justify-content: center;
+    align-items: center; /* Centraliza o conteúdo verticalmente */
     background-color: #22D4FD;
-    height: 30px;
     font-size: 19px;
     color: black;
-    padding: 10px 10px;
-    height:40px;
-    margin-top: 200px;
-    
-    
+    padding: 10px;
+    height: 40px;
+    margin-top: auto; /* ✅ Faz o rodapé ficar no final da página */
+    width: 100%;
+
     
 }
 
@@ -476,3 +433,142 @@ button:hover {
     background-color: var(--cor-primaria);
     color: var(--cor-secundaria);
 }
+
+
+
+
+
+
+.container {
+    display: flex;
+    flex-direction:row; /* Mantém os elementos em coluna */
+    height: 100vh; /* Garante que o main ocupe toda a altura da tela */
+    justify-content: center;
+}
+
+/* Seção de Descrição do Problema */
+.descricaoProblema {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Espaço entre os elementos */
+    align-items: center; /* Alinha verticalmente ao centro */
+    height: 750px; /* Ocupa 20% do main */
+    padding: 10px;
+    background-color: #ffffff; /* Apenas para visualização */
+    box-sizing: border-box;
+    width: 20%;
+    font-family: var(--fonte-primaria);
+    text-align: center;
+    
+}
+
+/* Pergunta e Resposta dentro da Descrição do Problema */
+.descricaoProblemaPergunta{
+    width: 100%; /* Cada um ocupa 40% da largura */
+    height: 100%; /* Ocupa toda a altura da section */
+    background-color: #dcdcdc; /* Apenas para visualização */
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    box-sizing: border-box;
+}
+.descricaoProblemaResposta {
+    width: 100%; /* Cada um ocupa 40% da largura */
+    height: 100%; /* Ocupa toda a altura da section */
+    background-color: #dcdcdc; /* Apenas para visualização */
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+#respostaInput {
+    width: 250px; /* Define a largura */
+    padding: 100px; /* Adiciona espaçamento interno */
+    font-size: 16px; /* Ajusta o tamanho da fonte */
+}
+.botoes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+input {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    padding: 8px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.matrizGuti {
+    display: flex;
+    flex-direction: column; /* Ou row, dependendo do layout */
+    background-color: #ffffff; /* Cor de fundo */
+    height: 750px;
+    width: 1360px;
+    overflow: hidden; /* Garante que nada saia da área da seção */
+}
+
+.matrizGuti__imagem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: relative; /* Adicionado */
+}
+
+.matrizGuti__imagem img {
+    object-fit: cover; /* Faz com que a imagem cubra toda a área, sem distorcer */
+    width: 100%;
+    height: 100%;
+    border-radius: 8px; /* Adiciona bordas arredondadas, se necessário */
+}
+
+.matrizGuti__retangulo {
+    width: 210px;
+    height: 50px;
+    background-color: green; /* Cor verde */
+    color: var(--cor-primaria); /* Fonte primária */
+    font-family: var(--fonte-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: calc(750px / 5*1.3); /* Primeira linha */
+    left: calc(1360px / 8*0.3); /* Terceira coluna (C) */
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.mini-retangulos-container {
+    position: absolute;
+    top: calc(750px / 5*1.65); /* Primeira linha */
+    left: calc(1360px / 8*0.3); /* Terceira coluna (C) */
+    display: flex;
+    flex-direction:row;
+    gap: 2px;
+}
+
+.mini-retangulo {
+    width: 50px;
+    height: 20px;
+    background-color: green;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    cursor: grab;
+    
+    
+}
+

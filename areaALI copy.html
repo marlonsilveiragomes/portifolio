@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz Guti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            width: 60%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .descricaoProblema {
+            width: 50%;
+        }
+        .descricaoProblemaPergunta {
+            font-size: 18px;
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+        .descricaoProblemaResposta {
+            display: flex;
+            flex-direction: column;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .botoes {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .ok { background-color: #4CAF50; color: white; }
+        .voltar { background-color: #f44336; color: white; }
+    </style>
+</head>
+<body>
+            <div class="container">
+                <section class="descricaoProblema">
+                    <div class="descricaoProblemaPergunta"></div>
+                    <div class="descricaoProblemaResposta">
+                        <input type="text" id="respostaInput" placeholder="Digite aqui...">
+                        <div class="botoes" style="display: none;">
+                            <button class="voltar" onclick="voltarPergunta()">Voltar</button>
+                            <button class="ok" onclick="proximaPergunta()">OK</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+    <script>
+        const perguntas = [
+            "Digite o título do primeiro desafio da Guti:",
+            "Digite a descrição do primeiro desafio:"
+        ];
+        let indicePergunta = 0;
+        const perguntaElemento = document.querySelector(".descricaoProblemaPergunta");
+        const inputResposta = document.getElementById("respostaInput");
+        const botoes = document.querySelector(".botoes");
+
+        function escreverTexto(texto, elemento, callback) {
+            let i = 0;
+            elemento.innerHTML = "";
+            const intervalo = setInterval(() => {
+                elemento.innerHTML += texto[i];
+                i++;
+                if (i === texto.length) {
+                    clearInterval(intervalo);
+                    if (callback) callback();
+                }
+            }, 50);
+        }
+
+        function carregarPergunta() {
+            escreverTexto(perguntas[indicePergunta], perguntaElemento, () => {
+                inputResposta.value = "";
+                inputResposta.focus();
+                botoes.style.display = "flex";
+            });
+        }
+
+        function proximaPergunta() {
+            if (indicePergunta < perguntas.length - 1) {
+                indicePergunta++;
+                carregarPergunta();
+            }
+        }
+
+        function voltarPergunta() {
+            if (indicePergunta > 0) {
+                indicePergunta--;
+                carregarPergunta();
+            }
+        }
+
+        carregarPergunta();
+    </script>
+</body>
+</html>
