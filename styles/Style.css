@@ -485,7 +485,7 @@ button:hover {
 #respostaInput {
     width: 250px; /* Define a largura */
     padding: 100px; /* Adiciona espaçamento interno */
-    font-size: 16px; /* Ajusta o tamanho da fonte */
+    font-size: 18px; /* Ajusta o tamanho da fonte */
 }
 .botoes {
     display: flex;
@@ -571,4 +571,47 @@ button {
     
     
 }
+.matrizGuti__retanguloDescricao {
+    width: 200px;
+    height: 100px;
+    background-color: green; /* Cor verde */
+    color: var(--cor-primaria); /* Fonte primária */
+    font-family: var(--fonte-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: calc(750px / 5*4.3); /* Primeira linha */
+    left: calc(1360px / 8*1.8); /* Terceira coluna (C) */
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    word-wrap: break-word; /* Quebra palavras longas para caber no retângulo */
+    overflow: hidden; /* Evita que o texto ultrapasse o retângulo */
+    white-space: normal; /* Permite a quebra de linhas */
+}
+.matrizGuti__retanguloResultado {
+    width: 80px;
+    height: 80px;
+    background-color: green; /* Cor verde */
+    color: var(--cor-primaria); /* Fonte primária */
+    font-family: var(--fonte-primaria);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: calc(750px / 5*4.3); /* Primeira linha */
+    left: calc(1360px / 8*6.3); /* Terceira coluna (C) */
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    word-wrap: break-word; /* Quebra palavras longas para caber no retângulo */
+    overflow: hidden; /* Evita que o texto ultrapasse o retângulo */
+    white-space: normal; /* Permite a quebra de linhas */
+}
+
 

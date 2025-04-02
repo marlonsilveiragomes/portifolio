@@ -25,7 +25,7 @@
                         <div class="botoes" style="display: none;">
                             <button class="voltar" onclick="voltarPergunta()">Voltar</button>
                             <button class="ok" onclick="proximaPergunta()">OK</button>
-                            <button id="salvarBtn" style="display: none;">Salvar</button>
+                            <button id="salvarBtn" style="display: none;" onclick="salvarDesafio()">Salvar</button>
                         </div>
                     </div>
                 </section>
@@ -46,7 +46,8 @@
                 const perguntaElemento = document.querySelector(".descricaoProblemaPergunta");
                 const inputResposta = document.getElementById("respostaInput");
                 const botoes = document.querySelector(".botoes");
-                
+                const salvarBtn = document.getElementById("salvarBtn");
+            
                 function escreverTexto(texto, elemento, callback) {
                     let i = 0;
                     elemento.innerHTML = "";
@@ -65,22 +66,68 @@
                         inputResposta.value = "";
                         inputResposta.focus();
                         botoes.style.display = "flex";
+                        if (indicePergunta === 1) {
+                            salvarBtn.style.display = "inline-block";
+                        } else {
+                            salvarBtn.style.display = "none";
+                        }
                     });
                 }
             
-                function criarRetangulo(texto) {
+                function criarRetangulo(texto, classe) {
                     const matrizImagem = document.querySelector(".matrizGuti__imagem");
-                    
+            
                     const retangulo = document.createElement("div");
-                    retangulo.classList.add("matrizGuti__retangulo");
+                    retangulo.classList.add(classe);
                     retangulo.textContent = texto;
-                    
+            
                     matrizImagem.appendChild(retangulo);
-                    
+            
                     const miniContainer = document.createElement("div");
                     miniContainer.classList.add("mini-retangulos-container");
                     matrizImagem.appendChild(miniContainer);
-                    
+            
+                    criarMiniRetangulos(miniContainer);
+                }
+            
+                function criarRetanguloDescricao(texto) {
+                    const matrizImagem = document.querySelector(".matrizGuti__imagem");
+            
+                    const retanguloDescricao = document.createElement("div");
+                    retanguloDescricao.classList.add("matrizGuti__retanguloDescricao");
+                    retanguloDescricao.textContent = texto;
+            
+                    matrizImagem.appendChild(retanguloDescricao);
+            
+                    const miniContainer = document.createElement("div");
+                    miniContainer.classList.add("mini-retangulos-container");
+                    matrizImagem.appendChild(miniContainer);
+            
+                    criarMiniRetangulos(miniContainer);
+                }
+            
+                // Função atualizada para criar o retângulo de resultado com a mesma lógica de criarRetanguloDescricao
+                function criarRetanguloResultado(texto) {
+                    const matrizImagem = document.querySelector(".matrizGuti__imagem");
+            
+                    // Criação do primeiro retângulo de resultado
+                    const retanguloResultado = document.createElement("div");
+                    retanguloResultado.classList.add("matrizGuti__retanguloResultado");  // Usando a classe de retângulo de descrição
+                    retanguloResultado.textContent = texto;
+            
+                    matrizImagem.appendChild(retanguloResultado);
+            
+                    // Criação do segundo retângulo de resultado
+                    const retanguloResultadoExtra = document.createElement("div");
+                    retanguloResultadoExtra.classList.add("matrizGuti__retanguloDescricao");  // Usando a classe de retângulo de descrição
+                    retanguloResultadoExtra.textContent = texto;
+            
+                    matrizImagem.appendChild(retanguloResultadoExtra);
+            
+                    const miniContainer = document.createElement("div");
+                    miniContainer.classList.add("mini-retangulos-container");
+                    matrizImagem.appendChild(miniContainer);
+            
                     criarMiniRetangulos(miniContainer);
                 }
             
@@ -99,8 +146,16 @@
             
                 function proximaPergunta() {
                     if (indicePergunta === 0) {
-                        criarRetangulo(inputResposta.value);
+                        // Cria o primeiro retângulo com o título
+                        criarRetangulo(inputResposta.value, "matrizGuti__retangulo");
+                    } else if (indicePergunta === 1) {
+                        // Cria o segundo retângulo com a descrição
+                        criarRetanguloDescricao(inputResposta.value);
+                        // Cria os retângulos de resultado após a descrição
+                        criarRetanguloResultado(inputResposta.value);
                     }
+            
+                    // Avança para a próxima pergunta somente após criar o retângulo
                     if (indicePergunta < perguntas.length - 1) {
                         indicePergunta++;
                         carregarPergunta();
@@ -114,14 +169,9 @@
                     }
                 }
             
+                function salvarDesafio() {
+                    alert("Desafio salvo: " + inputResposta.value);
+                }
+            
                 carregarPergunta();
             </script>
-            
-            
-
-
-
-
-        
-    </body>
-    </html> 
