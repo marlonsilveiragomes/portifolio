@@ -457,8 +457,11 @@ button:hover {
     background-color: #ffffff; /* Apenas para visualização */
     box-sizing: border-box;
     width: 20%;
-    font-family: var(--fonte-primaria);
+    font-family: var(--fonte-secundaria);
+    font-size: 25px;
     text-align: center;
+    color:(--cor-secundaria);
+
     
 }
 
@@ -483,7 +486,7 @@ button:hover {
     flex-direction: column;
 }
 #respostaInput {
-    width: 250px; /* Define a largura */
+    width: 290px; /* Define a largura */
     padding: 100px; /* Adiciona espaçamento interno */
     font-size: 18px; /* Ajusta o tamanho da fonte */
 }
