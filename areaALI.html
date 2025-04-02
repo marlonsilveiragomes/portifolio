@@ -107,29 +107,29 @@
                 }
             
                 // Função atualizada para criar o retângulo de resultado com a mesma lógica de criarRetanguloDescricao
-                function criarRetanguloResultado(texto) {
-                    const matrizImagem = document.querySelector(".matrizGuti__imagem");
-            
-                    // Criação do primeiro retângulo de resultado
-                    const retanguloResultado = document.createElement("div");
-                    retanguloResultado.classList.add("matrizGuti__retanguloResultado");  // Usando a classe de retângulo de descrição
-                    retanguloResultado.textContent = texto;
-            
-                    matrizImagem.appendChild(retanguloResultado);
-            
-                    // Criação do segundo retângulo de resultado
-                    const retanguloResultadoExtra = document.createElement("div");
-                    retanguloResultadoExtra.classList.add("matrizGuti__retanguloDescricao");  // Usando a classe de retângulo de descrição
-                    retanguloResultadoExtra.textContent = texto;
-            
-                    matrizImagem.appendChild(retanguloResultadoExtra);
-            
-                    const miniContainer = document.createElement("div");
-                    miniContainer.classList.add("mini-retangulos-container");
-                    matrizImagem.appendChild(miniContainer);
-            
-                    criarMiniRetangulos(miniContainer);
-                }
+                function criarRetanguloResultado(texto, numero) {
+    const matrizImagem = document.querySelector(".matrizGuti__imagem");
+
+    // Criação do primeiro retângulo de descrição (que armazena texto)
+    const retanguloDescricao = document.createElement("div");
+    retanguloDescricao.classList.add("matrizGuti__retanguloDescricao");  // Usando a classe de retângulo de descrição
+    retanguloDescricao.textContent = texto;  // Mantém o texto que é passado para a função
+    
+    matrizImagem.appendChild(retanguloDescricao);
+
+    // Criação do segundo retângulo de resultado (que agora armazena o número)
+    const retanguloResultado = document.createElement("div");
+    retanguloResultado.classList.add("matrizGuti__retanguloResultado");  // Usando a classe de retângulo de resultado
+    retanguloResultado.textContent = numero;  // Agora armazena o número passado para a função
+
+    matrizImagem.appendChild(retanguloResultado);
+
+    const miniContainer = document.createElement("div");
+    miniContainer.classList.add("mini-retangulos-container");
+    matrizImagem.appendChild(miniContainer);
+
+    criarMiniRetangulos(miniContainer);
+}
             
                 function criarMiniRetangulos(container) {
                     for (let i = 0; i < 4; i++) {
