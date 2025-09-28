@@ -11,7 +11,7 @@ function validateLogin() {
         document.getElementById('errorMessage').style.display = "none";
         
         // Redireciona para a nova página
-        window.location.href = "areaALI.html"; // Altere o nome do arquivo se necessário
+        window.location.href = "oficinaIA.html"; // Altere o nome do arquivo se necessário
         return false; // Impede o envio do formulário
     } else {
         document.getElementById('errorMessage').style.display = "block";

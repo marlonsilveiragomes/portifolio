@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Area Mentorado</title>
+    <link rel="stylesheet" href="/styles/StyleGuti.css" />
+</head>
+<body>
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            <a class="cabecalho__menu__link" href="index.html">Inicio</a>
+            <a class="cabecalho__menu__link" href="about.html">Sobre mim</a>
+            <a class="cabecalho__menu__link" href="curriculo.html">Curriculo</a>
+            <a class="cabecalho__menu__link" href="projetoALI.html">Projeto ALI</a>
+            <a class="cabecalho__menu__link" href="areaALI.html"><strong class="titulo-destaque">Área ALI</strong></a>
+        </nav>
+    </header>
+    <main>
+    <div class="container">
+        <section class="descricaoProblema">
+            <div class="descricaoProblemaPergunta"></div>
+            <div class="descricaoProblemaResposta">
+                <input type="text" id="respostaInput" placeholder="Digite aqui..." />
+                <div class="botoes" style="display: none;">
+                    <button class="voltar" onclick="voltarPergunta()">Voltar</button>
+                    <button class="ok" onclick="proximaPergunta()">OK</button>
+                    <button id="salvarBtn" style="display: none;" onclick="salvarDesafio()">Salvar</button>
+                </div>
+            </div>
+        </section>
+        <section class="matrizGuti">
+            <div class="matrizGuti__imagem">
+                <img src="/assets/GutMatriz.jpg" alt="Descrição da imagem" />
+                <div class="drop-area" data-coluna="gravidade"></div>
+                <div class="drop-area" data-coluna="urgencia"></div>
+                <div class="drop-area" data-coluna="tendencia"></div>
+                <div class="drop-area" data-coluna="impacto"></div>
+                <div class="matrizGuti__conteudo"></div>
+            </div>
+            </main>
+           <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+    </footer>
+    <div class="whats">
+        <a href=" https://wa.me/5548991180829" target="_blank">
+        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
+    </a>
+    </div>
+        </section>
+    </div>
+<script src="scriptGuti.js"></script>
+    
+</body>
+</html>
