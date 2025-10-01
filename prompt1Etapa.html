@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifólio</title>
+    <link rel="stylesheet" href="/styles/Style.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            
+            <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
+            <a class="cabecalho__menu__link" href="oficinaIA.html"><strong style="color: greenyellow;">Prompts ALI</strong>
+</a>
+                        
+        </nav>
+    </header>
+    <main class="apresentacao"> 
+    <section class="apresentacao__conteudo">
+        <h1 class="apresentacao__conteudo__titulo">1° Prompt | 
+        <strong class="titulo-destaque"> Etapa CONHECER/OBTER</strong> 
+        </h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Gerar uma descrição da empresa antes da reunião com o empresário.</p>
+        <h1><P class="apresentacao__conteudo__paragrafo">Obs.: Inclua as redes sociais da empresa, site e outras informações e agregue junto com o Prompt Sugerido. Ex: @empresainsta</P>
+        <div class="apresentacao__prompt">
+    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
+        "Com base nos links fornecidos (site, redes sociais, perfil no Google Meu Negócio, entre outros), gere um texto que descreva de forma clara e objetiva a empresa, incluindo:
+    • Quais produtos ou serviços ela oferece
+
+    • Quem são seus principais clientes
+
+    • Localização e presença online
+
+    • Canais de vendas utilizados
+
+    • Diferenciais percebidos
+
+O texto será utilizado na etapa Conhecer/Obter do Programa ALI Produtividade como base para o entendimento inicial do negócio."
+    </p>
+    <button class="botao-copiar" onclick="copiarPrompt()">Copiar</button>
+</div>
+<div class="apresentacao__conteudo__paragrafo">Prompt autor: Agente Local Inovação André Kettermann</p>
+    </section>
+            
+    <div class="apresentacao__foto__oficina">
+        <img class=" fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt = "foto principal">  
+    </main>    
+    <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+    </footer>
+    <div class="whats">
+        <a href=" https://wa.me/5548991180829" target="_blank">
+        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
+    </a>
+    </div>
+    <script>
+function copiarPrompt() {
+    const texto = document.getElementById("textoPrompt").innerText;
+    navigator.clipboard.writeText(texto).then(() => {
+        alert("✅ Prompt copiado com sucesso!");
+    }).catch(err => {
+        alert("❌ Erro ao copiar o texto.");
+    });
+}
+</script>
+</body>
+</html>
