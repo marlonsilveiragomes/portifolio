@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifólio</title>
+    <link rel="stylesheet" href="/styles/Style.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            
+            <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
+            <a class="cabecalho__menu__link" href="oficinaIA.html"><strong style="color: greenyellow;">Prompts ALI</strong>
+</a>
+                        
+        </nav>
+    </header>
+    <main class="apresentacao"> 
+    <section class="apresentacao__conteudo">
+        <h1 class="apresentacao__conteudo__titulo">Marketing Digital | 
+        <strong class="titulo-destaque"> Esolha o Prompt ideal para seu Desafio!</strong> 
+        </p>
+        <h1><P class="apresentacao__conteudo__paragrafo"><strong style="color: rgb(47, 255, 255);">🔍 Análise Presença Digital</strong><h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Mapear e sistematizar as 
+            informações essenciais da empresa para compreender sua atuação, posicionamento
+             e diferenciais competitivos no ambiente digital.
+        <div class="apresentacao__prompt">
+    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
+       Faça uma pesquisa no site e perfil de instagram da empresa (X). Me gere um relatório que contenha as principais informações sobre a empresa, 
+       incluindo: área de atuação, missão, produtos ou serviços oferecidos, localização e principais diferenciais; 
+    </p>
+    <button class="botao-copiar" onclick="copiarPrompt()">Copiar</button>
+</div>
+
+    <h1><P class="apresentacao__conteudo__paragrafo"><strong style="color: rgb(47, 255, 255);">🎯 Análise de Branding da Marca</strong><h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Identificar os principais elementos
+             de branding presentes nos canais digitais da empresa, avaliando sua consistência e força de marca.
+        <div class="apresentacao__prompt">
+    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
+       Quero que você atue como um profissional especialista na área de marketing e me traga os principais elementos de branding identificados na análise do site institucional e das redes sociais da empresa (X);
+    </p>
+    <button class="botao-copiar" onclick="copiarPrompt()">Copiar</button>
+</div>
+<h1><P class="apresentacao__conteudo__paragrafo"><strong style="color: rgb(47, 255, 255);">📱 Análise e Otimização de Perfil do Instagram</strong><h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Avaliar e propor melhorias estratégicas
+     no perfil do Instagram, visando aumentar a atratividade, relevância e autoridade digital da empresa.
+        <div class="apresentacao__prompt">
+    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
+Você atuará como um consultor estratégico de marketing em instagram, especializado em branding, SEO de perfil e comunicação. Sua missão é otimizar o perfil da empresa para aumentar a visibilidade, atratividade e autoridade da empresa na área de atuação. Segue o perfil da empresa para você acessar, a analisar e sugerir melhorias estratégicas:     </p>
+    <button class="botao-copiar" onclick="copiarPrompt()">Copiar</button>
+</div>
+<div class="apresentacao__conteudo__paragrafo">Prompt autor: Priscila Soares</p>
+    </section>
+    </section>
+    
+            
+    <div class="apresentacao__foto__oficina">
+        <img class=" fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt = "foto principal">  
+    </main>    
+    <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+    </footer>
+    <div class="whats">
+        <a href=" https://wa.me/5548991180829" target="_blank">
+        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
+    </a>
+    </div>
+    <script>
+function copiarPrompt() {
+    const texto = document.getElementById("textoPrompt").innerText;
+    navigator.clipboard.writeText(texto).then(() => {
+        alert("✅ Prompt copiado com sucesso!");
+    }).catch(err => {
+        alert("❌ Erro ao copiar o texto.");
+    });
+}
+</script>
+</body>
+</html>

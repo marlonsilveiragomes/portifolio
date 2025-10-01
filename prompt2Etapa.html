@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifólio</title>
+    <link rel="stylesheet" href="/styles/Style.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            
+            <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
+            <a class="cabecalho__menu__link" href="oficinaIA.html"><strong style="color: greenyellow;">Prompts ALI</strong>
+</a>
+                        
+        </nav>
+    </header>
+    <main class="apresentacao"> 
+    <section class="apresentacao__conteudo">
+        <h1 class="apresentacao__conteudo__titulo">2° Prompt | 
+        <strong class="titulo-destaque"> Etapa NOMEAR</strong> 
+        </h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Apoiar na construção da devolutiva do Radar e priorização de desafios, antecedentes a etapa 3 NOMEAR.</p>
+        <h1><P class="apresentacao__conteudo__paragrafo">Ação necessária:<h1><p class="apresentacao__conteudo__paragrafo"> 1. Copiar e colar o Briefing da empresa do Sprint de Inovação ou fazer o upload do Sprint Completo. </p>
+            <h1><p class="apresentacao__conteudo__paragrafo"> 2. Fazer o upload da Devolutiva do Radar em pdf(aprovada). <P>
+        <div class="apresentacao__prompt">
+    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
+       "Você é um consultor especializado no Programa ALI Produtividade do Sebrae. Analise o briefing coletado na etapa anterior (Sprint de Inovação) e a devolutiva do Radar de Inovação (anexada em PDF).
+Com base nesses materiais:
+    • Liste os principais desafios identificados na empresa
+
+    • Classifique-os utilizando a Matriz GUTI, considerando também o impacto para os clientes
+
+    • Destaque o(s) desafio(s) prioritário(s) a serem trabalhados nas próximas etapas
+
+Ao final, gere um documento em formato Word com a marca do ALI (logo será anexado pelo usuário), pronto para ser apresentado ao empresário na próxima reunião."
+    </p>
+    <button class="botao-copiar" onclick="copiarPrompt()">Copiar</button>
+</div>
+<div class="apresentacao__conteudo__paragrafo">Prompt autor: Agente Local Inovação André Kettermann</p>
+    </section>
+            
+    <div class="apresentacao__foto__oficina">
+        <img class=" fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt = "foto principal">  
+    </main>    
+    <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+    </footer>
+    <div class="whats">
+        <a href=" https://wa.me/5548991180829" target="_blank">
+        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
+    </a>
+    </div>
+    <script>
+function copiarPrompt() {
+    const texto = document.getElementById("textoPrompt").innerText;
+    navigator.clipboard.writeText(texto).then(() => {
+        alert("✅ Prompt copiado com sucesso!");
+    }).catch(err => {
+        alert("❌ Erro ao copiar o texto.");
+    });
+}
+</script>
+</body>
+</html>
