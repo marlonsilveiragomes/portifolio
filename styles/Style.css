@@ -213,10 +213,10 @@ main {
 .apresentacao__foto__oficina{
     display: flex;
     justify-content: center;
-    border: 3px solid var(--cor-terciaria);
-     width: 600px; /* Garante que a imagem ocupe todo o espaço disponível */
-    height: 390px;
-    border-radius: 8px;
+   
+    width: 690px;  /* +15% */
+    height: 449px;
+    
     align-items: center;
     overflow: hidden; 
 }
@@ -398,8 +398,8 @@ main {
         height: auto;
     }
     .apresentacao__foto__oficina {
-        width: 100%;
-        height: 100%;
+        width: 115%;
+        height: 115%;
         
     }
     .fotoprincipaloficina {
