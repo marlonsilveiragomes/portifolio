@@ -210,15 +210,18 @@ main {
     overflow: hidden; 
 }
 
-.apresentacao__foto__oficina{
-    display: flex;
-    justify-content: center;   
-    width: 750px;  /* +15% */
-    height: 500px;    
-    align-items: center;
-    overflow: hidden;
-    
+
+apresentacao__foto__oficina {
+  display: flex;
+  flex-direction: column;   /* ⬅ Empilha em coluna (uma em cima da outra) */
+  align-items: center;
+  justify-content: center;
+  gap: 12px;                /* Espaço entre as imagens */
+  width: 750px;             /* Mantém sua largura atual */
+  height: auto;             /* ⬅ Libera a altura para acomodar 2 imagens */
+  overflow: visible;        /* ⬅ Não corta as imagens */
 }
+
 
 .apresentacao__foto__areaMentorado {
     display: flex;
@@ -242,15 +245,44 @@ main {
     
     
 }
-.fotoprincipaloficina {
+
    
-    width: 690px; /* Garante que a imagem ocupe todo o espaço disponível */
-    height: 450px; /* Mantém a proporção da imagem */
-    display: block; /* Remove espaços extras ao redor da imagem */
-    
-    
-    
+   
+.fotoprincipaloficina {
+    width: 690px;
+    height: 450px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 300px; /* Espaço inferior adicionado */
 }
+
+    
+        
+
+
+.fotoprincipalpassoapasso {
+   
+    margin-top: 20px;
+    width: 690px; /* Garante que a imagem ocupe todo o espaço disponível */
+    height: 400px; /* Mantém a proporção da imagem */
+    display: block; /* Remove espaços extras ao redor da imagem */
+    align-items: center;
+    margin-left: auto; 
+    margin-right: auto;
+    
+        
+}
+
+
+.foto-topo-oficina {
+  width: 690px;             /* Mesmo padrão da principal */
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 
 .apresentacao__links__navegacao:hover {
     background-color: var(--cor-terciaria);
@@ -404,6 +436,7 @@ main {
     .fotoprincipaloficina {
         width:85%;
         height: 85%;
+        
     }
     .rodape {
         text-align: center;
