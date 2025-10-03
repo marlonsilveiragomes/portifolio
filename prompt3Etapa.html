@@ -9,50 +9,172 @@
 <body>
     <header class="cabecalho">
         <nav class="cabecalho__menu">
-            
             <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
-            <a class="cabecalho__menu__link" href="oficinaIA.html"><strong style="color: greenyellow;">Prompts ALI</strong>
-</a>
-                        
+            <a class="cabecalho__menu__link" href="oficinaIA.html">
+                <strong style="color: greenyellow;">Prompts ALI</strong>
+            </a>
         </nav>
     </header>
+
     <main class="apresentacao"> 
-    <section class="apresentacao__conteudo">
-        <h1 class="apresentacao__conteudo__titulo">3° Prompt | 
-        <strong class="titulo-destaque"> 5w2h</strong> 
-        </h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Geração de ideias de solução a partir do desafio priorizado, antecedentes a etapa 4 ELABORAR.</p>
-        <h1><P class="apresentacao__conteudo__paragrafo">Ação necessária:<h1><p class="apresentacao__conteudo__paragrafo"style="text-decoration: underline;"> 1. Copiar e colar o Desafio escolhido com sua descrição completa: causas, impactos, evidências, ações já tentadas e 
-            ideias de solução ou fazer o upload completo do Sprint de Inovação com a Etapa 3(aprovada). 
-        <div class="apresentacao__prompt">
-    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
-       Aqui será gerado prompt a partir do que a empresa escolher como solução
-    </p>
-    <button class="botao-copiar" onclick="copiarPrompt()">Copiar</button>
-</div>
-<div class="apresentacao__conteudo__paragrafo">Prompt autor: Marlon S.</p>
-    </section>
+        <section class="apresentacao__conteudo">
+            <h1 class="apresentacao__conteudo__titulo">
+                3° Prompt | <strong class="titulo-destaque">5w2h</strong> 
+            </h1>
+
+            <p class="apresentacao__conteudo__paragrafo">
+                Objetivo: Ajudar os Agentes Locais de Inovação na criação do plano plando 5w2h priorizado pelo Empresário na reunião durante a 4 Etapa Elaborar.
+            </p>
+
+            <div class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                1. Preencha os dados de acordo com a solução escolhida pela Empresária(o).
+            </div>
+            <div class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                2. obs. Se for anexar algum arquivo, descreva na solução escolhida
+            </div>
+
+            <!-- Campos para coleta de dados -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite a solução escolhida:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="descricaoSolucao" maxlength="500" placeholder="Digite até 500 caracteres">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('descricaoSolucao', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('descricaoSolucao', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite a primeira ação:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="nomeAcao" maxlength="50" placeholder="Ex: Implantar sistema de controle">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('nomeAcao', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('nomeAcao', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite a data da primeira ação:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="primeiraAcao" maxlength="50" placeholder="Ex: 15/10/2025">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('primeiraAcao', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('primeiraAcao', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite o intervalo entre as ações:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="intervaloAcoes" maxlength="50" placeholder="Ex: 15 dias">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('intervaloAcoes', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('intervaloAcoes', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite o responsável:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="responsavelAcao" maxlength="50" placeholder="Ex: João Silva">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('responsavelAcao', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('responsavelAcao', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão para gerar o prompt -->
+            <div class="apresentacao__conteudo__paragrafo" style="margin-top:20px; text-align:center;">
+                <button class="botao-copiar" onclick="gerarPrompt()">Gerar Prompt</button>
+            </div>
+
+            <!-- Área onde o prompt será exibido -->
+            <div class="apresentacao__prompt">
+                <p id="textoPrompt5w2h" class="apresentacao__conteudo__paragrafo__prompt">
+                    O prompt será gerado aqui.
+                </p>
+                <button class="botao-copiar" onclick="copiarPrompt5w2h()">Copiar</button>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo">Equipe ALI-Foz-Itajai-SC</div>
+        </section>
             
-    <div class="apresentacao__foto__oficina">
-        <img class=" fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt = "foto principal">  
+        <div class="apresentacao__foto__oficina">
+            <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt="foto principal">  
+        </div>
     </main>    
+
     <footer>
         <div class="rodape">
             <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+        </div>
     </footer>
+
     <div class="whats">
-        <a href=" https://wa.me/5548991180829" target="_blank">
-        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
-    </a>
+        <a href="https://wa.me/5548991180829" target="_blank">
+            <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
+        </a>
     </div>
+
     <script>
-function copiarPrompt() {
-    const texto = document.getElementById("textoPrompt").innerText;
+  const dados = {};
+
+  function salvarValor(classe, botao) {
+    const input = document.querySelector('.' + classe);
+    if (input && input.value.trim() !== "") {
+      dados[classe] = input.value.trim();
+      input.disabled = true; // trava o campo
+      botao.classList.add("saved");
+      botao.textContent = "✔ Salvo";
+    } else {
+      alert("Preencha o campo antes de confirmar.");
+    }
+  }
+
+  function editarValor(classe, botao) {
+    const input = document.querySelector('.' + classe);
+    if (input) {
+      input.disabled = false; // libera edição
+      input.focus();
+
+      // encontra o botão OK dentro do mesmo container de botões
+      const btnContainer = botao.parentElement;
+      const okBtn = btnContainer.querySelector(".ok-btn");
+
+      if (okBtn) {
+        okBtn.classList.remove("saved");
+        okBtn.textContent = "OK";
+      }
+    }
+  }
+
+  function gerarPrompt() {
+    const { descricaoSolucao, nomeAcao, primeiraAcao, intervaloAcoes, responsavelAcao } = dados;
+
+    if (!descricaoSolucao || !nomeAcao || !primeiraAcao || !intervaloAcoes || !responsavelAcao) {
+      alert("⚠️ Preencha todos os campos e confirme com OK antes de gerar o prompt.");
+      return;
+    }
+
+    const prompt = `Com base na solução escolhida (${descricaoSolucao}), crie um plano de ação 5W2H conforme a metodologia ALI Sebrae 2025, Etapa 4 ELABORAR. 
+Elabore 5 ações para a solução priorizada (${descricaoSolucao}), iniciando com a primeira ação (${nomeAcao}), 
+com data inicial (${primeiraAcao}), considerando o intervalo de (${intervaloAcoes}) e tendo como responsável (${responsavelAcao}).`;
+
+    document.getElementById("textoPrompt5w2h").innerText = prompt;
+  }
+
+  function copiarPrompt5w2h() {
+    const texto = document.getElementById("textoPrompt5w2h").innerText;
     navigator.clipboard.writeText(texto).then(() => {
-        alert("✅ Prompt copiado com sucesso!");
+      alert("✅ Prompt copiado com sucesso!");
     }).catch(err => {
-        alert("❌ Erro ao copiar o texto.");
+      alert("❌ Erro ao copiar o texto.");
     });
-}
+  }
 </script>
-</body>
-</html>
