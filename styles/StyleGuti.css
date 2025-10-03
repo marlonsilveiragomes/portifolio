@@ -427,7 +427,220 @@ button {
     overflow: hidden; /* Evita que o texto ultrapasse o retângulo */
     white-space: normal; /* Permite a quebra de linhas */
 }
+@media (max-width: 1200px) {
+    .cabecalho {
+        padding: 10%;
+    }
+    .cabecalho__menu {
+        flex-direction: row;
+        justify-content:space-around;
+    }
+    .apresentacao {
+        flex-direction: column-reverse;
+        padding: 7%;
+    }
+    .apresentacao__conteudo {
+        width: 70%; /* Ajuste de largura */
+    }
+    .apresentacao__foto {
+        width: 70%; /* Ajuste de largura */
+    }
+    .fotoprincipaloficina,
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 90%;
+        height: auto;
+        max-width: 600px;
+        margin: 20px auto;
+    }
 
+    .apresentacao__foto__oficina {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    matrizGuti {
+        width: 100%;
+        height: auto;
+    }
+
+    .matrizGuti__imagem img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .descricaoProblema {
+        width: 30%;
+        font-size: 20px;
+        height: auto;
+    }
+}
+
+/* Para telas menores que 768px */
+@media (max-width: 768px) {
+    .cabecalho {
+        padding: 5%;
+    }
+    .cabecalho__menu {
+        flex-direction:row;
+        align-items: center;
+        gap: 20px;
+    }
+    .apresentacao {
+        flex-direction: column-reverse;
+        padding: 5%;
+    }
+    .apresentacao__conteudo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .apresentacao__foto {
+        width: 100%;
+        height: auto;
+    }
+    .apresentacao__links__navegacao {
+        width: 100%;
+        padding: 10px;
+    }
+    .apresentacao__links__navegacao__download {
+        width: 100%;
+        padding: 10px;
+    }
+    .fotoprincipaloficina,
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+        margin: 15px auto;
+    }
+
+    .apresentacao__foto__oficina {
+        width: 100%;
+        max-width: 95%;
+        margin: 0 auto;
+    }
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .descricaoProblema {
+        width: 90%;
+        height: auto;
+        font-size: 18px;
+    }
+
+    .matrizGuti {
+        width: 100%;
+        height: auto;
+    }
+
+    .matrizGuti__imagem img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Esconde retângulos fixos se não couberem */
+    .matrizGuti__retangulo,
+    .matrizGuti__retanguloDescricao,
+    .matrizGuti__retanguloResultado,
+    .mini-retangulo {
+        transform: scale(0.8); /* Reduz proporção */
+        transform-origin: top left;
+    }
+}
+
+/* Para telas menores que 480px */
+@media (max-width: 480px) {
+    .cabecalho__menu__link {
+        font-size: 14px;
+    }
+    .cabecalho {
+        padding: 2%;
+    }
+    .apresentacao {
+        padding: 2%;
+    }
+    .apresentacao__conteudo__titulo {
+        font-size: 24px;
+    }
+    .apresentacao__conteudo__paragrafo {
+        font-size: 18px;
+    }
+    .apresentacao__links__navegacao {
+        font-size: 18px;
+    }
+    .apresentacao__links__navegacao__download {
+        font-size: 18px;
+    }
+    .apresentacao__foto {
+        width: 100%;
+        height: auto;
+    }
+    .apresentacao__foto__oficina {
+        width: 115%;
+        height: 115%;
+        
+    }
+    .fotoprincipaloficina {
+        width:85%;
+        height: 85%;
+        
+    }
+    .rodape {
+        text-align: center;
+    }
+    .fotoprincipaloficina,
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        margin: 10px auto;
+    }
+
+    .apresentacao__foto__oficina {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 5%;
+        margin: 0 auto;
+    }
+    .container {
+        flex-direction: column;
+        padding: 5%;
+    }
+
+    .descricaoProblema {
+        width: 100%;
+        height: auto;
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .matrizGuti {
+        width: 100%;
+        height: auto;
+        overflow-x: auto; /* permite scroll horizontal caso precise */
+    }
+
+    .matrizGuti__imagem img {
+        width: 100%;
+        height: auto;
+    }
+
+    .matrizGuti__retangulo,
+    .matrizGuti__retanguloDescricao,
+    .matrizGuti__retanguloResultado,
+    .mini-retangulo {
+        transform: scale(0.6); /* Reduz mais em mobile */
+        transform-origin: top left;
+    }
+    
+
+}
 
 
 

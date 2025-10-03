@@ -254,9 +254,20 @@ apresentacao__foto__oficina {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 300px; /* Espaço inferior adicionado */
+    margin-bottom: 300px;
+    border: 3px solid var(--cor-secundaria);
+    border-radius: 8px;
 }
-
+.fotoprincipaloficina2 {
+    width: 700px;
+    border: 3px solid var(--cor-terciaria);
+    height: 394px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 300px;
+    border-radius: 8px; /* Espaço inferior adicionado */
+}
     
         
 
@@ -270,6 +281,9 @@ apresentacao__foto__oficina {
     align-items: center;
     margin-left: auto; 
     margin-right: auto;
+    border: 3px solid var(--cor-terciaria);
+    border-radius: 8px;
+    
     
         
 }
@@ -369,6 +383,21 @@ apresentacao__foto__oficina {
     .apresentacao__foto {
         width: 70%; /* Ajuste de largura */
     }
+    .fotoprincipaloficina,
+    .fotoprincipaloficina2,
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 90%;
+        height: auto;
+        max-width: 600px;
+        margin: 20px auto;
+    }
+
+    .apresentacao__foto__oficina {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
 }
 
 /* Para telas menores que 768px */
@@ -401,6 +430,21 @@ apresentacao__foto__oficina {
     .apresentacao__links__navegacao__download {
         width: 100%;
         padding: 10px;
+    }
+    .fotoprincipaloficina,
+    .fotoprincipaloficina2,
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 100%;
+        height: auto;
+        max-width: 500px;
+        margin: 15px auto;
+    }
+
+    .apresentacao__foto__oficina {
+        width: 100%;
+        max-width: 95%;
+        margin: 0 auto;
     }
 }
 
@@ -441,6 +485,23 @@ apresentacao__foto__oficina {
     .rodape {
         text-align: center;
     }
+    .fotoprincipaloficina,
+    .fotoprincipaloficina2,
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        margin: 10px auto;
+    }
+
+    .apresentacao__foto__oficina {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 5%;
+        margin: 0 auto;
+    }
+
 }
 
 #loginForm {
