@@ -1,900 +1,1303 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap');
 
-:root {
-    --cor-primaria: #000000;
-    --cor-secundaria: #F6F6F6;
-    --cor-terciaria: #22d4fd;
+    :root {
+        --cor-primaria: #000000;
+        --cor-secundaria: #F6F6F6;
+        --cor-terciaria: #22d4fd;
 
-    --fonte-primaria: "Krona One", sans-serif;
-    --fonte-secundaria: "Montserrat", sans-serif;
-    --fonte-terciaria: "Roboto", sans-serif;
-}
+        --fonte-primaria: "Krona One", sans-serif;
+        --fonte-secundaria: "Montserrat", sans-serif;
+        --fonte-terciaria: "Roboto", sans-serif;
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-body {
-    font-family: var(--fonte-secundaria);
-    background-image: url('../assets/BackSite.png');
-    background-size: cover;
-    background-attachment: fixed; /* Mantém a imagem fixa ao rolar a página */
-    background-repeat: no-repeat;
-    background-position: center center;
-    margin: 0;
-    padding: 0;
-    display: flex; /* ✅ Organiza os elementos de forma flexível */
-    flex-direction: column; /* ✅ Mantém o layout em coluna */
-    min-height: 100vh; /* ✅ Garante altura mínima da tela */
-}
-main {
-    flex-grow: 1; /* ✅ Faz o conteúdo expandir e empurrar o rodapé para baixo */
-}
+    body {
+        font-family: var(--fonte-secundaria);
+        background-image: url('../assets/BackSite.png');
+        background-size: cover;
+        background-attachment: fixed;
+        /* Mantém a imagem fixa ao rolar a página */
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        /* ✅ Organiza os elementos de forma flexível */
+        flex-direction: column;
+        /* ✅ Mantém o layout em coluna */
+        min-height: 100vh;
+        /* ✅ Garante altura mínima da tela */
+    }
 
-
-
-.cabecalho {
-    padding: 2% 14%;
-}
-
-.cabecalho__menu {
-    display: flex;
-    gap: 80px;
-    
-}
-
-.cabecalho__menu__link {
-    font-family: var(--fonte-terciaria);
-    font-size: 22px;
-    font-weight: 499;
-    font-style: bold;
-    color: var(--cor-secundaria);
-    text-decoration: none;
-    
-}
-
-.apresentacao {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 0px;
-    
-}
-
-.apresentacao__conteudo {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    margin-bottom: 80px;
-   
-
-}
-
-.titulo-destaque {
-    color: var(--cor-terciaria);
-}
-
-.titulo-destaque__novo {
-    color:greenyellow;
-}
-
-.apresentacao__conteudo__titulo {
-    font-family: var(--fonte-secundaria);
-    font-weight: 400;
-    font-style: normal;
-    font-size: 30px;
-    text-align: center;
-    color: var(--cor-secundaria);
-    
-}
-
-.apresentacao__conteudo__titulo__areamentorado {
-    font-family: var(--fonte-secundaria);
-    font-weight: 400;
-    font-style: normal;
-    font-size: 30px;
-    text-align: left;
-    color:greenyellow
-    
-}
-
-
-.apresentacao__conteudo__paragrafo {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    text-align: center;
-    color: var(--cor-secundaria);
-}
-
-.apresentacao__conteudo__paragrafo__alimentacao {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    text-align:justify;
-    color: var(--cor-secundaria);
-   
-
-}
-
-.apresentacao__links__subtitulos {
-    font-family: var(--fonte-secundaria);
-    font-weight: 499;
-    font-style: normal;
-    color: var(--cor-terciaria);
-    text-decoration: none;
-    margin-bottom: 10px;
-}
-
-.apresentacao__links {
-    display: flex;
-    /*justify-content: space-between;*/
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.apresentacao__links__download {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    margin-top: 30px;
-}
-
-
-.apresentacao__links__navegacao {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    border: 2px solid var(--cor-terciaria);
-    width: 50%;
-    text-align: center;
-    border-radius: 8px;
-    font-size: 22px;
-    font-family: var(--cor-secundaria);
-    font-weight: 600;
-    font-style: normal;
-    color: var(--cor-secundaria);
-    text-decoration: none;
-    align-items: center;
-    padding: 21px;
-    color:var(--cor-secundaria)
-}
-
-.apresentacao__links__navegacao__download {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    border: 2px solid var(--cor-terciaria);
-    width: 50%;
-    text-align: center;
-    border-radius: 8px;
-    font-size: 22px;
-    font-family: var(--cor-secundaria);
-    font-weight: 600;
-    font-style: normal;
-    color: var(--cor-secundaria);
-    text-decoration: none;
-    align-items: center;
-    padding: 21px;
-    color:var(--cor-secundaria)
-}
+    main {
+        flex-grow: 1;
+        /* ✅ Faz o conteúdo expandir e empurrar o rodapé para baixo */
+    }
 
 
 
-
-.apresentacao__foto {
-    display: flex;
-    justify-content: center;
-    border: 3px solid var(--cor-terciaria);
-    width: 401px;
-    height: 431px;
-    border-radius: 8px;
-    align-items: center;
-    overflow: hidden; 
-}
-
-
-apresentacao__foto__oficina {
-  display: flex;
-  flex-direction: column;   /* ⬅ Empilha em coluna (uma em cima da outra) */
-  align-items: center;
-  justify-content: center;
-  gap: 12px;                /* Espaço entre as imagens */
-  width: 750px;             /* Mantém sua largura atual */
-  height: auto;             /* ⬅ Libera a altura para acomodar 2 imagens */
-  overflow: visible;        /* ⬅ Não corta as imagens */
-}
-
-
-.apresentacao__foto__areaMentorado {
-    display: flex;
-    justify-content:center;
-    /*border: 3px solid var(--cor-terciaria);*/
-    width: 700px;
-    height: 700px;
-    /*border-radius: 8px;*/
-    align-items:center;
-    overflow: hidden;
-    gap: 25px
-
-}
-
-.fotoprincipal {
-   
-    width: 108%; /* Garante que a imagem ocupe todo o espaço disponível */
-    height: auto; /* Mantém a proporção da imagem */
-    display: block; /* Remove espaços extras ao redor da imagem */
-    
-    
-    
-}
-
-   
-   
-.fotoprincipaloficina {
-    width: 690px;
-    height: 450px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 300px;
-    border: 3px solid var(--cor-secundaria);
-    border-radius: 8px;
-}
-.fotoprincipaloficina2 {
-    width: 700px;
-    border: 3px solid var(--cor-terciaria);
-    height: 394px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 300px;
-    border-radius: 8px; /* Espaço inferior adicionado */
-}
-    
-        
-
-
-.fotoprincipalpassoapasso {
-   
-    margin-top: 20px;
-    width: 690px; /* Garante que a imagem ocupe todo o espaço disponível */
-    height: 400px; /* Mantém a proporção da imagem */
-    display: block; /* Remove espaços extras ao redor da imagem */
-    align-items: center;
-    margin-left: auto; 
-    margin-right: auto;
-    border: 3px solid var(--cor-terciaria);
-    border-radius: 8px;
-    
-    
-        
-}
-
-
-.foto-topo-oficina {
-  width: 690px;             /* Mesmo padrão da principal */
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-
-.apresentacao__links__navegacao:hover {
-    background-color: var(--cor-terciaria);
-    cursor:pointer;
-    border: 2px solid var(--cor-terciaria);
-    color: var(--cor-primaria);
-}
-
-
-.apresentacao__links__navegacao__download:hover {
-    background-color:greenyellow;
-    cursor:pointer;
-    border: 2px solid var(--cor-terciaria);
-    color: var(--cor-primaria);
-}
-
-.rodape,
-.rodape__sobre,
-.rodape__curriculo,
-.rodape__mentoria {
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Centraliza o conteúdo verticalmente */
-    background-color: #22D4FD;
-    font-size: 19px;
-    color: black;
-    padding: 10px;
-    height: 40px;
-    margin-top: auto; /* ✅ Faz o rodapé ficar no final da página */
-    width: 100%;
-
-    
-}
-
-
-
-.whats {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    z-index: 9999;
-}
-
-
-/*@media (max-width: 1200px) {
     .cabecalho {
-        padding: 10%;
+        padding: 2% 14%;
     }
+
     .cabecalho__menu {
-        justify-content: center;
+        display: flex;
+        gap: 80px;
+
     }
+
+    .cabecalho__menu__link {
+        font-family: var(--fonte-terciaria);
+        font-size: 22px;
+        font-weight: 499;
+        font-style: bold;
+        color: var(--cor-secundaria);
+        text-decoration: none;
+
+    }
+
     .apresentacao {
-        flex-direction: column-reverse;
-        padding: 7%;
-        
-        
-    }
-    .apresentacao__conteudo {
-        width: 7%;
-    }
-    .apresentacao__foto {
-        width: 40%;
-    }
-}*/
-@media (max-width: 1200px) {
-    .cabecalho {
-        padding: 10%;
-    }
-    .cabecalho__menu {
-        flex-direction: row;
-        justify-content:space-around;
-    }
-    .apresentacao {
-        flex-direction: column-reverse;
-        padding: 7%;
-    }
-    .apresentacao__conteudo {
-        width: 70%; /* Ajuste de largura */
-    }
-    .apresentacao__foto {
-        width: 70%; /* Ajuste de largura */
-    }
-    .fotoprincipaloficina,
-    .fotoprincipaloficina2,
-    .fotoprincipalpassoapasso,
-    .foto-topo-oficina {
-        width: 90%;
-        height: auto;
-        max-width: 600px;
-        margin: 20px auto;
+
+        width: min(1400px, calc(100% - 60px));
+
+        margin: 40px auto;
+
+        display: grid;
+
+        grid-template-columns: minmax(600px, 1fr) 430px;
+
+        gap: 50px;
+
+        align-items: start;
+
     }
 
-    .apresentacao__foto__oficina {
-        width: 100%;
-        max-width: 700px;
-        margin: 0 auto;
-    }
-}
+    .apresentacao__conteudo{
 
-/* Para telas menores que 768px */
-@media (max-width: 768px) {
-    .cabecalho {
-        padding: 5%;
+        width:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
+        gap:18px;
+
     }
-    .cabecalho__menu {
-        flex-direction:row;
+
+    .titulo-destaque {
+        color: var(--cor-terciaria);
+    }
+
+    .titulo-destaque__novo {
+        color: greenyellow;
+    }
+
+    .apresentacao__conteudo__titulo {
+        font-family: var(--fonte-secundaria);
+        font-weight: 400;
+        font-style: normal;
+        font-size: 30px;
+        text-align: center;
+        color: var(--cor-secundaria);
+
+    }
+
+    .apresentacao__conteudo__titulo__areamentorado {
+        font-family: var(--fonte-secundaria);
+        font-weight: 400;
+        font-style: normal;
+        font-size: 30px;
+        text-align: left;
+        color: greenyellow
+    }
+
+
+    .apresentacao__conteudo__paragrafo {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 4px;
+        font-family: var(--fonte-secundaria);
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        text-align: center;
+        color: var(--cor-secundaria);
+    }
+
+    .apresentacao__conteudo__paragrafo__alimentacao {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 4px;
+        font-family: var(--fonte-secundaria);
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        text-align: justify;
+        color: var(--cor-secundaria);
+
+
+    }
+
+    .apresentacao__links__subtitulos {
+        font-family: var(--fonte-secundaria);
+        font-weight: 499;
+        font-style: normal;
+        color: var(--cor-terciaria);
+        text-decoration: none;
+        margin-bottom: 10px;
+    }
+
+    .apresentacao__links {
+        display: flex;
+        /*justify-content: space-between;*/
+        flex-direction: column;
         align-items: center;
         gap: 20px;
     }
-    .apresentacao {
-        flex-direction: column-reverse;
-        padding: 5%;
+
+    .apresentacao__links__download {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-top: 30px;
     }
+
+
+    .apresentacao__links__navegacao {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        border: 2px solid var(--cor-terciaria);
+        width: 50%;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 22px;
+        font-family: var(--cor-secundaria);
+        font-weight: 600;
+        font-style: normal;
+        color: var(--cor-secundaria);
+        text-decoration: none;
+        align-items: center;
+        padding: 21px;
+        color: var(--cor-secundaria)
+    }
+
+    .apresentacao__links__navegacao__download {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        border: 2px solid var(--cor-terciaria);
+        width: 50%;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 22px;
+        font-family: var(--cor-secundaria);
+        font-weight: 600;
+        font-style: normal;
+        color: var(--cor-secundaria);
+        text-decoration: none;
+        align-items: center;
+        padding: 21px;
+        color: var(--cor-secundaria)
+    }
+
+
+
+
+    .apresentacao__foto{
+
+        width:100%;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:flex-start;
+
+    }
+
+
+    .apresentacao__foto__oficina{
+
+        width:100%;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:18px;
+
+    }
+
+    .fotoprincipaloficina{
+
+        width:100%;
+
+        max-width:420px;
+
+        height:auto;
+
+        display:block;
+
+        border-radius:8px;
+
+        border:3px solid var(--cor-secundaria);
+
+    }
+
+    .fotoprincipaloficina2{
+
+        width:100%;
+
+        max-width:420px;
+
+        height:auto;
+
+        display:block;
+
+        border-radius:8px;
+
+        border:3px solid var(--cor-terciaria);
+
+    }
+
+
+
+
+    .fotoprincipalpassoapasso {
+
+        margin-top: 20px;
+        width: 690px;
+        /* Garante que a imagem ocupe todo o espaço disponível */
+        height: 400px;
+        /* Mantém a proporção da imagem */
+        display: block;
+        /* Remove espaços extras ao redor da imagem */
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        border: 3px solid var(--cor-terciaria);
+        border-radius: 8px;
+
+
+
+    }
+
+
+    .foto-topo-oficina {
+        width: 690px;
+        /* Mesmo padrão da principal */
+        height: auto;
+        display: block;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+
+    .apresentacao__links__navegacao:hover {
+        background-color: var(--cor-terciaria);
+        cursor: pointer;
+        border: 2px solid var(--cor-terciaria);
+        color: var(--cor-primaria);
+    }
+
+
+    .apresentacao__links__navegacao__download:hover {
+        background-color: greenyellow;
+        cursor: pointer;
+        border: 2px solid var(--cor-terciaria);
+        color: var(--cor-primaria);
+    }
+
+    .rodape,
+    .rodape__sobre,
+    .rodape__curriculo,
+    .rodape__mentoria {
+        font-family: var(--fonte-secundaria);
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Centraliza o conteúdo verticalmente */
+        background-color: #22D4FD;
+        font-size: 19px;
+        color: black;
+        padding: 10px;
+        height: 40px;
+        margin-top: auto;
+        /* ✅ Faz o rodapé ficar no final da página */
+        width: 100%;
+
+
+    }
+
+
+
+    .whats {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 9999;
+    }
+
+
+    /*@media (max-width: 1200px) {
+        .cabecalho {
+            padding: 10%;
+        }
+        .cabecalho__menu {
+            justify-content: center;
+        }
+        .apresentacao {
+            flex-direction: column-reverse;
+            padding: 7%;
+            
+            
+        }
+        .apresentacao__conteudo {
+            width: 7%;
+        }
+        .apresentacao__foto {
+            width: 40%;
+        }
+    }*/
+    @media (max-width: 1200px) {
+        .cabecalho {
+            padding: 10%;
+        }
+
+        .cabecalho__menu {
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .apresentacao {
+            flex-direction: column-reverse;
+            padding: 7%;
+        }
+
+        .apresentacao__conteudo {
+            width: 70%;
+            /* Ajuste de largura */
+        }
+
+        .apresentacao__foto {
+            width: 70%;
+            /* Ajuste de largura */
+        }
+
+        .fotoprincipaloficina,
+        .fotoprincipaloficina2,
+        .fotoprincipalpassoapasso,
+        .foto-topo-oficina {
+            width: 90%;
+            height: auto;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .apresentacao__foto__oficina {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+    }
+
+    /* Para telas menores que 768px */
+    @media (max-width: 768px) {
+        .cabecalho {
+            padding: 5%;
+        }
+
+        .cabecalho__menu {
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .apresentacao {
+            flex-direction: column-reverse;
+            padding: 5%;
+        }
+
+        .apresentacao__conteudo {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .apresentacao__foto {
+            width: 100%;
+            height: auto;
+        }
+
+        .apresentacao__links__navegacao {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .apresentacao__links__navegacao__download {
+            width: 100%;
+            padding: 10px;
+        }
+
+        .fotoprincipaloficina,
+        .fotoprincipaloficina2,
+        .fotoprincipalpassoapasso,
+        .foto-topo-oficina {
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            margin: 15px auto;
+        }
+
+        .apresentacao__foto__oficina {
+            width: 100%;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+    }
+
+    /* Para telas menores que 480px */
+    @media (max-width: 480px) {
+        .cabecalho {
+            padding: 2%;
+        }
+
+        .apresentacao {
+            padding: 2%;
+        }
+
+        .apresentacao__conteudo__titulo {
+            font-size: 24px;
+        }
+
+        .apresentacao__conteudo__paragrafo {
+            font-size: 18px;
+        }
+
+        .apresentacao__links__navegacao {
+            font-size: 18px;
+        }
+
+        .apresentacao__links__navegacao__download {
+            font-size: 18px;
+        }
+
+        .apresentacao__foto {
+            width: 100%;
+            height: auto;
+        }
+
+        .apresentacao__foto__oficina {
+            width: 115%;
+            height: 115%;
+
+        }
+
+        .fotoprincipaloficina {
+            width: 85%;
+            height: 85%;
+
+        }
+
+        .rodape {
+            text-align: center;
+        }
+
+        .fotoprincipaloficina,
+        .fotoprincipaloficina2,
+        .fotoprincipalpassoapasso,
+        .foto-topo-oficina {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            margin: 10px auto;
+        }
+
+        .apresentacao__foto__oficina {
+            width: 100%;
+            max-width: 100%;
+            padding: 0 5%;
+            margin: 0 auto;
+        }
+
+    }
+
+    #loginForm {
+        font-family: var(--fonte-secundaria);
+        display: flex;
+        flex-direction: column;
+        /* Colocar os grupos em coluna */
+        align-items: center;
+        /* Centraliza todos os itens */
+        margin: 0 auto;
+        /* Centraliza o formulário na página */
+        width: 300px;
+        /* Defina uma largura fixa se necessário */
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        /* Espaçamento entre os campos */
+
+    }
+
+    label {
+        display: block;
+        /* Faz o label ocupar toda a linha */
+        margin-bottom: 5px;
+        /* Espaçamento entre o label e o input */
+        font-family: var(--fonte-secundaria);
+        /* Fonte desejada */
+        color: var(--cor-secundaria);
+        /* Cor desejada */
+        font-size: 16px;
+        /* Tamanho da fonte */
+        text-align: center;
+
+    }
+
+    input {
+        font-family: var(--fonte-secundaria);
+        font-size: 18px;
+        color: #333;
+        border: 2px solid var(--cor-terciaria);
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+        /* Para ocupar toda a largura do container */
+        max-width: 300px;
+        /* Limita a largura máxima, ajuste conforme necessário */
+        box-sizing: border-box;
+        /* Inclui padding e borda no tamanho total */
+        text-align: center;
+        /* Centraliza o texto dentro do input */
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        color: var(--cor-secundaria);
+        background-color: var(--cor-terciaria);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: var(--cor-primaria);
+        color: var(--cor-secundaria);
+    }
+
+
+
+
+
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        /* Mantém elementos lado a lado */
+        height: 100vh;
+        /* Ocupa toda altura da viewport */
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Seção de Descrição do Problema */
+    .descricaoProblema {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* Espaço entre os elementos */
+        align-items: center;
+        /* Alinha verticalmente ao centro */
+        height: 750px;
+        /* Ocupa 20% do main */
+        padding: 10px;
+        background-color: #ffffff;
+        /* Apenas para visualização */
+        box-sizing: border-box;
+        width: 20%;
+        font-family: var(--fonte-secundaria);
+        font-size: 25px;
+        text-align: center;
+        color: (--cor-secundaria);
+
+
+    }
+
+    /* Pergunta e Resposta dentro da Descrição do Problema */
+    .descricaoProblemaPergunta {
+        width: 100%;
+        /* Cada um ocupa 40% da largura */
+        height: 100%;
+        /* Ocupa toda a altura da section */
+        background-color: #dcdcdc;
+        /* Apenas para visualização */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .descricaoProblemaResposta {
+        width: 100%;
+        /* Cada um ocupa 40% da largura */
+        height: 100%;
+        /* Ocupa toda a altura da section */
+        background-color: #dcdcdc;
+        /* Apenas para visualização */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        flex-direction: column;
+    }
+
+    #respostaInput {
+        width: 290px;
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .botoes {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    input {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        padding: 8px;
+        margin-top: 10px;
+    }
+
+    button {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+    .matrizGuti {
+        display: flex;
+        flex-direction: column;
+        /* Ou row, dependendo do layout */
+        background-color: #ffffff;
+        /* Cor de fundo */
+        height: 750px;
+        width: 1360px;
+        overflow: hidden;
+        /* Garante que nada saia da área da seção */
+    }
+
+    .matrizGuti__imagem {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        /* Adicionado */
+    }
+
+    .matrizGuti__imagem img {
+        object-fit: cover;
+        /* Faz com que a imagem cubra toda a área, sem distorcer */
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        /* Adiciona bordas arredondadas, se necessário */
+    }
+
+    .matrizGuti__retangulo {
+        width: 210px;
+        height: 50px;
+        background-color: green;
+        /* Cor verde */
+        color: var(--cor-primaria);
+        /* Fonte primária */
+        font-family: var(--fonte-primaria);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: calc(750px / 5*1.3);
+        /* Primeira linha */
+        left: calc(1360px / 8*0.3);
+        /* Terceira coluna (C) */
+        border-radius: 8px;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .mini-retangulos-container {
+        position: absolute;
+        top: calc(750px / 5*1.65);
+        /* Primeira linha */
+        left: calc(1360px / 8*0.3);
+        /* Terceira coluna (C) */
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+    }
+
+    .mini-retangulo {
+        width: 50px;
+        height: 20px;
+        background-color: green;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        cursor: grab;
+
+
+    }
+
+    .matrizGuti__retanguloDescricao {
+        width: 200px;
+        height: 100px;
+        background-color: green;
+        /* Cor verde */
+        color: var(--cor-primaria);
+        /* Fonte primária */
+        font-family: var(--fonte-primaria);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: calc(750px / 5*4.3);
+        /* Primeira linha */
+        left: calc(1360px / 8*1.8);
+        /* Terceira coluna (C) */
+        border-radius: 8px;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        word-wrap: break-word;
+        /* Quebra palavras longas para caber no retângulo */
+        overflow: hidden;
+        /* Evita que o texto ultrapasse o retângulo */
+        white-space: normal;
+        /* Permite a quebra de linhas */
+    }
+
+    .matrizGuti__retanguloResultado {
+        width: 80px;
+        height: 80px;
+        background-color: green;
+        /* Cor verde */
+        color: var(--cor-primaria);
+        /* Fonte primária */
+        font-family: var(--fonte-primaria);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: calc(750px / 5*4.3);
+        /* Primeira linha */
+        left: calc(1360px / 8*6.3);
+        /* Terceira coluna (C) */
+        border-radius: 8px;
+        text-align: center;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: center;
+        word-wrap: break-word;
+        /* Quebra palavras longas para caber no retângulo */
+        overflow: hidden;
+        /* Evita que o texto ultrapasse o retângulo */
+        white-space: normal;
+        /* Permite a quebra de linhas */
+    }
+
+    .mini-retangulo {
+        cursor: grab;
+        user-select: none;
+    }
+
+    .guti-drop-area {
+        border: 2px dashed #ccc;
+        min-height: 60px;
+        margin: 5px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .guti-drop-area.highlight {
+        border-color: #4CAF50;
+        background-color: #f0fff0;
+    }
+
+    .drop-area {
+        position: absolute;
+        width: 80px;
+        /* ajuste para o tamanho de cada célula */
+        height: 80px;
+        border: 2px dashed transparent;
+        z-index: 2;
+    }
+
+    .drop-area[data-coluna="gravidade"] {
+        left: 50px;
+        top: 100px;
+    }
+
+    .drop-area[data-coluna="urgencia"] {
+        left: 150px;
+        top: 100px;
+    }
+
+    .drop-area[data-coluna="tendencia"] {
+        left: 250px;
+        top: 100px;
+    }
+
+    .drop-area[data-coluna="impacto"] {
+        left: 350px;
+        top: 100px;
+    }
+
+    .drop-area.highlight {
+        border-color: #00f;
+    }
+
+
+    .apresentacao__prompt {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 30px;
+        padding: 15px;
+        border: 2px solid var(--cor-terciaria);
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .botao-copiar {
+        padding: 10px 20px;
+        font-size: 18px;
+        font-family: var(--fonte-secundaria);
+        background-color: var(--cor-terciaria);
+        color: var(--cor-primaria);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .botao-copiar:hover {
+        background-color: var(--cor-primaria);
+        color: var(--cor-secundaria);
+    }
+
+    .apresentacao__conteudo__paragrafo__prompt {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-bottom: 4px;
+        font-family: var(--fonte-secundaria);
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        text-align: justify;
+        color: var(--cor-secundaria);
+        font-style: italic;
+        font-size: 20px;
+    }
+
+    /* Agrupamento dos inputs + botões */
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .input-group label {
+        margin-bottom: 8px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .input-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        /* quebra linha em telas pequenas */
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .input-wrapper input {
+        flex: 1;
+        min-width: 220px;
+        max-width: 400px;
+    }
+
+    .btns-inline {
+        display: flex;
+        gap: 8px;
+    }
+
+    .ok-btn,
+    .edit-btn {
+        padding: 10px 16px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .ok-btn {
+        background: var(--cor-terciaria);
+        color: var(--cor-primaria);
+        font-weight: bold;
+    }
+
+    .ok-btn.saved {
+        background: #4CAF50;
+        color: #fff;
+    }
+
+    .edit-btn {
+        background: transparent;
+        border: 2px solid var(--cor-terciaria);
+        color: var(--cor-secundaria);
+    }
+
+    /* Responsividade já existente + ajustes extras */
+    @media (max-width: 768px) {
+        .input-wrapper {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btns-inline {
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btns-inline button {
+            width: 100%;
+            max-width: 200px;
+        }
+    }
+    /* =====================================================
+    AJUSTES GERAIS — PORTFÓLIO
+    Correções adicionadas para padronizar botões, cards,
+    links e responsividade sem reescrever todo o projeto.
+    ===================================================== */
+
+    .cabecalho__menu {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .cabecalho__menu__link {
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cabecalho__menu__link:hover,
+    .cabecalho__menu__link:focus-visible {
+        color: var(--cor-terciaria);
+        transform: translateY(-1px);
+    }
+
+    .apresentacao {
+        width: min(1200px, 100% - 48px);
+        margin: 0 auto;
+        gap: 48px;
+        padding: 24px 0 48px;
+    }
+
+    .apresentacao__conteudo {
+        width: min(560px, 100%);
+    }
+
+    .apresentacao__links,
+    .apresentacao__links__download,
+    .apresentacao__links__navegacao__cv {
+        width: 100%;
+    }
+
+    .apresentacao__links__navegacao,
+    .apresentacao__links__navegacao__download,
+    .botao-copiar,
+    button {
+        min-height: 48px;
+        border-radius: 10px;
+        font-family: var(--fonte-secundaria);
+        font-weight: 700;
+        line-height: 1.2;
+        text-decoration: none;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .apresentacao__links__navegacao,
+    .apresentacao__links__navegacao__download {
+        width: min(360px, 100%);
+        padding: 16px 20px;
+        background: rgba(0, 0, 0, 0.35);
+    }
+
+    .apresentacao__links__navegacao img,
+    .apresentacao__links__navegacao__download img {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .apresentacao__links__navegacao:hover,
+    .apresentacao__links__navegacao:focus-visible,
+    .apresentacao__links__navegacao__download:hover,
+    .apresentacao__links__navegacao__download:focus-visible,
+    .botao-copiar:hover,
+    .botao-copiar:focus-visible,
+    button:hover,
+    button:focus-visible {
+        transform: translateY(-2px);
+        outline: none;
+    }
+
+    .botao-copiar,
+    button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 20px;
+        border: 2px solid var(--cor-terciaria);
+        background-color: var(--cor-terciaria);
+        color: var(--cor-primaria);
+    }
+
+    .edit-btn {
+        background: rgba(0, 0, 0, 0.25);
+    }
+
+    .input-wrapper input {
+        min-height: 44px;
+    }
+
+    .apresentacao__foto {
+        flex-shrink: 0;
+        max-width: 401px;
+        width: min(401px, 100%);
+    }
+
+    .fotoprincipal {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .whats img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+    }
+
+    @media (max-width: 900px) {
+        .cabecalho {
+            padding: 24px;
+        }
+
+        .cabecalho__menu {
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .cabecalho__menu__link {
+            font-size: 18px;
+        }
+
+        .apresentacao {
+            flex-direction: column-reverse;
+            width: min(720px, 100% - 32px);
+            gap: 28px;
+            text-align: center;
+        }
+
+        .apresentacao__conteudo__paragrafo,
+        .apresentacao__conteudo__paragrafo__alimentacao,
+        .apresentacao__conteudo__paragrafo__prompt {
+            text-align: center;
+            font-size: 19px;
+        }
+    }
+
+    @media (max-width: 520px) {
+        .cabecalho__menu {
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .apresentacao__conteudo__titulo,
+        .apresentacao__conteudo__titulo__areamentorado {
+            font-size: 24px;
+        }
+
+        .apresentacao__links__navegacao,
+        .apresentacao__links__navegacao__download,
+        .botao-copiar,
+        button {
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .whats img {
+            width: 54px;
+            height: 54px;
+        }
+    }
+    /* =====================================================
+    BOTÕES DE IAS
+    ===================================================== */
+
+    .botoes-ias {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 18px;
+    }
+
+    .botao-ia {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        min-width: 150px;
+        min-height: 44px;
+        padding: 10px 14px;
+    }
+
+    .botao-ia__icone {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+        .botoes-ias {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .botao-ia {
+            width: 100%;
+            max-width: 280px;
+        }
+    }
+
+    .observacaoFinal {
+        width: 100%;
+        max-width: 500px;
+        min-height: 150px;
+
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+
+        font-size: 0.95rem;
+        font-family: inherit;
+
+        resize: vertical;
+        box-sizing: border-box;
+    }
+
+    .texto-ias-sugeridas {
+        margin: 12px 0 18px;
+        padding: 12px 18px;
+
+        color: #ffee00;              /* Azul ciano, em harmonia com o tema */
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.6;
+        text-align: center;
+
+        background: rgba(255, 255, 255, 0.05);
+        border-left: 4px solid #00E5FF;
+        border-radius: 8px;
+    }
+    .texto-passos {
+        margin: 12px 0 18px;
+        padding: 12px 18px;
+
+        color: #ffffff;              /* Azul ciano, em harmonia com o tema */
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.6;
+        text-align: center;
+
+        background: rgba(14, 5, 5, 0.671);
+        border-left: 4px solid #00E5FF;
+        border-radius: 8px;
+    }
+
+    /* =====================================================
+   RESPONSIVIDADE — IMAGEM ACIMA DO TEXTO NO CELULAR
+   ===================================================== */
+
+@media (max-width: 900px) {
+
+    .apresentacao {
+        display: flex;
+        flex-direction: column;
+        width: min(720px, calc(100% - 32px));
+        margin: 24px auto;
+        padding: 0 0 40px;
+        gap: 28px;
+        align-items: center;
+    }
+
+    .apresentacao__foto__oficina {
+        order: -1;
+        width: 100%;
+        max-width: 520px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .fotoprincipaloficina {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        display: block;
+        margin: 0 auto 20px;
+    }
+
     .apresentacao__conteudo {
         width: 100%;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .apresentacao__foto {
-        width: 100%;
-        height: auto;
-    }
-    .apresentacao__links__navegacao {
-        width: 100%;
-        padding: 10px;
-    }
-    .apresentacao__links__navegacao__download {
-        width: 100%;
-        padding: 10px;
-    }
-    .fotoprincipaloficina,
-    .fotoprincipaloficina2,
-    .fotoprincipalpassoapasso,
-    .foto-topo-oficina {
-        width: 100%;
-        height: auto;
-        max-width: 500px;
-        margin: 15px auto;
-    }
-
-    .apresentacao__foto__oficina {
-        width: 100%;
-        max-width: 95%;
-        margin: 0 auto;
-    }
-}
-
-/* Para telas menores que 480px */
-@media (max-width: 480px) {
-    .cabecalho {
-        padding: 2%;
-    }
-    .apresentacao {
-        padding: 2%;
-    }
-    .apresentacao__conteudo__titulo {
-        font-size: 24px;
-    }
-    .apresentacao__conteudo__paragrafo {
-        font-size: 18px;
-    }
-    .apresentacao__links__navegacao {
-        font-size: 18px;
-    }
-    .apresentacao__links__navegacao__download {
-        font-size: 18px;
-    }
-    .apresentacao__foto {
-        width: 100%;
-        height: auto;
-    }
-    .apresentacao__foto__oficina {
-        width: 115%;
-        height: 115%;
-        
-    }
-    .fotoprincipaloficina {
-        width:85%;
-        height: 85%;
-        
-    }
-    .rodape {
+        max-width: 620px;
         text-align: center;
     }
-    .fotoprincipaloficina,
-    .fotoprincipaloficina2,
-    .fotoprincipalpassoapasso,
-    .foto-topo-oficina {
-        width: 100%;
-        height: auto;
-        max-width: 100%;
-        margin: 10px auto;
-    }
-
-    .apresentacao__foto__oficina {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 5%;
-        margin: 0 auto;
-    }
-
 }
-
-#loginForm {
-    font-family: var(--fonte-secundaria);
-    display: flex;
-    flex-direction: column; /* Colocar os grupos em coluna */
-    align-items: center; /* Centraliza todos os itens */
-    margin: 0 auto; /* Centraliza o formulário na página */
-    width: 300px; /* Defina uma largura fixa se necessário */
-}
-
-.form-group {
-    margin-bottom: 15px; /* Espaçamento entre os campos */
-    
-}
-
-label {
-    display: block; /* Faz o label ocupar toda a linha */
-    margin-bottom: 5px; /* Espaçamento entre o label e o input */
-    font-family: var(--fonte-secundaria); /* Fonte desejada */
-    color: var(--cor-secundaria); /* Cor desejada */
-    font-size: 16px; /* Tamanho da fonte */
-    text-align: center;
-    
-}
-
-input {
-    font-family: var(--fonte-secundaria);
-    font-size: 18px;
-    color: #333;
-    border: 2px solid var(--cor-terciaria);
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%; /* Para ocupar toda a largura do container */
-    max-width: 300px; /* Limita a largura máxima, ajuste conforme necessário */
-    box-sizing: border-box; /* Inclui padding e borda no tamanho total */
-    text-align: center; /* Centraliza o texto dentro do input */
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: var(--cor-secundaria);
-    background-color: var(--cor-terciaria);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: var(--cor-primaria);
-    color: var(--cor-secundaria);
-}
-
-
-
-
-
-
-.container {
-    display: flex;
-    flex-direction: row; /* Mantém elementos lado a lado */
-    height: 100vh; /* Ocupa toda altura da viewport */
-    justify-content: center;
-    gap: 20px;
-}
-
-/* Seção de Descrição do Problema */
-.descricaoProblema {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Espaço entre os elementos */
-    align-items: center; /* Alinha verticalmente ao centro */
-    height: 750px; /* Ocupa 20% do main */
-    padding: 10px;
-    background-color: #ffffff; /* Apenas para visualização */
-    box-sizing: border-box;
-    width: 20%;
-    font-family: var(--fonte-secundaria);
-    font-size: 25px;
-    text-align: center;
-    color:(--cor-secundaria);
-
-    
-}
-
-/* Pergunta e Resposta dentro da Descrição do Problema */
-.descricaoProblemaPergunta{
-    width: 100%; /* Cada um ocupa 40% da largura */
-    height: 100%; /* Ocupa toda a altura da section */
-    background-color: #dcdcdc; /* Apenas para visualização */
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    box-sizing: border-box;
-}
-.descricaoProblemaResposta {
-    width: 100%; /* Cada um ocupa 40% da largura */
-    height: 100%; /* Ocupa toda a altura da section */
-    background-color: #dcdcdc; /* Apenas para visualização */
-    display: flex;
-    align-items: center;
-    justify-content:center;
-    box-sizing: border-box;
-    flex-direction: column;
-}
-#respostaInput {
-    width: 290px;
-    padding: 10px;
-    font-size: 18px;
-}
-.botoes {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-input {
-    display: block;
-    width: 100%;
-    max-width: 400px;
-    padding: 8px;
-    margin-top: 10px;
-}
-
-button {
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-.matrizGuti {
-    display: flex;
-    flex-direction: column; /* Ou row, dependendo do layout */
-    background-color: #ffffff; /* Cor de fundo */
-    height: 750px;
-    width: 1360px;
-    overflow: hidden; /* Garante que nada saia da área da seção */
-}
-
-.matrizGuti__imagem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    position: relative; /* Adicionado */
-}
-
-.matrizGuti__imagem img {
-    object-fit: cover; /* Faz com que a imagem cubra toda a área, sem distorcer */
-    width: 100%;
-    height: 100%;
-    border-radius: 8px; /* Adiciona bordas arredondadas, se necessário */
-}
-
-.matrizGuti__retangulo {
-    width: 210px;
-    height: 50px;
-    background-color: green; /* Cor verde */
-    color: var(--cor-primaria); /* Fonte primária */
-    font-family: var(--fonte-primaria);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: calc(750px / 5*1.3); /* Primeira linha */
-    left: calc(1360px / 8*0.3); /* Terceira coluna (C) */
-    border-radius: 8px;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-}
-.mini-retangulos-container {
-    position: absolute;
-    top: calc(750px / 5*1.65); /* Primeira linha */
-    left: calc(1360px / 8*0.3); /* Terceira coluna (C) */
-    display: flex;
-    flex-direction:row;
-    gap: 2px;
-}
-
-.mini-retangulo {
-    width: 50px;
-    height: 20px;
-    background-color: green;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    cursor: grab;
-    
-    
-}
-.matrizGuti__retanguloDescricao {
-    width: 200px;
-    height: 100px;
-    background-color: green; /* Cor verde */
-    color: var(--cor-primaria); /* Fonte primária */
-    font-family: var(--fonte-primaria);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: calc(750px / 5*4.3); /* Primeira linha */
-    left: calc(1360px / 8*1.8); /* Terceira coluna (C) */
-    border-radius: 8px;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-    text-align: center;
-    word-wrap: break-word; /* Quebra palavras longas para caber no retângulo */
-    overflow: hidden; /* Evita que o texto ultrapasse o retângulo */
-    white-space: normal; /* Permite a quebra de linhas */
-}
-.matrizGuti__retanguloResultado {
-    width: 80px;
-    height: 80px;
-    background-color: green; /* Cor verde */
-    color: var(--cor-primaria); /* Fonte primária */
-    font-family: var(--fonte-primaria);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: calc(750px / 5*4.3); /* Primeira linha */
-    left: calc(1360px / 8*6.3); /* Terceira coluna (C) */
-    border-radius: 8px;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-    text-align: center;
-    word-wrap: break-word; /* Quebra palavras longas para caber no retângulo */
-    overflow: hidden; /* Evita que o texto ultrapasse o retângulo */
-    white-space: normal; /* Permite a quebra de linhas */
-}
-
-.mini-retangulo {
-  cursor: grab;
-  user-select: none;
-}
-
-.guti-drop-area {
-  border: 2px dashed #ccc;
-  min-height: 60px;
-  margin: 5px;
-  padding: 10px;
-  text-align: center;
-}
-
-.guti-drop-area.highlight {
-  border-color: #4CAF50;
-  background-color: #f0fff0;
-}
-.drop-area {
-    position: absolute;
-    width: 80px; /* ajuste para o tamanho de cada célula */
-    height: 80px;
-    border: 2px dashed transparent;
-    z-index: 2;
-}
-
-.drop-area[data-coluna="gravidade"] { left: 50px; top: 100px; }
-.drop-area[data-coluna="urgencia"] { left: 150px; top: 100px; }
-.drop-area[data-coluna="tendencia"] { left: 250px; top: 100px; }
-.drop-area[data-coluna="impacto"] { left: 350px; top: 100px; }
-
-.drop-area.highlight {
-    border-color: #00f;
-}
-
-
-.apresentacao__prompt {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 30px;
-    padding: 15px;
-    border: 2px solid var(--cor-terciaria);
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.botao-copiar {
-    padding: 10px 20px;
-    font-size: 18px;
-    font-family: var(--fonte-secundaria);
-    background-color: var(--cor-terciaria);
-    color: var(--cor-primaria);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.botao-copiar:hover {
-    background-color: var(--cor-primaria);
-    color: var(--cor-secundaria);
-}
-
-.apresentacao__conteudo__paragrafo__prompt {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    font-family: var(--fonte-secundaria);
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    text-align: justify;
-    color: var(--cor-secundaria);
-    font-style: italic;
-    font-size: 20px;
-}
-
-/* Agrupamento dos inputs + botões */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.input-group label {
-  margin-bottom: 8px;
-  font-size: 18px;
-  text-align: center;
-}
-
-.input-wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap; /* quebra linha em telas pequenas */
-  width: 100%;
-  max-width: 600px;
-}
-
-.input-wrapper input {
-  flex: 1;
-  min-width: 220px;
-  max-width: 400px;
-}
-
-.btns-inline {
-  display: flex;
-  gap: 8px;
-}
-
-.ok-btn, .edit-btn {
-  padding: 10px 16px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-}
-
-.ok-btn {
-  background: var(--cor-terciaria);
-  color: var(--cor-primaria);
-  font-weight: bold;
-}
-
-.ok-btn.saved {
-  background: #4CAF50;
-  color: #fff;
-}
-
-.edit-btn {
-  background: transparent;
-  border: 2px solid var(--cor-terciaria);
-  color: var(--cor-secundaria);
-}
-
-/* Responsividade já existente + ajustes extras */
-@media (max-width: 768px) {
-  .input-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btns-inline {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .btns-inline button {
-    width: 100%;
-    max-width: 200px;
-  }
-}
-
-

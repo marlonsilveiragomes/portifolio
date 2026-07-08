@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+<rect width="128" height="128" rx="28" fill="#1e1b4b"/>
+<path d="M64 18c7 27 19 39 46 46-27 7-39 19-46 46-7-27-19-39-46-46 27-7 39-19 46-46z" fill="#a78bfa"/>
+<path d="M64 35c4 17 12 25 29 29-17 4-25 12-29 29-4-17-12-25-29-29 17-4 25-12 29-29z" fill="#ffffff"/>
+<text x="64" y="116" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#ffffff">Gemini</text>
+</svg>

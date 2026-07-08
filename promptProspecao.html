@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifólio</title>
+    <link rel="stylesheet" href="styles/Style.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
+            <a class="cabecalho__menu__link" href="oficinaIA.html">
+                <strong style="color: greenyellow;">1 Prompt Prospecção</strong>
+            </a>
+        </nav>
+    </header>
+
+    <main class="apresentacao">
+        <section class="apresentacao__conteudo">
+            <h1 class="apresentacao__conteudo__titulo">
+                1° Prompt | <strong class="titulo-destaque">Prospecção</strong>
+            </h1>
+
+            <p class="apresentacao__conteudo__paragrafo">
+                Objetivo: Auxiliar os Agentes Locais de Inovação na Prospecção de Leads de Acordo com a Cartilha de
+                Elegibilidade para Ingresso de
+                Empresas ao Programa ALI Produtividade.
+            </p>
+
+            <p class="texto-passos">
+                1. Preencha os dados de acordo com a cidade.
+            </p>
+                
+            
+            <p class="texto-passos">
+                2. Caso queira adicionar mais instruções ao prompt, digite no ultimo campo: "Observações Finais"
+            </p>
+
+            <!-- Campos para coleta de dados -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite a Cidade:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="cidade" maxlength="100" placeholder="Ex.: Brusque">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('cidade', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('cidade', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite os Bairros:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="bairros" maxlength="300" placeholder="Ex.: Santa Terezinha, Maluche">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('bairros', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('bairros', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite o Estado (UF):</label>
+                <div class="input-wrapper">
+                    <input type="text" class="estado" maxlength="100" placeholder="Ex.: Santa Catarina ou SC">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('estado', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('estado', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Quantidade de Empresas Desejadas:</label>
+                <div class="input-wrapper">
+                    <input type="number" class="quantidadeEmpresas" min="1" max="500" placeholder="Ex.: 100">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('quantidadeEmpresas', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('quantidadeEmpresas', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Quantidade máxima de empresas por rota:</label>
+                <div class="input-wrapper">
+                    <input type="number" class="maxEmpresasPorRota" min="1" max="50" placeholder="Ex.: 5">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('maxEmpresasPorRota', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('maxEmpresasPorRota', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Observação final:</label>
+                <div class="input-wrapper">
+                    <textarea class="observacaoFinal" maxlength="2000" rows="6"
+                        placeholder="Campo opcional. Ex.: priorizar empresas industriais, evitar franquias, focar empresas com WhatsApp ativo..."></textarea>
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValorOpcional('observacaoFinal', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('observacaoFinal', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Botão para gerar o prompt -->
+
+            <div class="apresentacao__conteudo__paragrafo bloco-gerar-prompt">
+                <button class="botao-copiar" onclick="gerarPrompt()">Gerar Prompt</button>
+
+
+            </div>
+
+
+
+            <!-- Área onde o prompt será exibido -->
+            <div class="apresentacao__prompt">
+                <p id="textoPrompt5w2h" class="apresentacao__conteudo__paragrafo__prompt">
+                    O prompt será gerado aqui.
+                </p>
+
+                <button class="botao-copiar" id="btnVerPromptCompleto" onclick="alternarPromptCompleto()"
+                    style="display: none;">
+                    Ver prompt completo
+                </button>
+
+                <button class="botao-copiar" onclick="copiarPrompt5w2h()">Copiar</button>
+            </div>
+            
+            <div class="separador-ias"></div>
+
+            <p class="texto-ias-sugeridas">
+                Ou Escolha a IA sugerida Abaixo, aqui você será encaminhado diretamente para a página
+                com o prompt copiado e só precisa colar na conversa!
+            </p>
+
+            <div class="botoes-ias">
+                <button class="botao-copiar botao-ia" onclick="abrirIAComPrompt('manus')">
+                    <img class="botao-ia__icone" src="assets/ia-manus.svg" alt="Manus.ai">
+                    Manus.ai
+                </button>
+
+                <button class="botao-copiar botao-ia" onclick="abrirIAComPrompt('gemini')">
+                    <img class="botao-ia__icone" src="assets/ia-gemini.svg" alt="Gemini">
+                    Gemini
+                </button>
+
+                <button class="botao-copiar botao-ia" onclick="abrirIAComPrompt('chatgpt')">
+                    <img class="botao-ia__icone" src="assets/ia-chatgpt.svg" alt="ChatGPT">
+                    ChatGPT
+                </button>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo">Equipe ALI-Foz-Itajai-SC</div>
+        </section>
+
+        <div class="apresentacao__foto__oficina">
+            <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt="foto principal">
+        </div>
+    </main>
+
+    <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+        </div>
+    </footer>
+
+    <div class="whats">
+        <a href="https://wa.me/5548991180829" target="_blank">
+            <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats" />
+        </a>
+    </div>
+
+    <script>
+    const dados = {};
+    let promptCompletoGerado = "";
+    let promptExpandido = false;
+
+    function salvarValor(classe, botao) {
+        const input = document.querySelector("." + classe);
+
+        if (input && input.value.trim() !== "") {
+            dados[classe] = input.value.trim();
+            input.disabled = true;
+
+            botao.classList.add("saved");
+            botao.textContent = "✔ Salvo";
+        } else {
+            alert("Preencha o campo antes de confirmar.");
+        }
+    }
+
+    function salvarValorOpcional(classe, botao) {
+        const input = document.querySelector("." + classe);
+
+        if (input) {
+            dados[classe] = input.value.trim();
+            input.disabled = true;
+
+            botao.classList.add("saved");
+            botao.textContent = "✔ Salvo";
+        }
+    }
+
+    function editarValor(classe, botao) {
+        const input = document.querySelector("." + classe);
+
+        if (input) {
+            input.disabled = false;
+            input.focus();
+
+            const btnContainer = botao.parentElement;
+            const okBtn = btnContainer.querySelector(".ok-btn");
+
+            if (okBtn) {
+                okBtn.classList.remove("saved");
+                okBtn.textContent = "OK";
+            }
+        }
+    }
+
+    function gerarPrompt() {
+        const cidade = dados.cidade;
+        const bairros = dados.bairros;
+        const estado = dados.estado;
+        const quantidadeEmpresas = dados.quantidadeEmpresas;
+        const maxEmpresasPorRota = dados.maxEmpresasPorRota;
+        const observacaoFinal = dados.observacaoFinal || "";
+
+        if (!cidade || !bairros || !estado || !quantidadeEmpresas || !maxEmpresasPorRota) {
+            alert("⚠️ Preencha todos os campos obrigatórios e confirme com OK antes de gerar o prompt.");
+            return;
+        }
+
+        const prompt = `PROMPT MESTRE — GERAÇÃO DE LEADS PARA O PROJETO ALI/SEBRAE — VERSÃO 3.0
+
+Objetivo
+
+Você é um especialista em inteligência comercial, pesquisa empresarial, geolocalização e prospecção B2B.
+
+Sua missão é localizar empresas reais com potencial para participação no Projeto ALI Sebrae utilizando pesquisa profunda em fontes públicas.
+
+Priorize precisão, cobertura e qualidade dos dados.
+
+Nunca invente informações.
+
+Dados da pesquisa
+
+Estado: ${estado}
+Cidade: ${cidade}
+Bairro(s) ou região: ${bairros}
+Quantidade desejada de empresas: ${quantidadeEmpresas}
+Quantidade máxima de empresas por rota: ${maxEmpresasPorRota}
+
+Critérios obrigatórios
+
+Inclua empresas que:
+
+• estejam em funcionamento;
+• possuam endereço físico identificável;
+• possuam potencial para atendimento ALI;
+• sejam preferencialmente ME ou EPP;
+• não sejam MEI quando essa informação puder ser confirmada;
+• não sejam médias ou grandes empresas;
+• possuam pelo menos dois meios públicos de validação, como telefone, endereço, site, Google Business, e-mail ou rede social.
+
+Fontes prioritárias
+
+Pesquise em fontes públicas, incluindo:
+
+• Google Maps;
+• Google Business Profile;
+• site oficial;
+• LinkedIn Company;
+• Facebook Business;
+• Instagram Business;
+• ACI;
+• CDL;
+• sindicatos patronais;
+• federações empresariais;
+• TeleListas;
+• GuiaMais;
+• Solutudo;
+• Apontador;
+• diretórios empresariais públicos;
+• consultas públicas de CNPJ;
+• outras fontes públicas confiáveis.
+
+Regras de validação
+
+Cruze informações entre múltiplas fontes sempre que possível.
+
+Priorize fontes oficiais.
+
+Remova duplicidades.
+
+Quando houver conflito entre informações, utilize a fonte mais confiável e recente.
+
+Classificação do porte
+
+Utilize uma das seguintes opções:
+
+• ME;
+• EPP;
+• LTDA;
+• SA;
+• Verificar Porte, quando não puder ser confirmado.
+
+Nunca invente o porte da empresa.
+
+Priorização do telefone
+
+Preencher o campo Fone seguindo esta ordem:
+
+1. WhatsApp Business confirmado.
+2. WhatsApp confirmado.
+3. Telefone comercial principal.
+4. Telefone fixo.
+5. Outro telefone público.
+
+Confirmar WhatsApp preferencialmente por:
+
+• Google Business Profile;
+• site oficial;
+• link wa.me;
+• botão oficial do WhatsApp;
+• redes sociais oficiais.
+
+Registrar apenas um telefone por empresa, priorizando o melhor contato.
+
+Formato obrigatório da planilha
+
+A resposta final deverá conter uma única tabela, pronta para copiar e colar diretamente em Microsoft Excel, LibreOffice Calc ou Google Planilhas.
+
+A tabela deverá usar exatamente esta ordem de colunas:
+
+Data Planilha | Data Atendimento | Fonte | Escritório Regional | Território | Município | Endereço | CNPJ | Razão Social | Porte | Data Abertura | CNAE | Responsável | E-mail | Fone | Consultor | Prioridade | Fonte Lead | Temperatura | Sênior | Data Distribuição | ALI | STATUS
+
+Regras de preenchimento
+
+Preencher apenas informações confirmadas em fontes públicas.
+
+Deixar obrigatoriamente em branco os seguintes campos:
+
+• Escritório Regional;
+• Território;
+• CNAE;
+• Responsável;
+• Consultor;
+• Prioridade;
+• Temperatura;
+• Sênior;
+• Data Distribuição;
+• ALI;
+• STATUS.
+
+Nunca utilizar:
+
+• Não encontrado;
+• N/A;
+• Desconhecido;
+• A confirmar;
+• Verificar;
+• traço "-".
+
+Nestes casos, deixar a célula vazia.
+
+Padronização
+
+• Data Planilha: data da geração da pesquisa no formato DD/MM/AAAA.
+• Data Atendimento: deixar em branco.
+• Fonte: principal fonte utilizada para validar a empresa.
+• Município: nome completo da cidade.
+• Endereço: endereço completo, incluindo bairro quando disponível.
+• CNPJ: formato oficial.
+• Razão Social: razão social oficial; se não encontrada, utilizar o nome empresarial mais confiável.
+• Porte: ME, EPP, LTDA, SA ou Verificar Porte.
+• Data Abertura: preencher somente quando disponível.
+• E-mail: e-mail corporativo.
+• Fone: melhor telefone disponível, priorizando WhatsApp Business.
+• Fonte Lead: origem predominante do lead.
+
+Organização logística
+
+Ordenar preferencialmente por:
+
+1. Bairro;
+2. Rua;
+3. Número;
+4. Razão Social.
+
+Agrupar em rotas considerando proximidade geográfica, mesma rua, mesma avenida, mesmo bairro e menor deslocamento possível.
+
+Cada rota deverá conter no máximo ${maxEmpresasPorRota} empresas.
+
+Saída obrigatória
+
+A resposta não deverá conter:
+
+• metodologia;
+• resumo executivo;
+• estatísticas;
+• explicações;
+• comentários;
+• matriz de priorização;
+• texto antes da tabela;
+• texto depois da tabela.
+
+A resposta deverá conter exclusivamente a tabela final, pronta para copiar e colar em Excel, LibreOffice Calc ou Google Planilhas.
+
+Regras finais
+
+Nunca invente dados.
+
+Nunca preencha campos não confirmados.
+
+Sempre priorize qualidade sobre quantidade.
+
+Continue pesquisando até atingir ${quantidadeEmpresas} empresas ou até esgotar as fontes públicas relevantes.
+
+Os dados devem ser compatíveis com CRM, Excel, Google Planilhas, Power BI e ferramentas de roteirização.${observacaoFinal ? `
+
+Observação final do usuário
+
+${observacaoFinal}` : ""}`;
+
+        promptCompletoGerado = prompt;
+        promptExpandido = false;
+
+        document.getElementById("textoPrompt5w2h").innerText = gerarPreviewPrompt(prompt);
+
+        const btnVerPromptCompleto = document.getElementById("btnVerPromptCompleto");
+
+        if (btnVerPromptCompleto) {
+            btnVerPromptCompleto.style.display = "inline-block";
+            btnVerPromptCompleto.textContent = "Ver prompt completo";
+        }
+    }
+
+    function gerarPreviewPrompt(prompt) {
+        const limiteCaracteres = 650;
+
+        if (!prompt || prompt.length <= limiteCaracteres) {
+            return prompt;
+        }
+
+        return prompt.substring(0, limiteCaracteres).trim() + "\n\n...mais";
+    }
+
+    function alternarPromptCompleto() {
+        const areaPrompt = document.getElementById("textoPrompt5w2h");
+        const botao = document.getElementById("btnVerPromptCompleto");
+
+        if (!promptCompletoGerado || !areaPrompt || !botao) {
+            return;
+        }
+
+        if (promptExpandido) {
+            areaPrompt.innerText = gerarPreviewPrompt(promptCompletoGerado);
+            botao.textContent = "Ver prompt completo";
+            promptExpandido = false;
+        } else {
+            areaPrompt.innerText = promptCompletoGerado;
+            botao.textContent = "Recolher prompt";
+            promptExpandido = true;
+        }
+    }
+
+    function copiarPrompt5w2h() {
+        const texto = promptCompletoGerado || document.getElementById("textoPrompt5w2h").innerText;
+
+        navigator.clipboard.writeText(texto).then(() => {
+            alert("✅ Prompt completo copiado com sucesso!");
+        }).catch(() => {
+            alert("❌ Erro ao copiar o texto.");
+        });
+    }
+
+    function abrirIAComPrompt(ia) {
+        const texto = promptCompletoGerado || document.getElementById("textoPrompt5w2h").innerText;
+
+        if (!texto || texto === "O prompt será gerado aqui.") {
+            alert("Gere o prompt antes de abrir a IA.");
+            return;
+        }
+
+        const urls = {
+            manus: "https://manus.ai/",
+            gemini: "https://gemini.google.com/app",
+            chatgpt: "https://chatgpt.com/"
+        };
+
+        const urlDestino = urls[ia];
+
+        if (!urlDestino) {
+            alert("IA não configurada.");
+            return;
+        }
+
+        navigator.clipboard.writeText(texto).then(() => {
+            window.open(urlDestino, "_blank");
+            alert("Prompt copiado. Agora cole na IA com Ctrl + V.");
+        }).catch(() => {
+            alert("Não foi possível copiar o prompt.");
+        });
+    }
+</script>
