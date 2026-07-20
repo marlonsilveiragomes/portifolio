@@ -25,10 +25,146 @@
             </h1>
 
             <p class="apresentacao__conteudo__paragrafo">
-                Nota: Estamos atualizando o gerador de Prompt das Prospecções para obter resultados mais acertivos!
+                Nota: Estamos atualizando o gerador de Prompt das Prospecçẽos para obter resultados mais acertivos!
             </p>
 
+            /*<p class="apresentacao__conteudo__paragrafo">
+                Objetivo: Auxiliar os Agentes Locais de Inovação na Prospecção de Leads de Acordo com a Cartilha de
+                Elegibilidade para Ingresso de
+                Empresas ao Programa ALI Produtividade.
+            </p>
+
+            <p class="texto-passos">
+                1. Preencha os dados de acordo com a cidade.
+            </p>
+                
             
+            <p class="texto-passos">
+                2. Caso queira adicionar mais instruções ao prompt, digite no ultimo campo: "Observações Finais"
+            </p>
+
+            <!-- Campos para coleta de dados -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite a Cidade:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="cidade" maxlength="100" placeholder="Ex.: Brusque">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('cidade', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('cidade', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite os Bairros:</label>
+                <div class="input-wrapper">
+                    <input type="text" class="bairros" maxlength="300" placeholder="Ex.: Santa Terezinha, Maluche">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('bairros', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('bairros', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite o Estado (UF):</label>
+                <div class="input-wrapper">
+                    <input type="text" class="estado" maxlength="100" placeholder="Ex.: Santa Catarina ou SC">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('estado', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('estado', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Quantidade de Empresas Desejadas:</label>
+                <div class="input-wrapper">
+                    <input type="number" class="quantidadeEmpresas" min="1" max="500" placeholder="Ex.: 100">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('quantidadeEmpresas', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('quantidadeEmpresas', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Quantidade máxima de empresas por rota:</label>
+                <div class="input-wrapper">
+                    <input type="number" class="maxEmpresasPorRota" min="1" max="50" placeholder="Ex.: 5">
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValor('maxEmpresasPorRota', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('maxEmpresasPorRota', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Observação final:</label>
+                <div class="input-wrapper">
+                    <textarea class="observacaoFinal" maxlength="2000" rows="6"
+                        placeholder="Campo opcional. Ex.: priorizar empresas industriais, evitar franquias, focar empresas com WhatsApp ativo..."></textarea>
+                    <div class="btns-inline">
+                        <button class="ok-btn" onclick="salvarValorOpcional('observacaoFinal', this)">OK</button>
+                        <button class="edit-btn" onclick="editarValor('observacaoFinal', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Botão para gerar o prompt -->
+
+            <div class="apresentacao__conteudo__paragrafo bloco-gerar-prompt">
+                <button class="botao-copiar" onclick="gerarPrompt()">Gerar Prompt</button>
+
+
+            </div>
+
+
+
+            <!-- Área onde o prompt será exibido -->
+            <div class="apresentacao__prompt">
+                <p id="textoPrompt5w2h" class="apresentacao__conteudo__paragrafo__prompt">
+                    O prompt será gerado aqui.
+                </p>
+
+                <button class="botao-copiar" id="btnVerPromptCompleto" onclick="alternarPromptCompleto()"
+                    style="display: none;">
+                    Ver prompt completo
+                </button>
+
+                <button class="botao-copiar" onclick="copiarPrompt5w2h()">Copiar</button>
+            </div>
+            
+            <div class="separador-ias"></div>
+
+            <p class="texto-ias-sugeridas">
+                Ou Escolha a IA sugerida Abaixo, aqui você será encaminhado diretamente para a página
+                com o prompt copiado e só precisa colar na conversa!
+            </p>
+
+            <div class="botoes-ias">
+                <button class="botao-copiar botao-ia" onclick="abrirIAComPrompt('manus')">
+                    <img class="botao-ia__icone" src="assets/ia-manus.svg" alt="Manus.ai">
+                    Manus.ai
+                </button>
+
+                <button class="botao-copiar botao-ia" onclick="abrirIAComPrompt('gemini')">
+                    <img class="botao-ia__icone" src="assets/ia-gemini.svg" alt="Gemini">
+                    Gemini
+                </button>
+
+                <button class="botao-copiar botao-ia" onclick="abrirIAComPrompt('chatgpt')">
+                    <img class="botao-ia__icone" src="assets/ia-chatgpt.svg" alt="ChatGPT">
+                    ChatGPT
+                </button>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo">Equipe ALI-SC</div>
+        </section>
+
+        <div class="apresentacao__foto__oficina">
+            <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt="foto principal">
+        </div>
+    </main>
 
     <footer>
         <div class="rodape">
