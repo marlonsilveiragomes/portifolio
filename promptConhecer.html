@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portifólio</title>
+    <link rel="stylesheet" href="styles/Style.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+
+            <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
+
+            <a class="cabecalho__menu__link" href="oficinaIA.html">
+                <strong style="color: greenyellow;">1° Prompt</strong>
+            </a>
+
+        </nav>
+    </header>
+
+    <main class="apresentacao">
+
+        <section class="apresentacao__conteudo">
+
+            <h1 class="apresentacao__conteudo__titulo">
+                1° Prompt |
+                <strong class="titulo-destaque">Conhecer</strong>
+            </h1>
+
+            <p class="apresentacao__conteudo__paragrafo">
+                Objetivo: Apoiar os Agentes Locais de Inovação na execução da Etapa Conhecer,
+                estruturando um briefing inicial da empresa com base nas informações fornecidas pelo empresário
+                e na análise de redes sociais, site e demais plataformas digitais. A etapa também orienta a criação
+                de uma conversa específica da empresa na IA indicada, que será utilizada como suporte técnico
+                e consultivo durante toda a jornada do Programa ALI Produtividade.
+            </p>
+
+            <p class="texto-passos">
+                1. Preencha os dados de acordo com o briefing coletado junto à empresa.
+            </p>
+
+            <p class="texto-passos">
+                2. Caso a empresa possua redes sociais, site, Google Maps ou outros canais digitais, informe no campo
+                correspondente.
+            </p>
+
+            <p class="texto-passos">
+                3. Gere o prompt, copie e cole na IA indicada para criar a conversa base da empresa.
+            </p>
+
+            <!-- Campo: Nome da Empresa -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite o Nome da Empresa</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="nomeEmpresa" maxlength="100" placeholder="Ex.: Empresa Modelo">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('nomeEmpresa', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('nomeEmpresa', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo: CNPJ -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite o CNPJ</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="cnpjEmpresa" maxlength="30" placeholder="Ex.: 00.000.000/0000-00">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('cnpjEmpresa', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('cnpjEmpresa', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo: Redes Sociais / Sites -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Digite as redes sociais, site, Google Maps ou outros canais digitais</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="redesSociaisEmpresa" maxlength="500"
+                        placeholder="Ex.: Instagram, site, Facebook, Google Maps, LinkedIn">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('redesSociaisEmpresa', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('redesSociaisEmpresa', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Briefing coletado na primeira conversa com a empresa:</label>
+
+                <div class="input-wrapper">
+                    <textarea class="briefingEmpresa" maxlength="3000" rows="8"
+                        placeholder="Ex.: Empresa iniciada a partir de uma oportunidade observada pelo gestor, principais produtos, clientes, dificuldades percebidas, diferenciais, canais de venda e informações relevantes da conversa inicial."></textarea>
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('briefingEmpresa', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('briefingEmpresa', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão para gerar o prompt -->
+            <div class="apresentacao__conteudo__paragrafo bloco-gerar-prompt">
+                <button class="botao-copiar" type="button" onclick="gerarPrompt()">
+                    Gerar Prompt
+                </button>
+            </div>
+
+            <!-- Área onde o prompt será exibido -->
+            <div class="apresentacao__prompt">
+
+                <p id="textoPrompt5w2h" class="apresentacao__conteudo__paragrafo__prompt">
+                    O prompt será gerado aqui.
+                </p>
+
+                <button class="botao-ler-mais" id="btnVerPromptCompleto" type="button"
+                    onclick="alternarPromptCompleto()" style="display: none;">
+                    Ver prompt completo
+                </button>
+
+                <button class="botao-copiar" type="button" onclick="copiarPrompt5w2h()">
+                    Copiar
+                </button>
+
+            </div>
+
+            <div class="separador-ias"></div>
+
+            <div class="apresentacao__conteudo__paragrafo">
+                Equipe ALI-SC
+            </div>
+
+        </section>
+
+        <div class="apresentacao__foto__oficina">
+            <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt="foto principal">
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+        </div>
+    </footer>
+
+    <div class="whats">
+        <a href="https://wa.me/5548991180829" target="_blank">
+            <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats">
+        </a>
+    </div>
+
+    <script>
+        const dados = {};
+        let promptCompletoGerado = "";
+        let promptExpandido = false;
+
+        function salvarValor(classe, botao) {
+            const input = document.querySelector("." + classe);
+
+            if (input && input.value.trim() !== "") {
+                dados[classe] = input.value.trim();
+                input.disabled = true;
+
+                botao.classList.add("saved");
+                botao.textContent = "✔ Salvo";
+            } else {
+                alert("Preencha o campo antes de confirmar.");
+            }
+        }
+
+        function salvarValorOpcional(classe, botao) {
+            const input = document.querySelector("." + classe);
+
+            if (input) {
+                dados[classe] = input.value.trim();
+                input.disabled = true;
+
+                botao.classList.add("saved");
+                botao.textContent = "✔ Salvo";
+            }
+        }
+
+        function editarValor(classe, botao) {
+            const input = document.querySelector("." + classe);
+
+            if (input) {
+                input.disabled = false;
+                input.focus();
+
+                const btnContainer = botao.parentElement;
+                const okBtn = btnContainer.querySelector(".ok-btn");
+
+                if (okBtn) {
+                    okBtn.classList.remove("saved");
+                    okBtn.textContent = "OK";
+                }
+            }
+        }
+
+        function gerarPrompt() {
+            const nomeEmpresa = dados.nomeEmpresa;
+            const cnpjEmpresa = dados.cnpjEmpresa;
+            const redesSociaisEmpresa = dados.redesSociaisEmpresa || "Não informado. Realizar busca ativa em fontes públicas.";
+            const briefingEmpresa = dados.briefingEmpresa;
+
+            if (!nomeEmpresa || !cnpjEmpresa || !briefingEmpresa) {
+                alert("⚠️ Preencha os campos obrigatórios e confirme com OK antes de gerar o prompt: Nome da Empresa, CNPJ e Briefing da Empresa.");
+                return;
+            }
+
+            const prompt = `1° Prompt | Etapa Conhecer
+
+(Uso no Copilot Institucional – Versão Atualizada)
+
+Papel:
+
+Atue como um analista sênior de negócios e inovação, com experiência em diagnóstico empresarial, inteligência de mercado e benchmarking para micro e pequenas empresas, alinhado à metodologia do Sebrae e ao Projeto ALI Produtividade.
+
+Objetivo:
+
+Apoiar a Etapa 1 – Conhecer da Jornada ALI Produtividade, construindo um panorama inicial da empresa a partir de fontes públicas e das informações fornecidas pelo empresário, preservando fielmente a narrativa do empreendedor.
+
+Dados de entrada fornecidos pelo usuário:
+
+Nome da Empresa:
+${nomeEmpresa}
+
+CNPJ:
+${cnpjEmpresa}
+
+Redes sociais da empresa:
+${redesSociaisEmpresa}
+
+Briefing da Empresa:
+${briefingEmpresa}
+
+Tarefas a serem executadas:
+
+1. Identificação e caracterização da empresa
+
+Consolidar os dados cadastrais básicos da empresa a partir do CNPJ, incluindo:
+- razão social;
+- nome fantasia;
+- porte;
+- CNAE principal e secundários;
+- data de abertura;
+- situação cadastral.
+
+Interpretar o enquadramento da empresa, especialmente ME ou EPP, e sua atividade econômica principal.
+
+2. Análise de presença digital e comunicação
+
+Analisar as redes sociais e canais digitais informados, observando:
+- clareza da proposta de valor;
+- frequência e tipo de conteúdo publicado;
+- posicionamento de marca;
+- interação com clientes;
+- coerência entre comunicação digital e a descrição fornecida pelo empresário.
+
+3. Identificação do setor e contexto de mercado
+
+Definir o setor econômico em que a empresa está inserida, como comércio, indústria ou serviços, e o segmento específico.
+
+Apresentar um breve panorama do setor no Brasil, considerando:
+- características gerais;
+- principais desafios enfrentados por micro e pequenas empresas do segmento;
+- tendências relevantes ao negócio.
+
+4. Mapeamento de concorrentes e referências para benchmarking
+
+Identificar de 3 a 5 concorrentes diretos ou empresas referência do mesmo segmento, preferencialmente com melhor desempenho percebido em:
+- presença digital;
+- modelo de negócio;
+- relacionamento com clientes;
+- processos, produtos ou serviços.
+
+Descrever, de forma objetiva, quais práticas podem ser observadas para fins de benchmarking, destacando aprendizados potenciais, sem recomendações prescritivas ou cópia direta.
+
+5. Síntese analítica para o ALI
+
+Apresentar uma síntese estruturada contendo:
+- pontos de atenção iniciais;
+- potenciais forças percebidas;
+- lacunas que poderão ser aprofundadas nas próximas etapas da jornada.
+
+6. Síntese institucional da empresa obrigatória
+
+Elaborar um único parágrafo, com no máximo 2.000 caracteres, que apresente uma síntese clara e objetiva da empresa.
+
+Manter integralmente o sentido, a linguagem e os elementos centrais da descrição fornecida pelo empresário, podendo apenas organizar o texto, melhorar a fluidez e integrar informações públicas levantadas.
+
+Não alterar o posicionamento, a proposta de valor ou a narrativa do empreendedor.
+
+A síntese deverá ser adequada para uso institucional no Projeto ALI Produtividade.
+
+7. Busca ativa de presença digital condicional obrigatória
+
+Caso o usuário não informe os links das redes sociais da empresa, realize busca ativa em fontes públicas para identificar a presença digital da empresa.
+
+Após a Síntese Institucional de até 2.000 caracteres, apresentar um campo de retorno específico contendo os links identificados das principais redes sociais e canais digitais, tais como:
+- Instagram;
+- Google Meu Negócio / Google Maps;
+- LinkedIn;
+- Facebook;
+- TikTok;
+- website oficial;
+- outros canais relevantes, quando aplicável.
+
+Caso nenhum canal seja identificado, informar explicitamente que não foram encontradas presenças digitais públicas ativas.
+
+Formato da resposta:
+
+- Linguagem técnica, formal e objetiva;
+- Estrutura organizada por subtítulos;
+- A síntese institucional deve ser apresentada ao final, destacada em bloco único de texto;
+- Os links de presença digital identificados devem ser apresentados logo abaixo da síntese institucional, em seção própria;
+- Manter caráter exploratório, sem conclusões definitivas ou diagnósticos fechados.`;
+
+            promptCompletoGerado = prompt;
+            promptExpandido = false;
+
+            const areaPrompt = document.getElementById("textoPrompt5w2h");
+            const btnVerPromptCompleto = document.getElementById("btnVerPromptCompleto");
+
+            if (areaPrompt) {
+                areaPrompt.innerText = gerarPreviewPrompt(promptCompletoGerado);
+            }
+
+            if (btnVerPromptCompleto) {
+                btnVerPromptCompleto.style.display = "inline-block";
+                btnVerPromptCompleto.textContent = "Ver prompt completo";
+            }
+        }
+
+        function gerarPreviewPrompt(prompt) {
+            const limiteCaracteres = 650;
+
+            if (!prompt || prompt.length <= limiteCaracteres) {
+                return prompt;
+            }
+
+            return prompt.substring(0, limiteCaracteres).trim() + "\n\n...mais";
+        }
+
+        function alternarPromptCompleto() {
+            const areaPrompt = document.getElementById("textoPrompt5w2h");
+            const botao = document.getElementById("btnVerPromptCompleto");
+
+            if (!promptCompletoGerado || !areaPrompt || !botao) {
+                return;
+            }
+
+            if (promptExpandido) {
+                areaPrompt.innerText = gerarPreviewPrompt(promptCompletoGerado);
+                botao.textContent = "Ver prompt completo";
+                promptExpandido = false;
+            } else {
+                areaPrompt.innerText = promptCompletoGerado;
+                botao.textContent = "Recolher prompt";
+                promptExpandido = true;
+            }
+        }
+
+        function copiarPrompt5w2h() {
+            if (!promptCompletoGerado) {
+                alert("⚠️ Gere o prompt antes de copiar.");
+                return;
+            }
+
+            navigator.clipboard.writeText(promptCompletoGerado).then(() => {
+                alert("✅ Prompt completo copiado com sucesso!");
+            }).catch(() => {
+                alert("❌ Erro ao copiar o texto.");
+            });
+        }
+
+        function abrirIAComPrompt(ia) {
+            if (!promptCompletoGerado) {
+                alert("Gere o prompt antes de abrir a IA.");
+                return;
+            }
+
+            const urls = {
+                manus: "https://manus.ai/",
+                gemini: "https://gemini.google.com/",
+                chatgpt: "https://chatgpt.com/"
+            };
+
+            const urlDestino = urls[ia];
+
+            if (!urlDestino) {
+                alert("IA não configurada.");
+                return;
+            }
+
+            navigator.clipboard.writeText(promptCompletoGerado).then(() => {
+                window.open(urlDestino, "_blank");
+                alert("Prompt copiado. Agora cole na IA com Ctrl + V.");
+            }).catch(() => {
+                alert("Não foi possível copiar o prompt.");
+            });
+        }
+    </script>
+
+</body>
+
+</html>

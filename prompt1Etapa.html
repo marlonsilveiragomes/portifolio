@@ -1,78 +1,275 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portifólio</title>
     <link rel="stylesheet" href="styles/Style.css">
 </head>
+
 <body>
+
     <header class="cabecalho">
         <nav class="cabecalho__menu">
-            
+
             <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
-            <a class="cabecalho__menu__link" href="oficinaIA.html"><strong style="color: greenyellow;">2°Prompt</strong>
-</a>
-                        
+
+            <a class="cabecalho__menu__link" href="oficinaIA.html">
+                <strong style="color: greenyellow;">2°Prompt</strong>
+            </a>
+
         </nav>
     </header>
-    <main class="apresentacao"> 
-    <section class="apresentacao__conteudo">
-        <h1 class="apresentacao__conteudo__titulo">2° Prompt | 
-        <strong class="titulo-destaque"> Preparatório Etapa 3 Nomear</strong> 
-        </h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Preparar a devolutiva apurada pelo Radar de Inovação e ajudar na escolha da priorização do Desaifo no 3° encontro 
-            empresário.
-        </p>
-           <p class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
-    1° Passo: Abrir nova conversa na Copilot. fazer o download da Devolutiva do Radar na janela e seguir para o segundo passo.
-  </p>
-                
-                <img class=" fotoprincipalpassoapasso" src="assets/1prompt1passo.png" alt = "foto passo a passo">
-        
-            <h1><P class="apresentacao__conteudo__paragrafo"style="text-decoration: underline;">2° Passo: Copiar o Briefing da com a descrição da empresa coletados na 1ª etapa, bem como sites e redes sociais, colar na na janela do Copilot e seguir
-                para o próximo passo.</P></h1>
-            
-                <img class=" fotoprincipalpassoapasso" src="assets/1prompt2passo.png" alt = "foto passo a passo"> 
 
-            <h1><P class="apresentacao__conteudo__paragrafo"style="text-decoration: underline;">3° Passo: Copiar o Prompt abaixo e colar na corversa do Copilot, juntamente com os passos anteriores e clicar em "OK".</P>
+    <main class="apresentacao">
 
+        <section class="apresentacao__conteudo">
 
-        <div class="apresentacao__prompt">
-    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
-         "Analise a devolutiva do Radar, a descrição da empresa bem como as redes sociais e site e Retorne: Contexto da Empresa,
-          Principais Desafios para Empresa Escolher". Retorne um doc completo com todas as informações retornadas no terminal"
-    </p>
-    <button class="botao-copiar" onclick="copiarPrompt()">Copiar Prompt</button>
-</div>
-    <img class=" fotoprincipalpassoapasso" src="assets/1prompt3passo.png" alt = "foto passo a passo"> 
-    <div class="apresentacao__links__download">
-                <
-<div class="apresentacao__conteudo__paragrafo">Equipe ALI-SC</p>
-    </section>
-            
-    <div class="apresentacao__foto__oficina">
-        <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt = "foto principal">  
-        
-        <img class="fotoprincipaloficina2" src="assets/robo.png" alt = "foto principal"> </div>
-    </main>    
+            <h1 class="apresentacao__conteudo__titulo">
+                2° Prompt |
+                <strong class="titulo-destaque">Preparatório Etapa 3 Nomear</strong>
+            </h1>
+
+            <p class="apresentacao__conteudo__paragrafo">
+                Objetivo: Preparar a devolutiva apurada pelo Radar de Inovação e ajudar na escolha da priorização do
+                desafio no 3° encontro com o empresário.
+            </p>
+
+            <p class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                1° Passo: Abrir nova conversa na Copilot, fazer o download da Devolutiva do Radar na janela e seguir
+                para o segundo passo.
+            </p>
+
+            <img class="fotoprincipalpassoapasso" src="assets/1prompt1passo.png" alt="foto passo a passo">
+
+            <p class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                2° Passo: Copiar o briefing com a descrição da empresa coletado na 1ª etapa, bem como sites e redes
+                sociais, colar na janela do Copilot e seguir para o próximo passo.
+            </p>
+
+            <img class="fotoprincipalpassoapasso" src="assets/1prompt2passo.png" alt="foto passo a passo">
+
+            <p class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                3° Passo: Copiar o prompt abaixo e colar na conversa do Copilot, juntamente com os passos anteriores,
+                e clicar em "OK".
+            </p>
+
+            <div class="apresentacao__prompt">
+
+                <p id="textoPromptEtapa3" class="apresentacao__conteudo__paragrafo__prompt">
+                    PROMPT PREPARATÓRIO – ETAPA 3 | ANÁLISE E PRIORIZAÇÃO DOS DESAFIOS.
+                    Atue como consultor sênior em produtividade, gestão empresarial e inovação, alinhado à metodologia
+                    do Sebrae e ao Projeto ALI Produtividade...
+
+                    ...mais
+                </p>
+
+                <button id="btnVerPromptCompletoEtapa3" class="botao-ler-mais" type="button"
+                    onclick="alternarPromptCompletoEtapa3()">
+                    Ver prompt completo
+                </button>
+
+                <button class="botao-copiar" type="button" onclick="copiarPromptEtapa3()">
+                    Copiar Prompt
+                </button>
+
+            </div>
+
+            <img class="fotoprincipalpassoapasso" src="assets/1prompt3passo.png" alt="foto passo a passo">
+
+            <div class="apresentacao__links__download">
+                <p class="apresentacao__conteudo__paragrafo">Equipe ALI-SC</p>
+            </div>
+
+        </section>
+
+        <div class="apresentacao__foto__oficina">
+
+            <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt="foto principal">
+
+            <img class="fotoprincipaloficina2" src="assets/robo.png" alt="foto principal">
+
+        </div>
+
+    </main>
+
     <footer>
         <div class="rodape">
             <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+        </div>
     </footer>
+
     <div class="whats">
-        <a href=" https://wa.me/5548991180829" target="_blank">
-        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
-    </a>
+        <a href="https://wa.me/5548991180829" target="_blank">
+            <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats">
+        </a>
     </div>
+
+
+
     <script>
-function copiarPrompt() {
-    const texto = document.getElementById("textoPrompt").innerText;
-    navigator.clipboard.writeText(texto).then(() => {
-        alert("✅ Prompt copiado com sucesso!");
-    }).catch(err => {
-        alert("❌ Erro ao copiar o texto.");
-    });
-}
-</script>
+        const promptCompletoEtapa3 = `PROMPT PREPARATÓRIO – ETAPA 3 | ANÁLISE E PRIORIZAÇÃO DOS DESAFIOS
+(Projeto ALI Produtividade – Uso Institucional)
+
+Papel:
+Atue como um consultor sênior em produtividade, gestão empresarial e inovação, alinhado à metodologia do Sebrae e ao Projeto ALI Produtividade.
+
+Objetivo:
+Executar a Etapa 3 da Jornada ALI Produtividade, realizando a análise do diagnóstico empresarial e a priorização dos principais desafios da empresa, somente quando todos os insumos obrigatórios estiverem completos.
+
+================================================================
+REGRA CRÍTICA DE VALIDAÇÃO (EXECUÇÃO OBRIGATÓRIA)
+================================================================
+
+Antes de qualquer análise, verifique se TODOS os insumos obrigatórios estão disponíveis.
+
+Insumos obrigatórios:
+1. Dados básicos da empresa (Etapa 1 – Conhecer a Empresa) ou Sprint / Síntese da empresa (Etapa 1 – Conhecer a Empresa), ou dados equivalentes inseridos manualmente;
+2. Devolutiva do Radar de Produtividade.
+
+================================================================
+TRATAMENTO DE ERRO (OBRIGATÓRIO)
+================================================================
+
+Se QUALQUER um dos insumos obrigatórios estiver ausente, execute EXATAMENTE o comportamento abaixo:
+
+- Interrompa imediatamente a execução
+- Não realize qualquer análise
+- Não gere síntese
+- Não gere arquivo PDF
+
+Retorno ÚNICO no terminal (não exibir mais nada além disso):
+
+❌ ERRO — DOCUMENTO NÃO CONCLUÍDO
+
+Insira os dados obrigatórios para continuar.
+
+Dados ausentes:
+- [listar apenas os itens que estão faltando]
+
+Opções para continuar:
+1) Inserir os dados da empresa manualmente
+2) Anexar os documentos pendentes
+
+Campos obrigatórios para inserção manual:
+- Nome da Empresa
+- CNPJ
+- Descrição do negócio (informada pelo empresário)
+
+Documentos obrigatórios para anexar:
+- Sprint / Síntese da empresa (Etapa 1 – Conhecer a Empresa)
+- Devolutiva do Radar de Produtividade
+
+================================================================
+DADOS DE ENTRADA (QUANDO COMPLETOS)
+================================================================
+
+Nome da Empresa:
+CNPJ:
+Descrição do negócio (informada pelo empresário) ou Sprint / Síntese da empresa (Etapa 1 – Conhecer): [inserir ou anexar]
+Devolutiva do Radar de Produtividade: [inserir ou anexar]
+Observações qualitativas do ALI (opcional):
+
+================================================================
+TAREFAS A SEREM EXECUTADAS (APENAS SE NÃO HOUVER ERRO)
+================================================================
+
+1. Interpretar os resultados do Radar de Produtividade por dimensão:
+   - Controles Gerenciais
+   - Gestão das Operações
+   - Gestão de Marketing
+   - Práticas de Inovação
+   - Transformação Digital
+   - ESG (Ambiental, Social e Governança)
+
+2. Analisar o nível de maturidade da empresa em cada dimensão, relacionando as justificativas apresentadas com impactos na produtividade.
+
+3. Identificar gargalos, riscos e práticas pouco sistematizadas que limitam eficiência, crescimento ou resultados.
+
+4. Priorizar de 2 a 4 desafios principais, considerando:
+   - Impacto na produtividade
+   - Urgência
+   - Capacidade de execução
+   - Alinhamento com os objetivos do empresário
+
+5. Preparar a empresa para as próximas etapas da Jornada ALI Produtividade.
+
+================================================================
+FORMATO DA RESPOSTA
+================================================================
+
+- Linguagem técnica, formal e institucional;
+- Estrutura organizada por subtítulos;
+- Conteúdo adequado para devolutiva ao empresário e registro no Sistema ALI;
+- Não apresentar soluções detalhadas ou plano de ação nesta etapa.
+
+================================================================
+ENCERRAMENTO OBRIGATÓRIO
+================================================================
+
+Elaborar uma síntese analítica da Etapa 3, explicando como o diagnóstico e o Radar de Produtividade sustentam a priorização dos desafios e preparam o avanço da jornada.
+
+================================================================
+GERAÇÃO DE ARQUIVO (APENAS SE NÃO HOUVER ERRO)
+================================================================
+
+Ao final da execução, gerar um arquivo em formato .pdf contendo:
+- Identificação da empresa;
+- Análise por dimensão do Radar de Produtividade;
+- Desafios prioritários identificados;
+- Síntese analítica da Etapa 3.
+
+O arquivo deve possuir linguagem institucional e formatação adequada para uso oficial no Projeto ALI Produtividade.`;
+
+        let promptEtapa3Expandido = false;
+
+        function gerarPreviewPromptEtapa3() {
+            const limiteCaracteres = 450;
+
+            if (promptCompletoEtapa3.length <= limiteCaracteres) {
+                return promptCompletoEtapa3;
+            }
+
+            return promptCompletoEtapa3.substring(0, limiteCaracteres).trim() + "\n\n...mais";
+        }
+
+        function alternarPromptCompletoEtapa3() {
+            const areaPrompt = document.getElementById("textoPromptEtapa3");
+            const botao = document.getElementById("btnVerPromptCompletoEtapa3");
+
+            if (!areaPrompt || !botao) {
+                return;
+            }
+
+            if (promptEtapa3Expandido) {
+                areaPrompt.innerText = gerarPreviewPromptEtapa3();
+                botao.innerText = "Ver prompt completo";
+                promptEtapa3Expandido = false;
+            } else {
+                areaPrompt.innerText = promptCompletoEtapa3;
+                botao.innerText = "Recolher prompt";
+                promptEtapa3Expandido = true;
+            }
+        }
+
+        function copiarPromptEtapa3() {
+            navigator.clipboard.writeText(promptCompletoEtapa3).then(() => {
+                alert("✅ Prompt completo copiado com sucesso!");
+            }).catch(() => {
+                alert("❌ Erro ao copiar o prompt.");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const areaPrompt = document.getElementById("textoPromptEtapa3");
+
+            if (areaPrompt) {
+                areaPrompt.innerText = gerarPreviewPromptEtapa3();
+            }
+        });
+    </script>
+
 </body>
+
 </html>

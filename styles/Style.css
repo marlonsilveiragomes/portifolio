@@ -79,15 +79,15 @@
 
     }
 
-    .apresentacao__conteudo{
+    .apresentacao__conteudo {
 
-        width:100%;
+        width: 100%;
 
-        display:flex;
+        display: flex;
 
-        flex-direction:column;
+        flex-direction: column;
 
-        gap:18px;
+        gap: 18px;
 
     }
 
@@ -212,62 +212,62 @@
 
 
 
-    .apresentacao__foto{
+    .apresentacao__foto {
 
-        width:100%;
+        width: 100%;
 
-        display:flex;
+        display: flex;
 
-        justify-content:center;
+        justify-content: center;
 
-        align-items:flex-start;
-
-    }
-
-
-    .apresentacao__foto__oficina{
-
-        width:100%;
-
-        display:flex;
-
-        flex-direction:column;
-
-        align-items:center;
-
-        gap:18px;
+        align-items: flex-start;
 
     }
 
-    .fotoprincipaloficina{
 
-        width:100%;
+    .apresentacao__foto__oficina {
 
-        max-width:420px;
+        width: 100%;
 
-        height:auto;
+        display: flex;
 
-        display:block;
+        flex-direction: column;
 
-        border-radius:8px;
+        align-items: center;
 
-        border:3px solid var(--cor-secundaria);
+        gap: 18px;
 
     }
 
-    .fotoprincipaloficina2{
+    .fotoprincipaloficina {
 
-        width:100%;
+        width: 100%;
 
-        max-width:420px;
+        max-width: 420px;
 
-        height:auto;
+        height: auto;
 
-        display:block;
+        display: block;
 
-        border-radius:8px;
+        border-radius: 8px;
 
-        border:3px solid var(--cor-terciaria);
+        border: 3px solid var(--cor-secundaria);
+
+    }
+
+    .fotoprincipaloficina2 {
+
+        width: 100%;
+
+        max-width: 420px;
+
+        height: auto;
+
+        display: block;
+
+        border-radius: 8px;
+
+        border: 3px solid var(--cor-terciaria);
 
     }
 
@@ -1005,6 +1005,7 @@
             max-width: 200px;
         }
     }
+
     /* =====================================================
     AJUSTES GERAIS — PORTFÓLIO
     Correções adicionadas para padronizar botões, cards,
@@ -1174,6 +1175,7 @@
             height: 54px;
         }
     }
+
     /* =====================================================
     BOTÕES DE IAS
     ===================================================== */
@@ -1236,7 +1238,8 @@
         margin: 12px 0 18px;
         padding: 12px 18px;
 
-        color: #ffee00;              /* Azul ciano, em harmonia com o tema */
+        color: #ffee00;
+        /* Azul ciano, em harmonia com o tema */
         font-size: 1rem;
         font-weight: 600;
         line-height: 1.6;
@@ -1246,11 +1249,13 @@
         border-left: 4px solid #00E5FF;
         border-radius: 8px;
     }
+
     .texto-passos {
         margin: 12px 0 18px;
         padding: 12px 18px;
 
-        color: #ffffff;              /* Azul ciano, em harmonia com o tema */
+        color: #ffffff;
+        /* Azul ciano, em harmonia com o tema */
         font-size: 22px;
         font-weight: 600;
         line-height: 1.6;
@@ -1265,39 +1270,285 @@
    RESPONSIVIDADE — IMAGEM ACIMA DO TEXTO NO CELULAR
    ===================================================== */
 
-@media (max-width: 900px) {
+    @media (max-width: 900px) {
+
+        .apresentacao {
+            display: flex;
+            flex-direction: column;
+            width: min(720px, calc(100% - 32px));
+            margin: 24px auto;
+            padding: 0 0 40px;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .apresentacao__foto__oficina {
+            order: -1;
+            width: 100%;
+            max-width: 520px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .fotoprincipaloficina {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px;
+        }
+
+        .apresentacao__conteudo {
+            width: 100%;
+            max-width: 620px;
+            text-align: center;
+        }
+    }
+
+    /* =====================================================
+   PROMPT — PREVIEW E TEXTO COMPLETO DENTRO DO BOX
+   ===================================================== */
+
+    .apresentacao__prompt {
+        width: 100%;
+        max-width: 690px;
+        overflow: hidden;
+    }
+
+    .apresentacao__conteudo__paragrafo__prompt {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .botao-ler-mais {
+        padding: 10px 18px;
+        font-size: 16px;
+        font-family: var(--fonte-secundaria);
+        font-weight: 700;
+
+        color: var(--cor-terciaria);
+        background: transparent;
+
+        border: 2px solid var(--cor-terciaria);
+        border-radius: 8px;
+
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .botao-ler-mais:hover,
+    .botao-ler-mais:focus-visible {
+        background-color: var(--cor-terciaria);
+        color: var(--cor-primaria);
+        outline: none;
+    }
+
+    /* =====================================================
+   AJUSTE CONTROLADO — APRESENTAÇÃO EM DUAS COLUNAS
+   ===================================================== */
 
     .apresentacao {
+        width: 100%;
+        max-width: none;
+
+        margin: 40px auto;
+        padding: 0 7%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+
+        gap: 64px;
+    }
+
+    /* Coluna esquerda — conteúdo, passos e prompt */
+    .apresentacao__conteudo {
+        flex: 0 1 58%;
+        width: 58%;
+        max-width: none;
+
         display: flex;
         flex-direction: column;
-        width: min(720px, calc(100% - 32px));
-        margin: 24px auto;
-        padding: 0 0 40px;
-        gap: 28px;
         align-items: center;
+
+        gap: 22px;
     }
 
+    /* Coluna direita — fotos da oficina */
+    .apresentacao__foto,
     .apresentacao__foto__oficina {
-        order: -1;
+        flex: 0 1 42%;
+        width: 42%;
+        max-width: none;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        gap: 42px;
+    }
+
+    /* Textos principais da coluna esquerda */
+    .apresentacao__conteudo__titulo,
+    .apresentacao__conteudo__titulo__areamentorado,
+    .apresentacao__conteudo__paragrafo {
+        width: 100%;
+        max-width: 780px;
+    }
+
+    /* Imagens do passo a passo */
+    .fotoprincipalpassoapasso,
+    .foto-topo-oficina {
+        width: 100%;
+        max-width: 820px;
+        height: auto;
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+
+        object-fit: contain;
+    }
+
+    /* Fotos da coluna direita */
+    .fotoprincipaloficina,
+    .fotoprincipaloficina2 {
         width: 100%;
         max-width: 520px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-    }
-
-    .fotoprincipaloficina {
-        width: 100%;
-        max-width: 420px;
         height: auto;
+
         display: block;
-        margin: 0 auto 20px;
+        object-fit: contain;
     }
 
-    .apresentacao__conteudo {
+    /* Box do prompt */
+    .apresentacao__prompt {
         width: 100%;
-        max-width: 620px;
-        text-align: center;
+        max-width: 820px;
+
+        overflow: hidden;
     }
-}
+
+    /* Texto do prompt dentro do box */
+    .apresentacao__conteudo__paragrafo__prompt {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* =====================================================
+   RESPONSIVIDADE — APRESENTAÇÃO NO CELULAR
+   ===================================================== */
+
+    @media (max-width: 900px) {
+
+        .apresentacao {
+            width: 100%;
+            padding: 0 24px;
+            margin: 24px auto;
+
+            flex-direction: column;
+            align-items: center;
+
+            gap: 32px;
+        }
+
+        .apresentacao__foto,
+        .apresentacao__foto__oficina {
+            order: -1;
+
+            width: 100%;
+            max-width: 100%;
+
+            gap: 24px;
+        }
+
+        .apresentacao__conteudo {
+            width: 100%;
+            max-width: 100%;
+
+            flex-basis: auto;
+        }
+
+        .apresentacao__conteudo__titulo,
+        .apresentacao__conteudo__titulo__areamentorado,
+        .apresentacao__conteudo__paragrafo,
+        .apresentacao__prompt {
+            width: 100%;
+            max-width: 680px;
+        }
+
+        .fotoprincipaloficina,
+        .fotoprincipaloficina2 {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .fotoprincipalpassoapasso,
+        .foto-topo-oficina {
+            width: 100%;
+            max-width: 680px;
+        }
+    }
+
+    @media (max-width: 480px) {
+
+        .apresentacao {
+            padding: 0 12px;
+            margin: 16px auto;
+
+            gap: 24px;
+        }
+
+        .apresentacao__conteudo__titulo,
+        .apresentacao__conteudo__titulo__areamentorado {
+            font-size: 24px;
+        }
+
+        .apresentacao__conteudo__paragrafo,
+        .apresentacao__conteudo__paragrafo__prompt {
+            font-size: 18px;
+        }
+
+        .fotoprincipaloficina,
+        .fotoprincipaloficina2,
+        .fotoprincipalpassoapasso,
+        .foto-topo-oficina,
+        .apresentacao__prompt {
+            max-width: 100%;
+        }
+    }
+
+    /* =====================================================
+   TEXTAREA — BRIEFING DA EMPRESA
+   Mesmo padrão visual da observação final
+   ===================================================== */
+
+    .briefingEmpresa {
+        width: 100%;
+        max-width: 500px;
+        min-height: 150px;
+
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+
+        font-size: 0.95rem;
+        font-family: inherit;
+
+        resize: vertical;
+        box-sizing: border-box;
+    }

@@ -1,76 +1,193 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portifólio</title>
     <link rel="stylesheet" href="styles/Style.css">
 </head>
+
 <body>
+
     <header class="cabecalho">
         <nav class="cabecalho__menu">
-            
+
             <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
-            <a class="cabecalho__menu__link" href="oficinaIA.html"><strong style="color: greenyellow;">3° Prompt</strong>
-</a>
-                        
+
+            <a class="cabecalho__menu__link" href="oficinaIA.html">
+                <strong style="color: greenyellow;">3° Prompt</strong>
+            </a>
+
         </nav>
     </header>
-    <main class="apresentacao"> 
-    <section class="apresentacao__conteudo">
-        <h1 class="apresentacao__conteudo__titulo">3° Prompt | 
-        <strong class="titulo-destaque"> Preparatório Etapa 4 Elaborar</strong> 
-        </h1><p class="apresentacao__conteudo__paragrafo">Objetivo: Ajudar o Agente Local de Inovação a ofertar idéias de soluções para o Desafio escolhido na etapa anterior, ou seja,
-            Etapa Nomear 3, apresentar com base na escolha, cerca de 10 opções de soluções criativas. 
-        </p>
-            <h1><P class="apresentacao__conteudo__paragrafo"style="text-decoration: underline;">1° Passo: Na mesma conversa do Copilot. fazer o download do Sprint em PDF aprovado na 3 Etapa e seguir para o segundo passo.</P></h1>
-                
-                <img class=" fotoprincipalpassoapasso" src="assets/2prompt1passo.png" alt = "foto passo a passo">
-                       
 
-            <h1><P class="apresentacao__conteudo__paragrafo"style="text-decoration: underline;">2° Passo: Copiar o Prompt abaixo e colar na corversa do Copilot, juntamente com os passos anteriores e clicar em "OK".</P>
+    <main class="apresentacao">
 
+        <section class="apresentacao__conteudo">
 
-        <div class="apresentacao__prompt">
-    <p id="textoPrompt" class="apresentacao__conteudo__paragrafo__prompt">
-        "Você é um consultor do Sebrae com sólida experiência em inovação, gestão e produtividade empresarial. Sua missão é analisar o documento da Etapa 3 do Programa ALI Produtividade, 
-        que contém o desafio selecionado pelo empresário. Com base nesse desafio, você deve: Compreender o contexto da empresa e o desafio apresentado. Identificar as causas raízes do desafio, 
-        considerando aspectos internos e externos. Retornar 10 ideias de soluções práticas e viáveis, alinhadas à metodologia ALI Produtividade e adaptadas ao porte, recursos e realidade da empresa. 
-        As soluções podem incluir: Ações internas na empresa Capacitações (Sebrae ou outras) Consultorias (de gestão ou tecnológica) Aquisição de equipamentos ou softwares Parcerias estratégicas Ações de marketing 
-        ou vendas Melhoria de processos Iniciativas de inovação Soluções digitais Fontes de financiamento ou subsídios Apresentar um resumo estratégico final, destacando os benefícios esperados caso as soluções sejam 
-        implementadas, como aumento de faturamento, redução de custos, melhoria na gestão, ganho de produtividade ou inovação. Sugira 1 ação para cada desafio não priorizado"
+            <h1 class="apresentacao__conteudo__titulo">
+                3° Prompt |
+                <strong class="titulo-destaque">Preparatório Etapa 4 Elaborar</strong>
+            </h1>
 
-    </p>
-    <button class="botao-copiar" onclick="copiarPrompt()">Copiar Prompt</button>
-</div>
-    <img class=" fotoprincipalpassoapasso" src="assets/1prompt3passo.png" alt = "foto passo a passo"> 
-    <div class="apresentacao__links__download">
-                
-<div class="apresentacao__conteudo__paragrafo">Equipe ALI-SC</p>
-    </section>
-            
-    <div class="apresentacao__foto__oficina">
-        <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt = "foto principal">  
-        <img class="fotoprincipaloficina2" src="assets/EquipeALI.png"  alt = "foto principal"> </div>
-    </main>    
+            <p class="apresentacao__conteudo__paragrafo">
+                Objetivo: Ajudar o Agente Local de Inovação a ofertar ideias de soluções para o desafio escolhido na
+                etapa anterior, ou seja, Etapa 3 — Nomear. Com base na escolha, o objetivo é apresentar cerca de 10
+                opções de soluções criativas.
+            </p>
+
+            <p class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                1° Passo: Na mesma conversa do Copilot, fazer o download do Sprint em PDF aprovado na 3ª etapa e seguir
+                para o segundo passo.
+            </p>
+
+            <img class="fotoprincipalpassoapasso" src="assets/2prompt1passo.png" alt="foto passo a passo">
+
+            <p class="apresentacao__conteudo__paragrafo" style="text-decoration: underline;">
+                2° Passo: Copiar o prompt abaixo e colar na conversa do Copilot, juntamente com os passos anteriores,
+                e clicar em "OK".
+            </p>
+
+            <div class="apresentacao__prompt">
+
+                <p id="textoPromptEtapa4" class="apresentacao__conteudo__paragrafo__prompt">
+                    PROMPT PREPARATÓRIO – ETAPA 4 | ELABORAR SOLUÇÕES.
+                    Atue como consultor do Sebrae com experiência em inovação, gestão e produtividade empresarial...
+
+                    ...mais
+                </p>
+
+                <button id="btnVerPromptCompletoEtapa4" class="botao-ler-mais" type="button"
+                    onclick="alternarPromptCompletoEtapa4()">
+                    Ver prompt completo
+                </button>
+
+                <button class="botao-copiar" type="button" onclick="copiarPromptEtapa4()">
+                    Copiar Prompt
+                </button>
+
+            </div>
+
+            <img class="fotoprincipalpassoapasso" src="assets/1prompt3passo.png" alt="foto passo a passo">
+
+            <div class="apresentacao__links__download">
+                <p class="apresentacao__conteudo__paragrafo">Equipe ALI-SC</p>
+            </div>
+
+        </section>
+
+        <div class="apresentacao__foto__oficina">
+
+            <img class="fotoprincipaloficina" src="assets/FotoApresentacaoIA.jpg" alt="foto principal">
+
+            <img class="fotoprincipaloficina2" src="assets/EquipeALI.png" alt="foto principal">
+
+        </div>
+
+    </main>
+
     <footer>
         <div class="rodape">
             <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+        </div>
     </footer>
+
     <div class="whats">
-        <a href=" https://wa.me/5548991180829" target="_blank">
-        <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats"/>
-    </a>
+        <a href="https://wa.me/5548991180829" target="_blank">
+            <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats">
+        </a>
     </div>
+
     <script>
-function copiarPrompt() {
-    const texto = document.getElementById("textoPrompt").innerText;
-    navigator.clipboard.writeText(texto).then(() => {
-        alert("✅ Prompt copiado com sucesso!");
-    }).catch(err => {
-        alert("❌ Erro ao copiar o texto.");
-    });
-}
-</script>
+        const promptCompletoEtapa4 = `Você é um consultor do Sebrae com sólida experiência em inovação, gestão e produtividade empresarial.
+
+Sua missão é analisar o documento da Etapa 3 do Programa ALI Produtividade, que contém o desafio selecionado pelo empresário.
+
+Com base nesse desafio, você deve:
+
+1. Compreender o contexto da empresa e o desafio apresentado.
+
+2. Identificar as causas raízes do desafio, considerando aspectos internos e externos.
+
+3. Retornar 10 ideias de soluções práticas e viáveis, alinhadas à metodologia ALI Produtividade e adaptadas ao porte, recursos e realidade da empresa.
+
+As soluções podem incluir:
+- Ações internas na empresa;
+- Capacitações, Sebrae ou outras;
+- Consultorias de gestão ou tecnológica;
+- Aquisição de equipamentos ou softwares;
+- Parcerias estratégicas;
+- Ações de marketing ou vendas;
+- Melhoria de processos;
+- Iniciativas de inovação;
+- Soluções digitais;
+- Fontes de financiamento ou subsídios.
+
+4. Apresentar um resumo estratégico final, destacando os benefícios esperados caso as soluções sejam implementadas, como:
+- aumento de faturamento;
+- redução de custos;
+- melhoria na gestão;
+- ganho de produtividade;
+- inovação.
+
+5. Sugira 1 ação para cada desafio não priorizado.`;
+
+        let promptEtapa4Expandido = false;
+
+        function gerarPreviewPromptEtapa4() {
+            const limiteCaracteres = 450;
+
+            if (promptCompletoEtapa4.length <= limiteCaracteres) {
+                return promptCompletoEtapa4;
+            }
+
+            return promptCompletoEtapa4.substring(0, limiteCaracteres).trim() + "\n\n...mais";
+        }
+
+        function alternarPromptCompletoEtapa4() {
+            const areaPrompt = document.getElementById("textoPromptEtapa4");
+            const botao = document.getElementById("btnVerPromptCompletoEtapa4");
+
+            if (!areaPrompt || !botao) {
+                return;
+            }
+
+            if (promptEtapa4Expandido) {
+                areaPrompt.innerText = gerarPreviewPromptEtapa4();
+                botao.innerText = "Ver prompt completo";
+                promptEtapa4Expandido = false;
+            } else {
+                areaPrompt.innerText = promptCompletoEtapa4;
+                botao.innerText = "Recolher prompt";
+                promptEtapa4Expandido = true;
+            }
+        }
+
+        function copiarPromptEtapa4() {
+            navigator.clipboard.writeText(promptCompletoEtapa4).then(() => {
+                alert("✅ Prompt completo copiado com sucesso!");
+            }).catch(() => {
+                alert("❌ Erro ao copiar o prompt.");
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const areaPrompt = document.getElementById("textoPromptEtapa4");
+            const botao = document.getElementById("btnVerPromptCompletoEtapa4");
+
+            if (areaPrompt) {
+                areaPrompt.innerText = gerarPreviewPromptEtapa4();
+            }
+
+            if (botao) {
+                botao.innerText = "Ver prompt completo";
+            }
+
+            promptEtapa4Expandido = false;
+        });
+    </script>
+
 </body>
+
 </html>
