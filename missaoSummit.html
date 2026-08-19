@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missão Summit 2026</title>
+
+    <link rel="stylesheet" href="styles/Style.css">
+    <link rel="stylesheet" href="styles/MissaoSummit.css">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+
+            <a class="cabecalho__menu__link" href="oficinaIA.html">Prompts ALI</a>
+
+            <a class="cabecalho__menu__link" href="missaoSummit.html">
+                <strong style="color: greenyellow;">Missão Summit 2026</strong>
+            </a>
+
+        </nav>
+    </header>
+
+    <main class="missao-summit">
+
+        <section class="missao-summit__conteudo">
+
+            <h1 class="apresentacao__conteudo__titulo">
+                Missão <strong class="titulo-destaque">Summit 2026</strong>
+            </h1>
+
+            <div class="missao-summit__imagens">
+                <img class="missao-summit__imagem missao-summit__imagem--summit" src="assets/summit2026logo.png"
+                    alt="Imagem Missão Summit 2026">
+
+                <img class="missao-summit__imagem missao-summit__imagem--ali" src="assets/aliprodutividade.png"
+                    alt="Imagem ALI Produtividade">
+            </div>
+
+            <p class="apresentacao__conteudo__paragrafo">
+                Formulário de coleta de dados de startups participantes do Sebrae Startup Summit 2026.
+                As informações registradas pelos ALIs serão enviadas para uma planilha Google Sheets,
+                permitindo organizar contatos, soluções, segmentos atendidos e oportunidades de conexão.
+            </p>
+
+
+            <!-- Nome do ALI -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Nome do ALI:</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="nomeAli" maxlength="120" placeholder="Ex.: Marlon Silveira Gomes">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('nomeAli', this)">OK</button>
+                        <button class="edit-btn" type="button" onclick="editarValor('nomeAli', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nome da Startup -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Nome da Startup:</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="nomeStartup" maxlength="150" placeholder="Ex.: Startup Modelo">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('nomeStartup', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('nomeStartup', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nome do contato -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Nome do contato:</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="nomeContato" maxlength="150" placeholder="Ex.: Ana Souza">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('nomeContato', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('nomeContato', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Telefone -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Telefone do contato da startup:</label>
+
+                <div class="input-wrapper">
+                    <input type="tel" class="telefoneContato" maxlength="40" placeholder="Ex.: (48) 99999-9999">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('telefoneContato', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('telefoneContato', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Redes sociais -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Redes sociais, site ou outro canal digital:</label>
+
+                <div class="missao-summit__redes-grid">
+
+                    <div class="missao-summit__subcampo">
+                        <label>Instagram</label>
+                        <input type="text" class="instagramStartup" maxlength="250" placeholder="Ex.: @startup">
+                    </div>
+
+                    <div class="missao-summit__subcampo">
+                        <label>LinkedIn</label>
+                        <input type="text" class="linkedinStartup" maxlength="250"
+                            placeholder="Ex.: linkedin.com/company/startup">
+                    </div>
+
+                    <div class="missao-summit__subcampo">
+                        <label>Facebook</label>
+                        <input type="text" class="facebookStartup" maxlength="250"
+                            placeholder="Ex.: facebook.com/startup">
+                    </div>
+
+                    <div class="missao-summit__subcampo">
+                        <label>Site</label>
+                        <input type="text" class="siteStartup" maxlength="250" placeholder="Ex.: www.startup.com.br">
+                    </div>
+
+                    <div class="missao-summit__subcampo missao-summit__subcampo--full">
+                        <label>Outra</label>
+                        <input type="text" class="outraRedeStartup" maxlength="250"
+                            placeholder="Ex.: TikTok, YouTube, WhatsApp, app ou outro canal">
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Problema que resolve -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Qual problema a startup resolve?</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="problemaResolve" maxlength="500"
+                        placeholder="Ex.: Reduz retrabalho, melhora vendas, automatiza atendimento ou resolve uma dor operacional">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button" onclick="salvarValor('problemaResolve', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('problemaResolve', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perfil de empresa -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Para qual perfil de empresa é indicada? ME, EPP, setor ou segmento:</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="perfilEmpresa" maxlength="500"
+                        placeholder="Ex.: ME e EPP do setor de varejo, alimentação, indústria ou serviços">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('perfilEmpresa', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('perfilEmpresa', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Como funciona -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Como funciona?</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="comoFunciona" maxlength="700"
+                        placeholder="Ex.: Plataforma SaaS com dashboard, automações, relatórios ou atendimento especializado">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('comoFunciona', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('comoFunciona', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investimento -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Qual o investimento ou modelo de contratação?</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="modeloContratacao" maxlength="500"
+                        placeholder="Ex.: Mensalidade, assinatura, licença, comissão, pacote ou projeto fechado">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('modeloContratacao', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('modeloContratacao', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resultado -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Qual resultado ou ganho a empresa pode gerar?</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="resultadoGerado" maxlength="700"
+                        placeholder="Ex.: Redução de custos, aumento de vendas, produtividade, inovação ou melhor gestão">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('resultadoGerado', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('resultadoGerado', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teste gratuito -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Existe teste gratuito, demonstração ou condição diferenciada?</label>
+
+                <div class="input-wrapper">
+                    <input type="text" class="condicaoDiferenciada" maxlength="500"
+                        placeholder="Ex.: Demonstração gratuita, piloto, desconto, trial ou condição especial para ALI/Sebrae">
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('condicaoDiferenciada', this)">OK</button>
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('condicaoDiferenciada', this)">Editar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Briefing com voz -->
+            <div class="apresentacao__conteudo__paragrafo input-group">
+                <label>Briefing / Pitch do empresário ou ALI:</label>
+
+                <div class="input-wrapper missao-summit__briefing-wrapper">
+                    <textarea class="briefingSummit" maxlength="4000" rows="8"
+                        placeholder="Digite ou use o microfone para registrar o pitch, observações da conversa, diferenciais da startup e possíveis oportunidades de conexão."></textarea>
+
+                    <div class="btns-inline">
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('briefingSummit', this)">OK</button>
+
+                        <button class="edit-btn" type="button"
+                            onclick="editarValor('briefingSummit', this)">Editar</button>
+
+                        <button class="edit-btn botao-microfone" type="button"
+                            onclick="iniciarVoz('briefingSummit', this)">
+                            🎙️ Voz
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enviar -->
+            <div class="apresentacao__conteudo__paragrafo bloco-gerar-prompt">
+                <button id="btnEnviarSummit" class="botao-copiar" type="button" onclick="enviarParaGoogleSheets()">
+                    Enviar para Planilha
+                </button>
+            </div>
+
+            <p id="statusEnvioSummit" class="missao-summit__status">
+                Aguardando preenchimento.
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="rodape">
+            <p class="text__rodape">Desenvolvido por Marlon Silveira Gomes</p>
+        </div>
+    </footer>
+
+    <div class="whats">
+        <a href="https://wa.me/5548991180829" target="_blank">
+            <img src="assets/whatsapp_icon.png" width="80" alt="fale whats" title="Fale comigo no Whats">
+        </a>
+    </div>
+
+    <script>
+        const GOOGLE_APPS_SCRIPT_URL = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+
+        function obterCampo(classe) {
+            return document.querySelector("." + classe);
+        }
+
+        function obterValor(classe) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                return "";
+            }
+
+            return campo.value.trim();
+        }
+
+        function limparErroCampo(campo) {
+            if (campo) {
+                campo.style.border = "";
+            }
+        }
+
+        function marcarCampoComErro(classe) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                return;
+            }
+
+            campo.disabled = false;
+            campo.focus();
+            campo.style.border = "2px solid red";
+        }
+
+        function salvarValor(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            const valor = campo.value.trim();
+
+            if (valor === "") {
+                alert("Preencha o campo antes de confirmar.");
+                campo.focus();
+                campo.style.border = "2px solid red";
+                return;
+            }
+
+            limparErroCampo(campo);
+
+            campo.disabled = true;
+            botao.classList.add("saved");
+            botao.textContent = "✔ Salvo";
+        }
+
+        function salvarValorOpcional(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            limparErroCampo(campo);
+
+            campo.disabled = true;
+            botao.classList.add("saved");
+            botao.textContent = "✔ Salvo";
+        }
+
+        function editarValor(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            campo.disabled = false;
+            campo.focus();
+
+            const grupoBotoes = botao.parentElement;
+            const botaoOk = grupoBotoes.querySelector(".ok-btn");
+
+            if (botaoOk) {
+                botaoOk.classList.remove("saved");
+                botaoOk.textContent = "OK";
+            }
+        }
+
+        function iniciarVoz(classeCampo, botao) {
+            const campo = obterCampo(classeCampo);
+
+            if (!campo) {
+                alert("Campo de texto não encontrado.");
+                return;
+            }
+
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!SpeechRecognition) {
+                alert("Seu navegador não suporta digitação por voz. Recomendamos abrir esta página no Google Chrome.");
+                return;
+            }
+
+            campo.disabled = false;
+            campo.focus();
+
+            const reconhecimento = new SpeechRecognition();
+
+            reconhecimento.lang = "pt-BR";
+            reconhecimento.continuous = false;
+            reconhecimento.interimResults = false;
+
+            botao.textContent = "🎙️ Ouvindo...";
+
+            reconhecimento.onresult = function (event) {
+                const textoFalado = event.results[0][0].transcript;
+                const textoAtual = campo.value.trim();
+
+                campo.value = textoAtual
+                    ? textoAtual + " " + textoFalado
+                    : textoFalado;
+            };
+
+            reconhecimento.onerror = function () {
+                alert("Não foi possível capturar o áudio. Verifique a permissão do microfone ou use digitação manual.");
+            };
+
+            reconhecimento.onend = function () {
+                botao.textContent = "🎙️ Voz";
+            };
+
+            reconhecimento.start();
+        }
+
+        function montarDadosFormulario() {
+            return {
+                dataEnvio: new Date().toLocaleString("pt-BR"),
+
+                nomeAli: obterValor("nomeAli"),
+                nomeStartup: obterValor("nomeStartup"),
+                nomeContato: obterValor("nomeContato"),
+                telefoneContato: obterValor("telefoneContato"),
+
+                instagramStartup: obterValor("instagramStartup"),
+                linkedinStartup: obterValor("linkedinStartup"),
+                facebookStartup: obterValor("facebookStartup"),
+                siteStartup: obterValor("siteStartup"),
+                outraRedeStartup: obterValor("outraRedeStartup"),
+
+                problemaResolve: obterValor("problemaResolve"),
+                perfilEmpresa: obterValor("perfilEmpresa"),
+                comoFunciona: obterValor("comoFunciona"),
+                modeloContratacao: obterValor("modeloContratacao"),
+                resultadoGerado: obterValor("resultadoGerado"),
+                condicaoDiferenciada: obterValor("condicaoDiferenciada"),
+                briefingSummit: obterValor("briefingSummit")
+            };
+        }
+
+        function validarDadosObrigatorios(dados) {
+            if (!dados.nomeAli) {
+                alert("Preencha o Nome do ALI.");
+                marcarCampoComErro("nomeAli");
+                return false;
+            }
+
+            if (!dados.nomeStartup) {
+                alert("Preencha o Nome da Startup.");
+                marcarCampoComErro("nomeStartup");
+                return false;
+            }
+
+            if (!dados.telefoneContato) {
+                alert("Preencha o Telefone do contato da startup.");
+                marcarCampoComErro("telefoneContato");
+                return false;
+            }
+
+            const possuiCanalDigital =
+                dados.instagramStartup ||
+                dados.linkedinStartup ||
+                dados.facebookStartup ||
+                dados.siteStartup ||
+                dados.outraRedeStartup;
+
+            if (!possuiCanalDigital) {
+                alert("Preencha pelo menos uma rede social, site ou outro canal digital da startup.");
+                marcarCampoComErro("instagramStartup");
+                return false;
+            }
+
+            if (!dados.problemaResolve) {
+                alert("Preencha o problema que a startup resolve.");
+                marcarCampoComErro("problemaResolve");
+                return false;
+            }
+
+            return true;
+        }
+
+        async function enviarParaGoogleSheets() {
+            const statusEnvio = document.getElementById("statusEnvioSummit");
+            const botaoEnviar = document.getElementById("btnEnviarSummit");
+
+            const dados = montarDadosFormulario();
+
+            if (!validarDadosObrigatorios(dados)) {
+                return;
+            }
+
+            if (!GOOGLE_APPS_SCRIPT_URL || GOOGLE_APPS_SCRIPT_URL === "COLE_AQUI_A_URL_DO_APPS_SCRIPT") {
+                alert("Configure a URL do Google Apps Script antes de enviar.");
+                return;
+            }
+
+            try {
+                botaoEnviar.disabled = true;
+                botaoEnviar.textContent = "Enviando...";
+
+                if (statusEnvio) {
+                    statusEnvio.textContent = "Enviando dados para a planilha...";
+                }
+
+                await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dados)
+                });
+
+                if (statusEnvio) {
+                    statusEnvio.textContent = "✅ Dados enviados. Confira a planilha.";
+                }
+
+                alert("✅ Dados enviados com sucesso!");
+
+            } catch (erro) {
+                console.error(erro);
+
+                if (statusEnvio) {
+                    statusEnvio.textContent = "❌ Erro ao enviar. Verifique a conexão e tente novamente.";
+                }
+
+                alert("❌ Erro ao enviar os dados.");
+            } finally {
+                botaoEnviar.disabled = false;
+                botaoEnviar.textContent = "Enviar para Planilha";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
