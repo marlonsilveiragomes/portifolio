@@ -166,63 +166,28 @@
     </div>
 
     <script>
-        const dados = {};
-        let promptCompletoGerado = "";
-        let promptExpandido = false;
-
-        function salvarValor(classe, botao) {
-            const input = document.querySelector("." + classe);
-
-            if (input && input.value.trim() !== "") {
-                dados[classe] = input.value.trim();
-                input.disabled = true;
-
-                botao.classList.add("saved");
-                botao.textContent = "✔ Salvo";
-            } else {
-                alert("Preencha o campo antes de confirmar.");
-            }
-        }
-
-        function salvarValorOpcional(classe, botao) {
-            const input = document.querySelector("." + classe);
-
-            if (input) {
-                dados[classe] = input.value.trim();
-                input.disabled = true;
-
-                botao.classList.add("saved");
-                botao.textContent = "✔ Salvo";
-            }
-        }
-
-        function editarValor(classe, botao) {
-            const input = document.querySelector("." + classe);
-
-            if (input) {
-                input.disabled = false;
-                input.focus();
-
-                const btnContainer = botao.parentElement;
-                const okBtn = btnContainer.querySelector(".ok-btn");
-
-                if (okBtn) {
-                    okBtn.classList.remove("saved");
-                    okBtn.textContent = "OK";
-                }
-            }
-        }
-
         function gerarPrompt() {
-            const nomeEmpresa = dados.nomeEmpresa;
-            const cnpjEmpresa = dados.cnpjEmpresa;
-            const redesSociaisEmpresa = dados.redesSociaisEmpresa || "Não informado. Realizar busca ativa em fontes públicas.";
-            const briefingEmpresa = dados.briefingEmpresa;
+            const campoNomeEmpresa = document.querySelector(".nomeEmpresa");
+            const campoCnpjEmpresa = document.querySelector(".cnpjEmpresa");
+            const campoRedesSociaisEmpresa = document.querySelector(".redesSociaisEmpresa");
+            const campoBriefingEmpresa = document.querySelector(".briefingEmpresa");
+
+            const nomeEmpresa = campoNomeEmpresa ? campoNomeEmpresa.value.trim() : "";
+            const cnpjEmpresa = campoCnpjEmpresa ? campoCnpjEmpresa.value.trim() : "";
+            const redesSociaisDigitadas = campoRedesSociaisEmpresa ? campoRedesSociaisEmpresa.value.trim() : "";
+            const briefingEmpresa = campoBriefingEmpresa ? campoBriefingEmpresa.value.trim() : "";
+
+            const redesSociaisEmpresa = redesSociaisDigitadas || "Não informado. Realizar busca ativa em fontes públicas.";
 
             if (!nomeEmpresa || !cnpjEmpresa || !briefingEmpresa) {
-                alert("⚠️ Preencha os campos obrigatórios e confirme com OK antes de gerar o prompt: Nome da Empresa, CNPJ e Briefing da Empresa.");
+                alert("⚠️ Preencha os campos obrigatórios antes de gerar o prompt: Nome da Empresa, CNPJ e Briefing da Empresa.");
                 return;
             }
+
+            dados.nomeEmpresa = nomeEmpresa;
+            dados.cnpjEmpresa = cnpjEmpresa;
+            dados.redesSociaisEmpresa = redesSociaisDigitadas;
+            dados.briefingEmpresa = briefingEmpresa;
 
             const prompt = `1° Prompt | Etapa Conhecer
 
@@ -346,75 +311,6 @@ Formato da resposta:
                 btnVerPromptCompleto.style.display = "inline-block";
                 btnVerPromptCompleto.textContent = "Ver prompt completo";
             }
-        }
-
-        function gerarPreviewPrompt(prompt) {
-            const limiteCaracteres = 650;
-
-            if (!prompt || prompt.length <= limiteCaracteres) {
-                return prompt;
-            }
-
-            return prompt.substring(0, limiteCaracteres).trim() + "\n\n...mais";
-        }
-
-        function alternarPromptCompleto() {
-            const areaPrompt = document.getElementById("textoPrompt5w2h");
-            const botao = document.getElementById("btnVerPromptCompleto");
-
-            if (!promptCompletoGerado || !areaPrompt || !botao) {
-                return;
-            }
-
-            if (promptExpandido) {
-                areaPrompt.innerText = gerarPreviewPrompt(promptCompletoGerado);
-                botao.textContent = "Ver prompt completo";
-                promptExpandido = false;
-            } else {
-                areaPrompt.innerText = promptCompletoGerado;
-                botao.textContent = "Recolher prompt";
-                promptExpandido = true;
-            }
-        }
-
-        function copiarPrompt5w2h() {
-            if (!promptCompletoGerado) {
-                alert("⚠️ Gere o prompt antes de copiar.");
-                return;
-            }
-
-            navigator.clipboard.writeText(promptCompletoGerado).then(() => {
-                alert("✅ Prompt completo copiado com sucesso!");
-            }).catch(() => {
-                alert("❌ Erro ao copiar o texto.");
-            });
-        }
-
-        function abrirIAComPrompt(ia) {
-            if (!promptCompletoGerado) {
-                alert("Gere o prompt antes de abrir a IA.");
-                return;
-            }
-
-            const urls = {
-                manus: "https://manus.ai/",
-                gemini: "https://gemini.google.com/",
-                chatgpt: "https://chatgpt.com/"
-            };
-
-            const urlDestino = urls[ia];
-
-            if (!urlDestino) {
-                alert("IA não configurada.");
-                return;
-            }
-
-            navigator.clipboard.writeText(promptCompletoGerado).then(() => {
-                window.open(urlDestino, "_blank");
-                alert("Prompt copiado. Agora cole na IA com Ctrl + V.");
-            }).catch(() => {
-                alert("Não foi possível copiar o prompt.");
-            });
         }
     </script>
 
