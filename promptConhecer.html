@@ -40,19 +40,18 @@
             </p>
 
             <p class="texto-passos">
-                1. Preencha os dados de acordo com o briefing coletado junto à empresa.
+                1. Preencha os dados básicos da empresa.
             </p>
 
             <p class="texto-passos">
-                2. Caso a empresa possua redes sociais, site, Google Maps ou outros canais digitais, informe no campo
-                correspondente.
+                2. Redes sociais, site, Google Maps e briefing são opcionais. Caso não sejam informados, a IA deverá
+                buscar informações públicas disponíveis.
             </p>
 
             <p class="texto-passos">
                 3. Gere o prompt, copie e cole na IA indicada para criar a conversa base da empresa.
             </p>
 
-            <!-- Campo: Nome da Empresa -->
             <div class="apresentacao__conteudo__paragrafo input-group">
                 <label>Digite o Nome da Empresa</label>
 
@@ -61,13 +60,11 @@
 
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('nomeEmpresa', this)">OK</button>
-                        <button class="edit-btn" type="button"
-                            onclick="editarValor('nomeEmpresa', this)">Editar</button>
+                        <button class="edit-btn" type="button" onclick="editarValor('nomeEmpresa', this)">Editar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Campo: CNPJ -->
             <div class="apresentacao__conteudo__paragrafo input-group">
                 <label>Digite o CNPJ</label>
 
@@ -76,19 +73,17 @@
 
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('cnpjEmpresa', this)">OK</button>
-                        <button class="edit-btn" type="button"
-                            onclick="editarValor('cnpjEmpresa', this)">Editar</button>
+                        <button class="edit-btn" type="button" onclick="editarValor('cnpjEmpresa', this)">Editar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Campo: Redes Sociais / Sites -->
             <div class="apresentacao__conteudo__paragrafo input-group">
                 <label>Digite as redes sociais, site, Google Maps ou outros canais digitais</label>
 
                 <div class="input-wrapper">
                     <input type="text" class="redesSociaisEmpresa" maxlength="500"
-                        placeholder="Ex.: Instagram, site, Facebook, Google Maps, LinkedIn">
+                        placeholder="Campo opcional. Ex.: Instagram, site, Facebook, Google Maps, LinkedIn">
 
                     <div class="btns-inline">
                         <button class="ok-btn" type="button"
@@ -104,24 +99,23 @@
 
                 <div class="input-wrapper">
                     <textarea class="briefingEmpresa" maxlength="3000" rows="8"
-                        placeholder="Ex.: Empresa iniciada a partir de uma oportunidade observada pelo gestor, principais produtos, clientes, dificuldades percebidas, diferenciais, canais de venda e informações relevantes da conversa inicial."></textarea>
+                        placeholder="Campo opcional. Ex.: Empresa iniciada a partir de uma oportunidade observada pelo gestor, principais produtos, clientes, dificuldades percebidas, diferenciais, canais de venda e informações relevantes da conversa inicial."></textarea>
 
                     <div class="btns-inline">
-                        <button class="ok-btn" type="button" onclick="salvarValor('briefingEmpresa', this)">OK</button>
+                        <button class="ok-btn" type="button"
+                            onclick="salvarValorOpcional('briefingEmpresa', this)">OK</button>
                         <button class="edit-btn" type="button"
                             onclick="editarValor('briefingEmpresa', this)">Editar</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Botão para gerar o prompt -->
             <div class="apresentacao__conteudo__paragrafo bloco-gerar-prompt">
                 <button class="botao-copiar" type="button" onclick="gerarPrompt()">
                     Gerar Prompt
                 </button>
             </div>
 
-            <!-- Área onde o prompt será exibido -->
             <div class="apresentacao__prompt">
 
                 <p id="textoPrompt5w2h" class="apresentacao__conteudo__paragrafo__prompt">
@@ -166,28 +160,120 @@
     </div>
 
     <script>
-        function gerarPrompt() {
-            const campoNomeEmpresa = document.querySelector(".nomeEmpresa");
-            const campoCnpjEmpresa = document.querySelector(".cnpjEmpresa");
-            const campoRedesSociaisEmpresa = document.querySelector(".redesSociaisEmpresa");
-            const campoBriefingEmpresa = document.querySelector(".briefingEmpresa");
+        let promptCompletoGerado = "";
+        let promptExpandido = false;
 
-            const nomeEmpresa = campoNomeEmpresa ? campoNomeEmpresa.value.trim() : "";
-            const cnpjEmpresa = campoCnpjEmpresa ? campoCnpjEmpresa.value.trim() : "";
-            const redesSociaisDigitadas = campoRedesSociaisEmpresa ? campoRedesSociaisEmpresa.value.trim() : "";
-            const briefingEmpresa = campoBriefingEmpresa ? campoBriefingEmpresa.value.trim() : "";
+        function obterCampo(classe) {
+            return document.querySelector("." + classe);
+        }
 
-            const redesSociaisEmpresa = redesSociaisDigitadas || "Não informado. Realizar busca ativa em fontes públicas.";
+        function obterValor(classe) {
+            const campo = obterCampo(classe);
 
-            if (!nomeEmpresa || !cnpjEmpresa || !briefingEmpresa) {
-                alert("⚠️ Preencha os campos obrigatórios antes de gerar o prompt: Nome da Empresa, CNPJ e Briefing da Empresa.");
+            if (!campo) {
+                return "";
+            }
+
+            return campo.value.trim();
+        }
+
+        function marcarCampoComErro(classe) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
                 return;
             }
 
-            dados.nomeEmpresa = nomeEmpresa;
-            dados.cnpjEmpresa = cnpjEmpresa;
-            dados.redesSociaisEmpresa = redesSociaisDigitadas;
-            dados.briefingEmpresa = briefingEmpresa;
+            campo.disabled = false;
+            campo.focus();
+            campo.style.border = "2px solid red";
+        }
+
+        function limparErroCampo(campo) {
+            if (campo) {
+                campo.style.border = "";
+            }
+        }
+
+        function salvarValor(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            const valor = campo.value.trim();
+
+            if (valor === "") {
+                alert("Preencha o campo antes de confirmar.");
+                campo.focus();
+                campo.style.border = "2px solid red";
+                return;
+            }
+
+            limparErroCampo(campo);
+
+            campo.disabled = true;
+            botao.classList.add("saved");
+            botao.textContent = "✔ Salvo";
+        }
+
+        function salvarValorOpcional(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            limparErroCampo(campo);
+
+            campo.disabled = true;
+            botao.classList.add("saved");
+            botao.textContent = "✔ Salvo";
+        }
+
+        function editarValor(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            campo.disabled = false;
+            campo.focus();
+
+            const grupoBotoes = botao.parentElement;
+            const botaoOk = grupoBotoes.querySelector(".ok-btn");
+
+            if (botaoOk) {
+                botaoOk.classList.remove("saved");
+                botaoOk.textContent = "OK";
+            }
+        }
+
+        function gerarPrompt() {
+            const nomeEmpresa = obterValor("nomeEmpresa");
+            const cnpjEmpresa = obterValor("cnpjEmpresa");
+            const redesSociaisDigitadas = obterValor("redesSociaisEmpresa");
+            const briefingDigitado = obterValor("briefingEmpresa");
+
+            if (!nomeEmpresa) {
+                alert("⚠️ Preencha o Nome da Empresa antes de gerar o prompt.");
+                marcarCampoComErro("nomeEmpresa");
+                return;
+            }
+
+            if (!cnpjEmpresa) {
+                alert("⚠️ Preencha o CNPJ antes de gerar o prompt.");
+                marcarCampoComErro("cnpjEmpresa");
+                return;
+            }
+
+            const redesSociaisEmpresa = redesSociaisDigitadas || "Não informado. Realizar busca ativa em fontes públicas.";
+            const briefingEmpresa = briefingDigitado || "Não informado. Construir panorama inicial a partir do CNPJ, das fontes públicas disponíveis e da presença digital identificada.";
 
             const prompt = `1° Prompt | Etapa Conhecer
 
@@ -199,7 +285,7 @@ Atue como um especialista sênior de negócios e inovação, com experiência em
 
 Objetivo:
 
-Apoiar a Etapa 1 – Conhecer da Jornada ALI Produtividade, construindo um panorama inicial da empresa a partir de fontes públicas e das informações fornecidas pelo empresário, preservando fielmente a narrativa do empreendedor.
+Apoiar a Etapa 1 – Conhecer da Jornada ALI Produtividade, construindo um panorama inicial da empresa a partir de fontes públicas e das informações fornecidas pelo empresário, preservando fielmente a narrativa do empreendedor quando houver briefing informado.
 
 Dados de entrada fornecidos pelo usuário:
 
@@ -231,12 +317,16 @@ Interpretar o enquadramento da empresa, especialmente ME ou EPP, e sua atividade
 
 2. Análise de presença digital e comunicação
 
-Analisar as redes sociais e canais digitais informados, observando:
+Analisar as redes sociais e canais digitais informados, quando houver.
+
+Caso as redes sociais, site ou canais digitais não tenham sido informados, realizar busca ativa em fontes públicas para identificar a presença digital da empresa.
+
+Observar:
 - clareza da proposta de valor;
 - frequência e tipo de conteúdo publicado;
 - posicionamento de marca;
 - interação com clientes;
-- coerência entre comunicação digital e a descrição fornecida pelo empresário.
+- coerência entre comunicação digital, dados públicos disponíveis e eventual descrição fornecida pelo empresário.
 
 3. Identificação do setor e contexto de mercado
 
@@ -268,13 +358,15 @@ Apresentar uma síntese estruturada contendo:
 
 Elaborar um único parágrafo, com no máximo 2.000 caracteres, que apresente uma síntese clara e objetiva da empresa.
 
-Manter integralmente o sentido, a linguagem e os elementos centrais da descrição fornecida pelo empresário, podendo apenas organizar o texto, melhorar a fluidez e integrar informações públicas levantadas.
+Quando houver briefing informado pelo empresário, manter integralmente o sentido, a linguagem e os elementos centrais da descrição fornecida, podendo apenas organizar o texto, melhorar a fluidez e integrar informações públicas levantadas.
 
-Não alterar o posicionamento, a proposta de valor ou a narrativa do empreendedor.
+Quando não houver briefing informado, elaborar a síntese com base nos dados cadastrais, fontes públicas, presença digital identificada e informações disponíveis, deixando claro que a síntese foi construída a partir de dados públicos.
+
+Não alterar o posicionamento, a proposta de valor ou a narrativa do empreendedor quando ela tiver sido informada.
 
 A síntese deverá ser adequada para uso institucional no Projeto ALI Produtividade.
 
-7. Busca ativa de presença digital condicional obrigatória
+7. Busca ativa de presença digital obrigatória quando necessário
 
 Caso o usuário não informe os links das redes sociais da empresa, realize busca ativa em fontes públicas para identificar a presença digital da empresa.
 
@@ -311,6 +403,75 @@ Formato da resposta:
                 btnVerPromptCompleto.style.display = "inline-block";
                 btnVerPromptCompleto.textContent = "Ver prompt completo";
             }
+        }
+
+        function gerarPreviewPrompt(prompt) {
+            const limiteCaracteres = 650;
+
+            if (!prompt || prompt.length <= limiteCaracteres) {
+                return prompt;
+            }
+
+            return prompt.substring(0, limiteCaracteres).trim() + "\n\n...mais";
+        }
+
+        function alternarPromptCompleto() {
+            const areaPrompt = document.getElementById("textoPrompt5w2h");
+            const botao = document.getElementById("btnVerPromptCompleto");
+
+            if (!promptCompletoGerado || !areaPrompt || !botao) {
+                return;
+            }
+
+            if (promptExpandido) {
+                areaPrompt.innerText = gerarPreviewPrompt(promptCompletoGerado);
+                botao.textContent = "Ver prompt completo";
+                promptExpandido = false;
+            } else {
+                areaPrompt.innerText = promptCompletoGerado;
+                botao.textContent = "Recolher prompt";
+                promptExpandido = true;
+            }
+        }
+
+        function copiarPrompt5w2h() {
+            if (!promptCompletoGerado) {
+                alert("⚠️ Gere o prompt antes de copiar.");
+                return;
+            }
+
+            navigator.clipboard.writeText(promptCompletoGerado).then(() => {
+                alert("✅ Prompt completo copiado com sucesso!");
+            }).catch(() => {
+                alert("❌ Erro ao copiar o texto.");
+            });
+        }
+
+        function abrirIAComPrompt(ia) {
+            if (!promptCompletoGerado) {
+                alert("Gere o prompt antes de abrir a IA.");
+                return;
+            }
+
+            const urls = {
+                manus: "https://manus.ai/",
+                gemini: "https://gemini.google.com/",
+                chatgpt: "https://chatgpt.com/"
+            };
+
+            const urlDestino = urls[ia];
+
+            if (!urlDestino) {
+                alert("IA não configurada.");
+                return;
+            }
+
+            navigator.clipboard.writeText(promptCompletoGerado).then(() => {
+                window.open(urlDestino, "_blank");
+                alert("Prompt copiado. Agora cole na IA com Ctrl + V.");
+            }).catch(() => {
+                alert("Não foi possível copiar o prompt.");
+            });
         }
     </script>
 
