@@ -390,11 +390,9 @@
 
         let reconhecimentoVoz = null;
         let vozAtiva = false;
-        let paradaSolicitadaPeloUsuario = false;
         let campoVozAtual = null;
         let botaoVozAtual = null;
         let ultimaFraseRegistrada = "";
-        let temporizadorReinicioVoz = null;
 
         function iniciarVoz(classeCampo, botao) {
             const campo = obterCampo(classeCampo);
@@ -404,7 +402,6 @@
                 return;
             }
 
-            // Segundo clique: parar gravação.
             if (vozAtiva) {
                 pararVoz();
                 return;
@@ -413,7 +410,7 @@
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             if (!SpeechRecognition) {
-                alert("Seu navegador não suporta digitação por voz. Use o Google Chrome, preferencialmente com a página publicada em HTTPS.");
+                alert("Seu navegador não suporta digitação por voz. Use o Google Chrome.");
                 return;
             }
 
@@ -421,77 +418,60 @@
             campo.focus();
 
             vozAtiva = true;
-            paradaSolicitadaPeloUsuario = false;
             campoVozAtual = campo;
             botaoVozAtual = botao;
             ultimaFraseRegistrada = "";
-
-            botao.textContent = "⏹️ Parar gravação";
-            botao.classList.add("gravando");
-
-            criarReconhecimentoVoz();
-        }
-
-        function criarReconhecimentoVoz() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             reconhecimentoVoz = new SpeechRecognition();
 
             reconhecimentoVoz.lang = "pt-BR";
 
             /*
-                Para mobile:
-                - continuous tenta manter a gravação ativa.
-                - interimResults false evita texto parcial duplicado.
-                - o texto só entra quando o navegador confirma a frase final.
+                Mais estável no mobile:
+                - sem continuous
+                - sem texto parcial
+                - sem reinício automático
             */
-            reconhecimentoVoz.continuous = true;
+            reconhecimentoVoz.continuous = false;
             reconhecimentoVoz.interimResults = false;
             reconhecimentoVoz.maxAlternatives = 1;
 
-            reconhecimentoVoz.onstart = function () {
-                console.log("Gravação por voz iniciada.");
-            };
+            botao.textContent = "⏹️ Parar gravação";
+            botao.classList.add("gravando");
 
             reconhecimentoVoz.onresult = function (event) {
                 if (!campoVozAtual) {
                     return;
                 }
 
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const resultado = event.results[i];
+                const resultado = event.results[0];
 
-                    if (!resultado.isFinal) {
-                        continue;
-                    }
-
-                    const frase = limparTextoVoz(resultado[0].transcript);
-
-                    if (!frase) {
-                        continue;
-                    }
-
-                    /*
-                        Evita duplicação comum no mobile:
-                        o navegador às vezes devolve a mesma frase final novamente.
-                    */
-                    if (frase === ultimaFraseRegistrada) {
-                        continue;
-                    }
-
-                    const textoAtual = limparTextoVoz(campoVozAtual.value);
-
-                    if (textoAtual.endsWith(frase)) {
-                        ultimaFraseRegistrada = frase;
-                        continue;
-                    }
-
-                    campoVozAtual.value = textoAtual
-                        ? textoAtual + " " + frase
-                        : frase;
-
-                    ultimaFraseRegistrada = frase;
+                if (!resultado || !resultado[0]) {
+                    return;
                 }
+
+                const frase = limparTextoVoz(resultado[0].transcript);
+
+                if (!frase) {
+                    return;
+                }
+
+                if (frase === ultimaFraseRegistrada) {
+                    return;
+                }
+
+                const textoAtual = limparTextoVoz(campoVozAtual.value);
+
+                if (textoAtual.endsWith(frase)) {
+                    ultimaFraseRegistrada = frase;
+                    return;
+                }
+
+                campoVozAtual.value = textoAtual
+                    ? textoAtual + " " + frase
+                    : frase;
+
+                ultimaFraseRegistrada = frase;
             };
 
             reconhecimentoVoz.onerror = function (event) {
@@ -507,47 +487,24 @@
 
                 if (event.error === "not-allowed" || event.error === "service-not-allowed") {
                     alert("Permissão de microfone negada. Libere o microfone no navegador.");
-                    pararVoz();
+                    finalizarBotaoVoz();
                     return;
                 }
 
                 if (event.error === "audio-capture") {
                     alert("Microfone não encontrado ou indisponível.");
-                    pararVoz();
+                    finalizarBotaoVoz();
                     return;
                 }
 
                 if (event.error === "network") {
-                    alert("Erro de rede no reconhecimento de voz. Teste no Google Chrome com internet ativa.");
-                    pararVoz();
+                    alert("Erro de rede no reconhecimento de voz. Teste com internet ativa.");
+                    finalizarBotaoVoz();
                     return;
                 }
             };
 
             reconhecimentoVoz.onend = function () {
-                console.log("Gravação encerrada pelo navegador.");
-
-                /*
-                    Mobile pode encerrar sozinho após pausa.
-                    Se o usuário ainda não apertou parar, reinicia.
-                    Como interimResults=false e não remontamos o texto, reduzimos a duplicação.
-                */
-                if (vozAtiva && !paradaSolicitadaPeloUsuario) {
-                    temporizadorReinicioVoz = setTimeout(function () {
-                        if (!vozAtiva || paradaSolicitadaPeloUsuario) {
-                            return;
-                        }
-
-                        try {
-                            criarReconhecimentoVoz();
-                        } catch (erro) {
-                            console.error("Não foi possível reiniciar a gravação:", erro);
-                        }
-                    }, 700);
-
-                    return;
-                }
-
                 finalizarBotaoVoz();
             };
 
@@ -556,29 +513,17 @@
             } catch (erro) {
                 console.error("Erro ao iniciar gravação:", erro);
                 alert("Não foi possível iniciar a gravação. Atualize a página e tente novamente.");
-                pararVoz();
+                finalizarBotaoVoz();
             }
         }
 
         function pararVoz() {
-            paradaSolicitadaPeloUsuario = true;
-            vozAtiva = false;
-
-            if (temporizadorReinicioVoz) {
-                clearTimeout(temporizadorReinicioVoz);
-                temporizadorReinicioVoz = null;
-            }
-
             if (reconhecimentoVoz) {
                 try {
                     reconhecimentoVoz.stop();
                 } catch (erro) {
                     console.error("Erro ao parar gravação:", erro);
                 }
-            }
-
-            if (campoVozAtual) {
-                campoVozAtual.focus();
             }
 
             finalizarBotaoVoz();
@@ -592,15 +537,9 @@
 
             reconhecimentoVoz = null;
             vozAtiva = false;
-            paradaSolicitadaPeloUsuario = false;
             campoVozAtual = null;
             botaoVozAtual = null;
             ultimaFraseRegistrada = "";
-
-            if (temporizadorReinicioVoz) {
-                clearTimeout(temporizadorReinicioVoz);
-                temporizadorReinicioVoz = null;
-            }
         }
 
         function limparTextoVoz(texto) {
