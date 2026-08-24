@@ -263,7 +263,7 @@
                         <button class="edit-btn botao-microfone" type="button"
                             onpointerdown="iniciarVozPressionada(event, 'briefingSummit', this)"
                             onpointerup="pararVozPressionada(event)" onpointercancel="pararVozPressionada(event)"
-                            onpointerleave="pararVozPressionada(event)" oncontextmenu="return false;">
+                            oncontextmenu="return false;">
                             🎙️ Segure para falar
                         </button>
 
@@ -395,6 +395,7 @@
         let vozPressionada = false;
         let campoVozAtual = null;
         let botaoVozAtual = null;
+        let ponteiroVozId = null;
 
         let textoBaseVoz = "";
         let textoFinalVoz = "";
@@ -407,10 +408,12 @@
         let ultimoFinalHorario = 0;
 
         const TEMPO_REINICIO_VOZ_MS = 700;
+        const TEMPO_IGNORAR_DUPLICADO_MS = 5000;
 
         function iniciarVozPressionada(event, classeCampo, botao) {
             if (event) {
                 event.preventDefault();
+                ponteiroVozId = event.pointerId;
 
                 if (botao.setPointerCapture && event.pointerId !== undefined) {
                     try {
@@ -502,7 +505,13 @@
                     }
                 }
 
-                textoInterinoVoz = interinoAtual;
+                /*
+                    No mobile, o texto interino pode vir repetindo parte do texto final.
+                    Aqui guardamos somente a parte realmente nova.
+                */
+                const textoJaConfirmado = juntarTextoVoz(textoBaseVoz, textoFinalVoz);
+                textoInterinoVoz = obterParteNovaVoz(textoJaConfirmado, interinoAtual);
+
                 atualizarCampoVoz();
             };
 
@@ -539,9 +548,8 @@
                 reconhecimentoVoz = null;
 
                 /*
-                    O navegador mobile pode encerrar após pausa.
-                    Enquanto o usuário ainda estiver segurando o botão,
-                    tentamos religar automaticamente.
+                    Se o navegador mobile encerrar sozinho enquanto o usuário
+                    ainda está segurando o botão, tenta religar.
                 */
                 if (vozPressionada) {
                     reinicioVozTimer = setTimeout(function () {
@@ -568,9 +576,22 @@
         function pararVozPressionada(event) {
             if (event) {
                 event.preventDefault();
+
+                if (
+                    botaoVozAtual &&
+                    botaoVozAtual.releasePointerCapture &&
+                    ponteiroVozId !== null
+                ) {
+                    try {
+                        botaoVozAtual.releasePointerCapture(ponteiroVozId);
+                    } catch (erro) {
+                        console.error("Não foi possível liberar o ponteiro:", erro);
+                    }
+                }
             }
 
             vozPressionada = false;
+            ponteiroVozId = null;
 
             if (reinicioVozTimer) {
                 clearTimeout(reinicioVozTimer);
@@ -578,7 +599,8 @@
             }
 
             /*
-                Ao soltar, preserva qualquer texto parcial que já estava visível.
+                Ao soltar, se havia texto parcial visível,
+                ele vira texto final sem duplicar.
             */
             if (textoInterinoVoz) {
                 adicionarTextoFinalVoz(textoInterinoVoz);
@@ -604,33 +626,34 @@
                 return;
             }
 
-            const fraseNormalizada = normalizarTextoVoz(fraseLimpa);
+            /*
+                Esta é a correção principal:
+                se o mobile mandar uma frase cumulativa, pegamos apenas
+                a parte nova em relação ao que já está confirmado.
+            */
+            const textoJaConfirmado = juntarTextoVoz(textoBaseVoz, textoFinalVoz);
+            const parteNova = obterParteNovaVoz(textoJaConfirmado, fraseLimpa);
+
+            if (!parteNova) {
+                return;
+            }
+
+            const parteNovaNormalizada = normalizarTextoVoz(parteNova);
             const agora = Date.now();
 
             /*
-                Trava contra duplicação comum no mobile.
-                Se a mesma frase final chegar de novo em até 4 segundos, ignora.
+                Trava contra duplicação exata em poucos segundos.
             */
             if (
-                fraseNormalizada === ultimoFinalNormalizado &&
-                agora - ultimoFinalHorario < 4000
+                parteNovaNormalizada === ultimoFinalNormalizado &&
+                agora - ultimoFinalHorario < TEMPO_IGNORAR_DUPLICADO_MS
             ) {
                 return;
             }
 
-            const textoFinalNormalizado = normalizarTextoVoz(textoFinalVoz);
+            textoFinalVoz = juntarTextoVoz(textoFinalVoz, parteNova);
 
-            if (textoFinalNormalizado.endsWith(fraseNormalizada)) {
-                ultimoFinalNormalizado = fraseNormalizada;
-                ultimoFinalHorario = agora;
-                return;
-            }
-
-            textoFinalVoz = textoFinalVoz
-                ? textoFinalVoz + " " + fraseLimpa
-                : fraseLimpa;
-
-            ultimoFinalNormalizado = fraseNormalizada;
+            ultimoFinalNormalizado = parteNovaNormalizada;
             ultimoFinalHorario = agora;
         }
 
@@ -659,6 +682,7 @@
         function finalizarVozPressionada() {
             vozPressionada = false;
             iniciandoVoz = false;
+            ponteiroVozId = null;
 
             if (reinicioVozTimer) {
                 clearTimeout(reinicioVozTimer);
@@ -680,6 +704,85 @@
 
             ultimoFinalNormalizado = "";
             ultimoFinalHorario = 0;
+        }
+
+        function obterParteNovaVoz(textoAnterior, textoNovo) {
+            const anterior = limparTextoVoz(textoAnterior);
+            const novo = limparTextoVoz(textoNovo);
+
+            if (!novo) {
+                return "";
+            }
+
+            if (!anterior) {
+                return novo;
+            }
+
+            const anteriorNormalizado = normalizarTextoVoz(anterior);
+            const novoNormalizado = normalizarTextoVoz(novo);
+
+            if (!novoNormalizado) {
+                return "";
+            }
+
+            /*
+                Se o texto novo inteiro já está no final do texto anterior,
+                não há nada novo para adicionar.
+            */
+            if (anteriorNormalizado.endsWith(novoNormalizado)) {
+                return "";
+            }
+
+            const palavrasAnterior = anterior.split(/\s+/);
+            const palavrasNovo = novo.split(/\s+/);
+
+            const palavrasAnteriorNormalizadas = anteriorNormalizado.split(/\s+/);
+            const palavrasNovoNormalizadas = novoNormalizado.split(/\s+/);
+
+            const maximoSobreposicao = Math.min(
+                palavrasAnteriorNormalizadas.length,
+                palavrasNovoNormalizadas.length
+            );
+
+            let tamanhoSobreposicao = 0;
+
+            /*
+                Procura a maior sobreposição:
+                final do texto anterior == começo do texto novo.
+            */
+            for (let tamanho = maximoSobreposicao; tamanho > 0; tamanho--) {
+                const finalAnterior = palavrasAnteriorNormalizadas
+                    .slice(palavrasAnteriorNormalizadas.length - tamanho)
+                    .join(" ");
+
+                const inicioNovo = palavrasNovoNormalizadas
+                    .slice(0, tamanho)
+                    .join(" ");
+
+                if (finalAnterior === inicioNovo) {
+                    tamanhoSobreposicao = tamanho;
+                    break;
+                }
+            }
+
+            return limparTextoVoz(
+                palavrasNovo.slice(tamanhoSobreposicao).join(" ")
+            );
+        }
+
+        function juntarTextoVoz(textoAtual, textoNovo) {
+            const atual = limparTextoVoz(textoAtual);
+            const novo = limparTextoVoz(textoNovo);
+
+            if (!atual) {
+                return novo;
+            }
+
+            if (!novo) {
+                return atual;
+            }
+
+            return atual + " " + novo;
         }
 
         function limparTextoVoz(texto) {
