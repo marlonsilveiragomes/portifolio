@@ -261,9 +261,9 @@
                             onclick="editarValor('briefingSummit', this)">Editar</button>
 
                         <button class="edit-btn botao-microfone" type="button"
-                            onpointerdown="iniciarVozSegurando(event, 'briefingSummit', this)"
-                            onpointerup="pararVozSegurando(event)" onpointercancel="pararVozSegurando(event)"
-                            oncontextmenu="return false;">
+                            onpointerdown="iniciarVozPressionada(event, 'briefingSummit', this)"
+                            onpointerup="pararVozPressionada(event)" onpointercancel="pararVozPressionada(event)"
+                            onpointerleave="pararVozPressionada(event)" oncontextmenu="return false;">
                             🎙️ Segure para falar
                         </button>
 
@@ -393,20 +393,35 @@
 
         let reconhecimentoVoz = null;
         let vozPressionada = false;
-        let vozRodando = false;
         let campoVozAtual = null;
         let botaoVozAtual = null;
-        let textoConfirmadoVoz = "";
-        let textoInterinoVoz = "";
-        let ultimaFraseFinalVoz = "";
-        let temporizadorReinicioVoz = null;
 
-        function iniciarVozSegurando(event, classeCampo, botao) {
+        let textoBaseVoz = "";
+        let textoFinalVoz = "";
+        let textoInterinoVoz = "";
+
+        let reinicioVozTimer = null;
+        let iniciandoVoz = false;
+
+        let ultimoFinalNormalizado = "";
+        let ultimoFinalHorario = 0;
+
+        const TEMPO_REINICIO_VOZ_MS = 700;
+
+        function iniciarVozPressionada(event, classeCampo, botao) {
             if (event) {
                 event.preventDefault();
+
+                if (botao.setPointerCapture && event.pointerId !== undefined) {
+                    try {
+                        botao.setPointerCapture(event.pointerId);
+                    } catch (erro) {
+                        console.error("Não foi possível capturar o ponteiro:", erro);
+                    }
+                }
             }
 
-            if (vozRodando) {
+            if (vozPressionada || iniciandoVoz) {
                 return;
             }
 
@@ -428,45 +443,52 @@
             campo.focus();
 
             vozPressionada = true;
-            vozRodando = true;
             campoVozAtual = campo;
             botaoVozAtual = botao;
 
-            textoConfirmadoVoz = limparTextoVoz(campo.value);
+            textoBaseVoz = limparTextoVoz(campo.value);
+            textoFinalVoz = "";
             textoInterinoVoz = "";
-            ultimaFraseFinalVoz = "";
+
+            ultimoFinalNormalizado = "";
+            ultimoFinalHorario = 0;
 
             botao.textContent = "🎙️ Ouvindo...";
             botao.classList.add("gravando");
 
-            iniciarReconhecimentoEnquantoPressionado();
+            iniciarCicloVoz();
         }
 
-        function iniciarReconhecimentoEnquantoPressionado() {
-            if (!vozPressionada || !campoVozAtual) {
-                finalizarVozSegurando();
+        function iniciarCicloVoz() {
+            if (!vozPressionada || !campoVozAtual || iniciandoVoz) {
                 return;
             }
 
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+            iniciandoVoz = true;
             reconhecimentoVoz = new SpeechRecognition();
 
             reconhecimentoVoz.lang = "pt-BR";
-
-            /*
-                continuous tenta manter a escuta.
-                interimResults mostra o texto enquanto a pessoa fala.
-            */
             reconhecimentoVoz.continuous = true;
             reconhecimentoVoz.interimResults = true;
             reconhecimentoVoz.maxAlternatives = 1;
 
+            reconhecimentoVoz.onstart = function () {
+                iniciandoVoz = false;
+                console.log("Voz iniciada.");
+            };
+
             reconhecimentoVoz.onresult = function (event) {
-                let textoInterinoAtual = "";
+                let interinoAtual = "";
 
                 for (let i = event.resultIndex; i < event.results.length; i++) {
                     const resultado = event.results[i];
+
+                    if (!resultado || !resultado[0]) {
+                        continue;
+                    }
+
                     const frase = limparTextoVoz(resultado[0].transcript);
 
                     if (!frase) {
@@ -474,17 +496,19 @@
                     }
 
                     if (resultado.isFinal) {
-                        adicionarFraseFinalVoz(frase);
+                        adicionarTextoFinalVoz(frase);
                     } else {
-                        textoInterinoAtual = frase;
+                        interinoAtual = frase;
                     }
                 }
 
-                textoInterinoVoz = textoInterinoAtual;
+                textoInterinoVoz = interinoAtual;
                 atualizarCampoVoz();
             };
 
             reconhecimentoVoz.onerror = function (event) {
+                iniciandoVoz = false;
+
                 console.error("Erro no reconhecimento de voz:", event.error);
 
                 if (event.error === "no-speech" || event.error === "aborted") {
@@ -493,69 +517,71 @@
 
                 if (event.error === "not-allowed" || event.error === "service-not-allowed") {
                     alert("Permissão de microfone negada. Libere o microfone no navegador.");
-                    pararVozSegurando(event);
+                    finalizarVozPressionada();
                     return;
                 }
 
                 if (event.error === "audio-capture") {
                     alert("Microfone não encontrado ou indisponível.");
-                    pararVozSegurando(event);
+                    finalizarVozPressionada();
                     return;
                 }
 
                 if (event.error === "network") {
                     alert("Erro de rede no reconhecimento de voz. Teste com internet ativa.");
-                    pararVozSegurando(event);
+                    finalizarVozPressionada();
                     return;
                 }
             };
 
             reconhecimentoVoz.onend = function () {
+                iniciandoVoz = false;
                 reconhecimentoVoz = null;
 
                 /*
-                    Se o navegador mobile encerrar sozinho enquanto o usuário
-                    ainda está segurando o botão, tentamos religar.
+                    O navegador mobile pode encerrar após pausa.
+                    Enquanto o usuário ainda estiver segurando o botão,
+                    tentamos religar automaticamente.
                 */
                 if (vozPressionada) {
-                    temporizadorReinicioVoz = setTimeout(function () {
+                    reinicioVozTimer = setTimeout(function () {
                         if (vozPressionada) {
-                            iniciarReconhecimentoEnquantoPressionado();
+                            iniciarCicloVoz();
                         }
-                    }, 600);
+                    }, TEMPO_REINICIO_VOZ_MS);
 
                     return;
                 }
 
-                finalizarVozSegurando();
+                finalizarVozPressionada();
             };
 
             try {
                 reconhecimentoVoz.start();
             } catch (erro) {
-                console.error("Erro ao iniciar reconhecimento de voz:", erro);
-                finalizarVozSegurando();
+                iniciandoVoz = false;
+                console.error("Erro ao iniciar voz:", erro);
+                finalizarVozPressionada();
             }
         }
 
-        function pararVozSegurando(event) {
+        function pararVozPressionada(event) {
             if (event) {
                 event.preventDefault();
             }
 
             vozPressionada = false;
 
-            if (temporizadorReinicioVoz) {
-                clearTimeout(temporizadorReinicioVoz);
-                temporizadorReinicioVoz = null;
+            if (reinicioVozTimer) {
+                clearTimeout(reinicioVozTimer);
+                reinicioVozTimer = null;
             }
 
             /*
-                Se havia texto parcial aparecendo na tela, preserva esse texto
-                ao soltar o botão.
+                Ao soltar, preserva qualquer texto parcial que já estava visível.
             */
             if (textoInterinoVoz) {
-                adicionarFraseFinalVoz(textoInterinoVoz);
+                adicionarTextoFinalVoz(textoInterinoVoz);
                 textoInterinoVoz = "";
                 atualizarCampoVoz();
             }
@@ -567,34 +593,45 @@
                     console.error("Erro ao parar voz:", erro);
                 }
             } else {
-                finalizarVozSegurando();
+                finalizarVozPressionada();
             }
         }
 
-        function adicionarFraseFinalVoz(frase) {
+        function adicionarTextoFinalVoz(frase) {
             const fraseLimpa = limparTextoVoz(frase);
 
             if (!fraseLimpa) {
                 return;
             }
 
+            const fraseNormalizada = normalizarTextoVoz(fraseLimpa);
+            const agora = Date.now();
+
             /*
-                Evita duplicar a última frase reconhecida.
+                Trava contra duplicação comum no mobile.
+                Se a mesma frase final chegar de novo em até 4 segundos, ignora.
             */
-            if (fraseLimpa === ultimaFraseFinalVoz) {
+            if (
+                fraseNormalizada === ultimoFinalNormalizado &&
+                agora - ultimoFinalHorario < 4000
+            ) {
                 return;
             }
 
-            if (textoConfirmadoVoz.endsWith(fraseLimpa)) {
-                ultimaFraseFinalVoz = fraseLimpa;
+            const textoFinalNormalizado = normalizarTextoVoz(textoFinalVoz);
+
+            if (textoFinalNormalizado.endsWith(fraseNormalizada)) {
+                ultimoFinalNormalizado = fraseNormalizada;
+                ultimoFinalHorario = agora;
                 return;
             }
 
-            textoConfirmadoVoz = textoConfirmadoVoz
-                ? textoConfirmadoVoz + " " + fraseLimpa
+            textoFinalVoz = textoFinalVoz
+                ? textoFinalVoz + " " + fraseLimpa
                 : fraseLimpa;
 
-            ultimaFraseFinalVoz = fraseLimpa;
+            ultimoFinalNormalizado = fraseNormalizada;
+            ultimoFinalHorario = agora;
         }
 
         function atualizarCampoVoz() {
@@ -604,8 +641,12 @@
 
             const partes = [];
 
-            if (textoConfirmadoVoz) {
-                partes.push(textoConfirmadoVoz);
+            if (textoBaseVoz) {
+                partes.push(textoBaseVoz);
+            }
+
+            if (textoFinalVoz) {
+                partes.push(textoFinalVoz);
             }
 
             if (textoInterinoVoz) {
@@ -615,30 +656,44 @@
             campoVozAtual.value = partes.join(" ").replace(/\s+/g, " ").trim();
         }
 
-        function finalizarVozSegurando() {
+        function finalizarVozPressionada() {
             vozPressionada = false;
-            vozRodando = false;
+            iniciandoVoz = false;
+
+            if (reinicioVozTimer) {
+                clearTimeout(reinicioVozTimer);
+                reinicioVozTimer = null;
+            }
 
             if (botaoVozAtual) {
                 botaoVozAtual.textContent = "🎙️ Segure para falar";
                 botaoVozAtual.classList.remove("gravando");
             }
 
-            if (temporizadorReinicioVoz) {
-                clearTimeout(temporizadorReinicioVoz);
-                temporizadorReinicioVoz = null;
-            }
-
             reconhecimentoVoz = null;
             campoVozAtual = null;
             botaoVozAtual = null;
-            textoConfirmadoVoz = "";
+
+            textoBaseVoz = "";
+            textoFinalVoz = "";
             textoInterinoVoz = "";
-            ultimaFraseFinalVoz = "";
+
+            ultimoFinalNormalizado = "";
+            ultimoFinalHorario = 0;
         }
 
         function limparTextoVoz(texto) {
             return String(texto || "")
+                .replace(/\s+/g, " ")
+                .trim();
+        }
+
+        function normalizarTextoVoz(texto) {
+            return String(texto || "")
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^\w\s]/g, "")
                 .replace(/\s+/g, " ")
                 .trim();
         }
