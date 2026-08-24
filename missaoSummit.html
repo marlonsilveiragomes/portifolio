@@ -56,7 +56,7 @@
 
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('nomeAli', this)">OK</button>
-                        <button class="edit-btn" type="button" onclick="editarValor('nomeAli', this)">Editar</button>
+                        <button class="edit-btn" type="button" onclick="limparValor('nomeAli', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('nomeStartup', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('nomeStartup', this)">Editar</button>
+                            onclick="limparValor('nomeStartup', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                         <button class="ok-btn" type="button"
                             onclick="salvarValorOpcional('nomeContato', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('nomeContato', this)">Editar</button>
+                            onclick="limparValor('nomeContato', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('telefoneContato', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('telefoneContato', this)">Editar</button>
+                            onclick="limparValor('telefoneContato', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -155,7 +155,7 @@
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('problemaResolve', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('problemaResolve', this)">Editar</button>
+                            onclick="limparValor('problemaResolve', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@
                         <button class="ok-btn" type="button"
                             onclick="salvarValorOpcional('perfilEmpresa', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('perfilEmpresa', this)">Editar</button>
+                            onclick="limparValor('perfilEmpresa', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -189,7 +189,7 @@
                         <button class="ok-btn" type="button"
                             onclick="salvarValorOpcional('comoFunciona', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('comoFunciona', this)">Editar</button>
+                            onclick="limparValor('comoFunciona', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -206,7 +206,7 @@
                         <button class="ok-btn" type="button"
                             onclick="salvarValorOpcional('modeloContratacao', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('modeloContratacao', this)">Editar</button>
+                            onclick="limparValor('modeloContratacao', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -223,7 +223,7 @@
                         <button class="ok-btn" type="button"
                             onclick="salvarValorOpcional('resultadoGerado', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('resultadoGerado', this)">Editar</button>
+                            onclick="limparValor('resultadoGerado', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -240,7 +240,7 @@
                         <button class="ok-btn" type="button"
                             onclick="salvarValorOpcional('condicaoDiferenciada', this)">OK</button>
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('condicaoDiferenciada', this)">Editar</button>
+                            onclick="limparValor('condicaoDiferenciada', this)">Limpar</button>
                     </div>
                 </div>
             </div>
@@ -258,7 +258,8 @@
                             onclick="salvarValorOpcional('briefingSummit', this)">OK</button>
 
                         <button class="edit-btn" type="button"
-                            onclick="editarValor('briefingSummit', this)">Editar</button>
+                            onclick="limparValor('briefingSummit', this)">Limpar</button>
+
 
                         <button class="edit-btn botao-microfone" type="button"
                             onpointerdown="iniciarVozPressionada(event, 'briefingSummit', this)"
@@ -380,6 +381,28 @@
             }
 
             campo.disabled = false;
+            campo.focus();
+
+            const grupoBotoes = botao.parentElement;
+            const botaoOk = grupoBotoes.querySelector(".ok-btn");
+
+            if (botaoOk) {
+                botaoOk.classList.remove("saved");
+                botaoOk.textContent = "OK";
+            }
+        }
+
+        function limparValor(classe, botao) {
+            const campo = obterCampo(classe);
+
+            if (!campo) {
+                alert("Campo não encontrado: " + classe);
+                return;
+            }
+
+            campo.disabled = false;
+            campo.value = "";
+            campo.style.border = "";
             campo.focus();
 
             const grupoBotoes = botao.parentElement;
@@ -867,6 +890,53 @@
             return true;
         }
 
+        function resetarFormularioSummit() {
+            const formulario = document.querySelector(".missao-summit");
+
+            if (!formulario) {
+                return;
+            }
+
+            const campos = formulario.querySelectorAll("input, textarea");
+
+            campos.forEach(function (campo) {
+                campo.disabled = false;
+                campo.value = "";
+                campo.style.border = "";
+            });
+
+            const botoesOk = formulario.querySelectorAll(".ok-btn");
+
+            botoesOk.forEach(function (botao) {
+                botao.classList.remove("saved");
+                botao.textContent = "OK";
+            });
+
+            const botaoMicrofone = formulario.querySelector(".botao-microfone");
+
+            if (botaoMicrofone) {
+                botaoMicrofone.classList.remove("gravando");
+                botaoMicrofone.textContent = "🎙️ Segure para falar";
+            }
+
+            const statusEnvio = document.getElementById("statusEnvioSummit");
+
+            if (statusEnvio) {
+                statusEnvio.textContent = "Pronto para novo preenchimento.";
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+            const primeiroCampo = obterCampo("nomeAli");
+
+            if (primeiroCampo) {
+                primeiroCampo.focus();
+            }
+        }
+
         async function enviarParaGoogleSheets() {
             const statusEnvio = document.getElementById("statusEnvioSummit");
             const botaoEnviar = document.getElementById("btnEnviarSummit");
@@ -900,10 +970,12 @@
                 });
 
                 if (statusEnvio) {
-                    statusEnvio.textContent = "✅ Dados enviados. Confira a planilha.";
+                    statusEnvio.textContent = "✅ Dados enviados. Preparando novo formulário...";
                 }
 
                 alert("✅ Dados enviados com sucesso!");
+
+                resetarFormularioSummit();
 
             } catch (erro) {
                 console.error(erro);
