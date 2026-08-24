@@ -390,11 +390,11 @@
 
         let reconhecimentoVoz = null;
         let vozAtiva = false;
+        let paradaSolicitadaPeloUsuario = false;
         let campoVozAtual = null;
         let botaoVozAtual = null;
-        let textoBaseVoz = "";
-        let ultimoValorCampoVoz = "";
-        let resultadosVoz = {};
+        let ultimaFraseRegistrada = "";
+        let temporizadorReinicioVoz = null;
 
         function iniciarVoz(classeCampo, botao) {
             const campo = obterCampo(classeCampo);
@@ -404,6 +404,7 @@
                 return;
             }
 
+            // Segundo clique: parar gravação.
             if (vozAtiva) {
                 pararVoz();
                 return;
@@ -420,52 +421,77 @@
             campo.focus();
 
             vozAtiva = true;
+            paradaSolicitadaPeloUsuario = false;
             campoVozAtual = campo;
             botaoVozAtual = botao;
-            textoBaseVoz = campo.value.trim();
-            ultimoValorCampoVoz = campo.value.trim();
-            resultadosVoz = {};
+            ultimaFraseRegistrada = "";
 
             botao.textContent = "⏹️ Parar gravação";
             botao.classList.add("gravando");
 
-            iniciarReconhecimentoVoz();
+            criarReconhecimentoVoz();
         }
 
-        function iniciarReconhecimentoVoz() {
+        function criarReconhecimentoVoz() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
             reconhecimentoVoz = new SpeechRecognition();
 
             reconhecimentoVoz.lang = "pt-BR";
+
+            /*
+                Para mobile:
+                - continuous tenta manter a gravação ativa.
+                - interimResults false evita texto parcial duplicado.
+                - o texto só entra quando o navegador confirma a frase final.
+            */
             reconhecimentoVoz.continuous = true;
-            reconhecimentoVoz.interimResults = true;
+            reconhecimentoVoz.interimResults = false;
             reconhecimentoVoz.maxAlternatives = 1;
 
-            reconhecimentoVoz.onresult = function (event) {
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const textoFalado = event.results[i][0].transcript.trim();
+            reconhecimentoVoz.onstart = function () {
+                console.log("Gravação por voz iniciada.");
+            };
 
-                    if (!textoFalado) {
+            reconhecimentoVoz.onresult = function (event) {
+                if (!campoVozAtual) {
+                    return;
+                }
+
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const resultado = event.results[i];
+
+                    if (!resultado.isFinal) {
                         continue;
                     }
 
-                    resultadosVoz[i] = textoFalado;
+                    const frase = limparTextoVoz(resultado[0].transcript);
+
+                    if (!frase) {
+                        continue;
+                    }
+
+                    /*
+                        Evita duplicação comum no mobile:
+                        o navegador às vezes devolve a mesma frase final novamente.
+                    */
+                    if (frase === ultimaFraseRegistrada) {
+                        continue;
+                    }
+
+                    const textoAtual = limparTextoVoz(campoVozAtual.value);
+
+                    if (textoAtual.endsWith(frase)) {
+                        ultimaFraseRegistrada = frase;
+                        continue;
+                    }
+
+                    campoVozAtual.value = textoAtual
+                        ? textoAtual + " " + frase
+                        : frase;
+
+                    ultimaFraseRegistrada = frase;
                 }
-
-                const textoReconhecido = Object.keys(resultadosVoz)
-                    .sort(function (a, b) {
-                        return Number(a) - Number(b);
-                    })
-                    .map(function (indice) {
-                        return resultadosVoz[indice];
-                    })
-                    .join(" ");
-
-                const novoTexto = montarTextoVozSemDuplicar(textoBaseVoz, textoReconhecido);
-
-                campoVozAtual.value = novoTexto;
-                ultimoValorCampoVoz = novoTexto;
             };
 
             reconhecimentoVoz.onerror = function (event) {
@@ -475,14 +501,12 @@
                     return;
                 }
 
-                if (event.error === "not-allowed" || event.error === "service-not-allowed") {
-                    alert("Permissão de microfone negada. Libere o microfone no navegador.");
-                    pararVoz();
+                if (event.error === "aborted") {
                     return;
                 }
 
-                if (event.error === "network") {
-                    alert("Erro de rede no reconhecimento de voz. Teste no Google Chrome com internet ativa.");
+                if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+                    alert("Permissão de microfone negada. Libere o microfone no navegador.");
                     pararVoz();
                     return;
                 }
@@ -492,33 +516,39 @@
                     pararVoz();
                     return;
                 }
+
+                if (event.error === "network") {
+                    alert("Erro de rede no reconhecimento de voz. Teste no Google Chrome com internet ativa.");
+                    pararVoz();
+                    return;
+                }
             };
 
             reconhecimentoVoz.onend = function () {
-                if (!vozAtiva) {
-                    finalizarBotaoVoz();
+                console.log("Gravação encerrada pelo navegador.");
+
+                /*
+                    Mobile pode encerrar sozinho após pausa.
+                    Se o usuário ainda não apertou parar, reinicia.
+                    Como interimResults=false e não remontamos o texto, reduzimos a duplicação.
+                */
+                if (vozAtiva && !paradaSolicitadaPeloUsuario) {
+                    temporizadorReinicioVoz = setTimeout(function () {
+                        if (!vozAtiva || paradaSolicitadaPeloUsuario) {
+                            return;
+                        }
+
+                        try {
+                            criarReconhecimentoVoz();
+                        } catch (erro) {
+                            console.error("Não foi possível reiniciar a gravação:", erro);
+                        }
+                    }, 700);
+
                     return;
                 }
 
-                /*
-                    Correção para mobile:
-                    antes de reiniciar a escuta, o texto atual vira texto-base.
-                    Assim o navegador não reprocessa a sessão anterior como se fosse nova.
-                */
-                textoBaseVoz = ultimoValorCampoVoz;
-                resultadosVoz = {};
-
-                setTimeout(function () {
-                    if (!vozAtiva) {
-                        return;
-                    }
-
-                    try {
-                        iniciarReconhecimentoVoz();
-                    } catch (erro) {
-                        console.error("Não foi possível reiniciar a gravação:", erro);
-                    }
-                }, 700);
+                finalizarBotaoVoz();
             };
 
             try {
@@ -531,10 +561,12 @@
         }
 
         function pararVoz() {
+            paradaSolicitadaPeloUsuario = true;
             vozAtiva = false;
 
-            if (campoVozAtual) {
-                ultimoValorCampoVoz = campoVozAtual.value.trim();
+            if (temporizadorReinicioVoz) {
+                clearTimeout(temporizadorReinicioVoz);
+                temporizadorReinicioVoz = null;
             }
 
             if (reconhecimentoVoz) {
@@ -546,7 +578,6 @@
             }
 
             if (campoVozAtual) {
-                campoVozAtual.value = ultimoValorCampoVoz;
                 campoVozAtual.focus();
             }
 
@@ -560,38 +591,23 @@
             }
 
             reconhecimentoVoz = null;
+            vozAtiva = false;
+            paradaSolicitadaPeloUsuario = false;
             campoVozAtual = null;
             botaoVozAtual = null;
-            textoBaseVoz = "";
-            ultimoValorCampoVoz = "";
-            resultadosVoz = {};
+            ultimaFraseRegistrada = "";
+
+            if (temporizadorReinicioVoz) {
+                clearTimeout(temporizadorReinicioVoz);
+                temporizadorReinicioVoz = null;
+            }
         }
 
-        function montarTextoVozSemDuplicar(textoBase, textoReconhecido) {
-            const base = limparEspacos(textoBase);
-            const reconhecido = limparEspacos(textoReconhecido);
-
-            if (!base) {
-                return reconhecido;
-            }
-
-            if (!reconhecido) {
-                return base;
-            }
-
-            if (base.endsWith(reconhecido)) {
-                return base;
-            }
-
-            return limparEspacos(base + " " + reconhecido);
-        }
-
-        function limparEspacos(texto) {
+        function limparTextoVoz(texto) {
             return String(texto || "")
                 .replace(/\s+/g, " ")
                 .trim();
         }
-
 
         function montarDadosFormulario() {
             return {
