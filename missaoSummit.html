@@ -390,9 +390,11 @@
 
         let reconhecimentoVoz = null;
         let vozAtiva = false;
+        let paradaSolicitadaPeloUsuario = false;
         let campoVozAtual = null;
         let botaoVozAtual = null;
         let ultimaFraseRegistrada = "";
+        let temporizadorReinicioVoz = null;
 
         function iniciarVoz(classeCampo, botao) {
             const campo = obterCampo(classeCampo);
@@ -402,8 +404,9 @@
                 return;
             }
 
+            // Segundo clique: terminar gravação.
             if (vozAtiva) {
-                pararVoz();
+                terminarGravacaoVoz();
                 return;
             }
 
@@ -418,60 +421,71 @@
             campo.focus();
 
             vozAtiva = true;
+            paradaSolicitadaPeloUsuario = false;
             campoVozAtual = campo;
             botaoVozAtual = botao;
             ultimaFraseRegistrada = "";
 
+            botao.textContent = "⏹️ Terminar gravação";
+            botao.classList.add("gravando");
+
+            criarReconhecimentoVoz();
+        }
+
+        function criarReconhecimentoVoz() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            if (!vozAtiva || paradaSolicitadaPeloUsuario) {
+                return;
+            }
+
             reconhecimentoVoz = new SpeechRecognition();
 
             reconhecimentoVoz.lang = "pt-BR";
-
-            /*
-                Mais estável no mobile:
-                - sem continuous
-                - sem texto parcial
-                - sem reinício automático
-            */
-            reconhecimentoVoz.continuous = false;
+            reconhecimentoVoz.continuous = true;
             reconhecimentoVoz.interimResults = false;
             reconhecimentoVoz.maxAlternatives = 1;
 
-            botao.textContent = "⏹️ Parar gravação";
-            botao.classList.add("gravando");
+            reconhecimentoVoz.onstart = function () {
+                console.log("Gravação por voz iniciada.");
+            };
 
             reconhecimentoVoz.onresult = function (event) {
                 if (!campoVozAtual) {
                     return;
                 }
 
-                const resultado = event.results[0];
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const resultado = event.results[i];
 
-                if (!resultado || !resultado[0]) {
-                    return;
-                }
+                    if (!resultado.isFinal) {
+                        continue;
+                    }
 
-                const frase = limparTextoVoz(resultado[0].transcript);
+                    const frase = limparTextoVoz(resultado[0].transcript);
 
-                if (!frase) {
-                    return;
-                }
+                    if (!frase) {
+                        continue;
+                    }
 
-                if (frase === ultimaFraseRegistrada) {
-                    return;
-                }
+                    // Evita duplicar a mesma frase.
+                    if (frase === ultimaFraseRegistrada) {
+                        continue;
+                    }
 
-                const textoAtual = limparTextoVoz(campoVozAtual.value);
+                    const textoAtual = campoVozAtual.value.trim();
 
-                if (textoAtual.endsWith(frase)) {
+                    if (limparTextoVoz(textoAtual).endsWith(frase)) {
+                        ultimaFraseRegistrada = frase;
+                        continue;
+                    }
+
+                    campoVozAtual.value = textoAtual
+                        ? textoAtual + " " + frase
+                        : frase;
+
                     ultimaFraseRegistrada = frase;
-                    return;
                 }
-
-                campoVozAtual.value = textoAtual
-                    ? textoAtual + " " + frase
-                    : frase;
-
-                ultimaFraseRegistrada = frase;
             };
 
             reconhecimentoVoz.onerror = function (event) {
@@ -487,25 +501,44 @@
 
                 if (event.error === "not-allowed" || event.error === "service-not-allowed") {
                     alert("Permissão de microfone negada. Libere o microfone no navegador.");
-                    finalizarBotaoVoz();
+                    terminarGravacaoVoz();
                     return;
                 }
 
                 if (event.error === "audio-capture") {
                     alert("Microfone não encontrado ou indisponível.");
-                    finalizarBotaoVoz();
+                    terminarGravacaoVoz();
                     return;
                 }
 
                 if (event.error === "network") {
                     alert("Erro de rede no reconhecimento de voz. Teste com internet ativa.");
-                    finalizarBotaoVoz();
+                    terminarGravacaoVoz();
                     return;
                 }
             };
 
             reconhecimentoVoz.onend = function () {
-                finalizarBotaoVoz();
+                console.log("Gravação encerrada pelo navegador.");
+
+                /*
+                    No mobile, o navegador pode encerrar sozinho.
+                    Aqui esperamos 5 segundos e tentamos religar,
+                    desde que o usuário NÃO tenha clicado em terminar.
+                */
+                if (vozAtiva && !paradaSolicitadaPeloUsuario) {
+                    temporizadorReinicioVoz = setTimeout(function () {
+                        if (!vozAtiva || paradaSolicitadaPeloUsuario) {
+                            return;
+                        }
+
+                        criarReconhecimentoVoz();
+                    }, 5000);
+
+                    return;
+                }
+
+                finalizarEstadoVoz();
             };
 
             try {
@@ -513,23 +546,35 @@
             } catch (erro) {
                 console.error("Erro ao iniciar gravação:", erro);
                 alert("Não foi possível iniciar a gravação. Atualize a página e tente novamente.");
-                finalizarBotaoVoz();
+                terminarGravacaoVoz();
             }
         }
 
-        function pararVoz() {
+        function terminarGravacaoVoz() {
+            paradaSolicitadaPeloUsuario = true;
+            vozAtiva = false;
+
+            if (temporizadorReinicioVoz) {
+                clearTimeout(temporizadorReinicioVoz);
+                temporizadorReinicioVoz = null;
+            }
+
             if (reconhecimentoVoz) {
                 try {
                     reconhecimentoVoz.stop();
                 } catch (erro) {
-                    console.error("Erro ao parar gravação:", erro);
+                    console.error("Erro ao terminar gravação:", erro);
                 }
             }
 
-            finalizarBotaoVoz();
+            if (campoVozAtual) {
+                campoVozAtual.focus();
+            }
+
+            finalizarEstadoVoz();
         }
 
-        function finalizarBotaoVoz() {
+        function finalizarEstadoVoz() {
             if (botaoVozAtual) {
                 botaoVozAtual.textContent = "🎙️ Voz";
                 botaoVozAtual.classList.remove("gravando");
@@ -537,9 +582,15 @@
 
             reconhecimentoVoz = null;
             vozAtiva = false;
+            paradaSolicitadaPeloUsuario = false;
             campoVozAtual = null;
             botaoVozAtual = null;
             ultimaFraseRegistrada = "";
+
+            if (temporizadorReinicioVoz) {
+                clearTimeout(temporizadorReinicioVoz);
+                temporizadorReinicioVoz = null;
+            }
         }
 
         function limparTextoVoz(texto) {
