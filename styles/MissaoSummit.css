@@ -188,7 +188,15 @@
 }
 
 .botao-microfone {
-    white-space: nowrap;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.botao-microfone.gravando {
+    background-color: #ff4d4d;
+    color: #ffffff;
+    border-color: #ff4d4d;
 }
 
 /* =====================================================
