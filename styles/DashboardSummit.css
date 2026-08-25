@@ -342,3 +342,17 @@ body,
         min-height: 460px;
     }
 }
+
+/* =====================================================
+   GRÁFICO RESULTADO GERADO
+===================================================== */
+
+.dashboard-summit__graficos .dashboard-grafico--resultado {
+    grid-column: 1 / -1;
+}
+
+#graficoResultadoGerado {
+    width: 100% !important;
+    height: 360px !important;
+    max-height: 360px !important;
+}
