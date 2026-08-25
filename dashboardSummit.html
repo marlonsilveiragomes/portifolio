@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Missão Summit 2026</title>
+
+    <link rel="stylesheet" href="styles/Style.css">
+    <link rel="stylesheet" href="styles/DashboardSummit.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <nav class="cabecalho__menu">
+            <a class="cabecalho__menu__link" href="missaoSummit.html">Missão Summit 2026</a>
+
+            <a class="cabecalho__menu__link" href="dashboardSummit.html">
+                <strong style="color: greenyellow;">Dashboard</strong>
+            </a>
+        </nav>
+    </header>
+
+    <main class="dashboard-summit">
+
+        <section class="dashboard-summit__conteudo">
+
+            <div class="dashboard-summit__cabecalho">
+                <h1 class="dashboard-summit__titulo">
+                    Dashboard <strong class="titulo-destaque">Missão Summit 2026</strong>
+                </h1>
+
+                <p class="dashboard-summit__descricao">
+                    Acompanhamento das empresas coletadas pelos ALIs em tempo quase real.
+                </p>
+
+                <p id="statusDashboardSummit" class="dashboard-summit__status">
+                    Carregando dados...
+                </p>
+            </div>
+
+            <section class="dashboard-summit__cards">
+
+                <article class="dashboard-card dashboard-card--principal">
+                    <span class="dashboard-card__rotulo">Total de empresas coletadas</span>
+                    <strong id="totalColetas" class="dashboard-card__numero">0</strong>
+                </article>
+
+                <article class="dashboard-card">
+                    <span class="dashboard-card__rotulo">1º lugar</span>
+                    <strong id="topAli1Nome" class="dashboard-card__nome">-</strong>
+                    <small id="topAli1Total" class="dashboard-card__detalhe">0 coletas</small>
+                </article>
+
+                <article class="dashboard-card">
+                    <span class="dashboard-card__rotulo">2º lugar</span>
+                    <strong id="topAli2Nome" class="dashboard-card__nome">-</strong>
+                    <small id="topAli2Total" class="dashboard-card__detalhe">0 coletas</small>
+                </article>
+
+                <article class="dashboard-card">
+                    <span class="dashboard-card__rotulo">3º lugar</span>
+                    <strong id="topAli3Nome" class="dashboard-card__nome">-</strong>
+                    <small id="topAli3Total" class="dashboard-card__detalhe">0 coletas</small>
+                </article>
+
+            </section>
+
+            <section class="dashboard-summit__cards dashboard-summit__cards--secundarios">
+
+                <article class="dashboard-card dashboard-card--menor">
+                    <span class="dashboard-card__rotulo">Com telefone</span>
+                    <strong id="totalComTelefone" class="dashboard-card__numero">0</strong>
+                </article>
+
+                <article class="dashboard-card dashboard-card--menor">
+                    <span class="dashboard-card__rotulo">Com Instagram</span>
+                    <strong id="totalComInstagram" class="dashboard-card__numero">0</strong>
+                </article>
+
+                <article class="dashboard-card dashboard-card--menor">
+                    <span class="dashboard-card__rotulo">Com briefing</span>
+                    <strong id="totalComBriefing" class="dashboard-card__numero">0</strong>
+                </article>
+
+            </section>
+
+            <section class="dashboard-summit__graficos">
+
+                <article class="dashboard-grafico dashboard-grafico--ali">
+                    <h2>Coletas por ALI</h2>
+
+                    <div class="dashboard-grafico__canvas-area dashboard-grafico__canvas-area--ali">
+                        <canvas id="graficoPorAli"></canvas>
+                    </div>
+                </article>
+
+                <article class="dashboard-grafico">
+                    <h2>Coletas por dia</h2>
+
+                    <div class="dashboard-grafico__canvas-area">
+                        <canvas id="graficoPorDia"></canvas>
+                    </div>
+                </article>
+
+                <article class="dashboard-grafico">
+                    <h2>Canais digitais informados</h2>
+
+                    <div class="dashboard-grafico__canvas-area dashboard-grafico__canvas-area--donut">
+                        <canvas id="graficoCanaisDigitais"></canvas>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="dashboard-summit__tabela-bloco">
+                <h2>Últimas empresas coletadas</h2>
+
+                <div class="dashboard-summit__tabela-wrapper">
+                    <table class="dashboard-summit__tabela">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>ALI</th>
+                                <th>Startup</th>
+                                <th>Contato</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaUltimasColetas">
+                            <tr>
+                                <td colspan="4">Carregando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </section>
+
+    </main>
+
+    <script>
+        const APPS_SCRIPT_DASHBOARD_URL = "https://script.google.com/macros/s/AKfycby0nLnC6bmxp8Ay_WBmcx5sN1zEnEB8tcZ1mAtpW4ZKxif1WKHmcN0KuHp22TsXTcuhfg/exec";
+
+        let graficoPorAli = null;
+        let graficoPorDia = null;
+        let graficoCanaisDigitais = null;
+
+        Chart.defaults.color = "#f6f6f6";
+        Chart.defaults.borderColor = "rgba(255, 255, 255, 0.18)";
+
+        function carregarDashboardSummit() {
+            const status = document.getElementById("statusDashboardSummit");
+            const nomeCallback = "receberDashboardSummit_" + Date.now();
+
+            if (status) {
+                status.textContent = "Atualizando dados...";
+            }
+
+            const script = document.createElement("script");
+
+            window[nomeCallback] = function (dados) {
+                try {
+                    atualizarDashboardSummit(dados);
+
+                    if (status) {
+                        status.textContent = "Atualizado em " + formatarDataHora(new Date());
+                    }
+
+                } catch (erro) {
+                    console.error("Erro ao atualizar dashboard:", erro);
+
+                    if (status) {
+                        status.textContent = "Erro ao atualizar a dashboard.";
+                    }
+
+                } finally {
+                    delete window[nomeCallback];
+
+                    if (script.parentNode) {
+                        script.parentNode.removeChild(script);
+                    }
+                }
+            };
+
+            script.onerror = function () {
+                delete window[nomeCallback];
+
+                if (status) {
+                    status.textContent = "Erro ao carregar dados do Apps Script.";
+                }
+
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+            };
+
+            script.src =
+                APPS_SCRIPT_DASHBOARD_URL +
+                "?acao=dashboard" +
+                "&callback=" + nomeCallback +
+                "&t=" + Date.now();
+
+            document.body.appendChild(script);
+        }
+
+        function atualizarDashboardSummit(dados) {
+            if (!dados || dados.status !== "sucesso") {
+                throw new Error("Resposta inválida da API da dashboard.");
+            }
+
+            atualizarCardsDashboard(dados);
+            atualizarTop3Alis(dados.top3Alis || []);
+            atualizarGraficoPorAli(dados.porAli || []);
+            atualizarGraficoPorDia(dados.porDia || []);
+            atualizarGraficoCanaisDigitais(dados.canaisDigitais || []);
+            atualizarTabelaUltimasColetas(dados.ultimasColetas || []);
+        }
+
+        function atualizarCardsDashboard(dados) {
+            definirTexto("totalColetas", dados.totalColetas || 0);
+            definirTexto("totalComTelefone", dados.totalComTelefone || 0);
+            definirTexto("totalComInstagram", dados.totalComInstagram || 0);
+            definirTexto("totalComBriefing", dados.totalComBriefing || 0);
+        }
+
+        function atualizarTop3Alis(top3Alis) {
+            preencherTopAli(1, top3Alis[0]);
+            preencherTopAli(2, top3Alis[1]);
+            preencherTopAli(3, top3Alis[2]);
+        }
+
+        function preencherTopAli(posicao, item) {
+            const nome = document.getElementById("topAli" + posicao + "Nome");
+            const total = document.getElementById("topAli" + posicao + "Total");
+
+            if (!nome || !total) {
+                return;
+            }
+
+            if (!item) {
+                nome.textContent = "-";
+                total.textContent = "0 coletas";
+                return;
+            }
+
+            nome.textContent = item.nome || "-";
+            total.textContent = (item.total || 0) + " coletas";
+        }
+
+        function atualizarGraficoPorAli(listaPorAli) {
+            const listaOrdenada = listaPorAli.slice().sort(function (a, b) {
+                return (b.total || 0) - (a.total || 0);
+            });
+
+            const nomes = listaOrdenada.map(function (item) {
+                return item.nome;
+            });
+
+            const totais = listaOrdenada.map(function (item) {
+                return item.total;
+            });
+
+            const contexto = document.getElementById("graficoPorAli");
+
+            if (!contexto) {
+                return;
+            }
+
+            const areaCanvas = contexto.parentElement;
+
+            if (areaCanvas) {
+                const alturaCalculada = Math.max(360, nomes.length * 42);
+                areaCanvas.style.height = alturaCalculada + "px";
+            }
+
+            if (graficoPorAli) {
+                graficoPorAli.destroy();
+            }
+
+            graficoPorAli = new Chart(contexto, {
+                type: "bar",
+                data: {
+                    labels: nomes,
+                    datasets: [{
+                        label: "Empresas coletadas",
+                        data: totais,
+                        backgroundColor: "rgba(34, 212, 253, 0.75)",
+                        borderColor: "rgba(34, 212, 253, 1)",
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: "y",
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                autoSkip: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function atualizarGraficoPorDia(listaPorDia) {
+            const dias = listaPorDia.map(function (item) {
+                return item.nome;
+            });
+
+            const totais = listaPorDia.map(function (item) {
+                return item.total;
+            });
+
+            const contexto = document.getElementById("graficoPorDia");
+
+            if (!contexto) {
+                return;
+            }
+
+            if (graficoPorDia) {
+                graficoPorDia.destroy();
+            }
+
+            graficoPorDia = new Chart(contexto, {
+                type: "line",
+                data: {
+                    labels: dias,
+                    datasets: [{
+                        label: "Coletas por dia",
+                        data: totais,
+                        tension: 0.25,
+                        borderColor: "rgba(173, 255, 47, 1)",
+                        backgroundColor: "rgba(173, 255, 47, 0.18)",
+                        pointBackgroundColor: "rgba(173, 255, 47, 1)",
+                        pointBorderColor: "#ffffff",
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function atualizarGraficoCanaisDigitais(canaisDigitais) {
+            const nomes = canaisDigitais.map(function (item) {
+                return item.nome;
+            });
+
+            const totais = canaisDigitais.map(function (item) {
+                return item.total;
+            });
+
+            const contexto = document.getElementById("graficoCanaisDigitais");
+
+            if (!contexto) {
+                return;
+            }
+
+            if (graficoCanaisDigitais) {
+                graficoCanaisDigitais.destroy();
+            }
+
+            graficoCanaisDigitais = new Chart(contexto, {
+                type: "doughnut",
+                data: {
+                    labels: nomes,
+                    datasets: [{
+                        label: "Canais digitais",
+                        data: totais,
+                        backgroundColor: [
+                            "rgba(34, 212, 253, 0.90)",   // Instagram
+                            "rgba(10, 102, 194, 0.90)",   // LinkedIn
+                            "rgba(24, 119, 242, 0.90)",   // Facebook
+                            "rgba(173, 255, 47, 0.90)",   // Site
+                            "rgba(255, 159, 64, 0.90)"    // Outra rede
+                        ],
+                        borderColor: [
+                            "rgba(34, 212, 253, 1)",
+                            "rgba(10, 102, 194, 1)",
+                            "rgba(24, 119, 242, 1)",
+                            "rgba(173, 255, 47, 1)",
+                            "rgba(255, 159, 64, 1)"
+                        ],
+                        borderWidth: 2,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: "bottom",
+                            labels: {
+                                color: "#ffffff",
+                                font: {
+                                    size: 12
+                                },
+                                padding: 16
+                            }
+                        },
+                        tooltip: {
+                            titleColor: "#ffffff",
+                            bodyColor: "#ffffff",
+                            backgroundColor: "rgba(5, 8, 22, 0.95)",
+                            borderColor: "rgba(34, 212, 253, 0.55)",
+                            borderWidth: 1
+                        }
+                    }
+                }
+            });
+        }
+
+        function atualizarTabelaUltimasColetas(ultimasColetas) {
+            const corpoTabela = document.getElementById("tabelaUltimasColetas");
+
+            if (!corpoTabela) {
+                return;
+            }
+
+            corpoTabela.innerHTML = "";
+
+            if (!ultimasColetas.length) {
+                const linhaVazia = document.createElement("tr");
+                const colunaVazia = document.createElement("td");
+
+                colunaVazia.colSpan = 4;
+                colunaVazia.textContent = "Nenhuma coleta encontrada.";
+
+                linhaVazia.appendChild(colunaVazia);
+                corpoTabela.appendChild(linhaVazia);
+
+                return;
+            }
+
+            ultimasColetas.forEach(function (item) {
+                const linha = document.createElement("tr");
+
+                adicionarCelulaTabela(linha, formatarDataPlanilha(item.data));
+                adicionarCelulaTabela(linha, item.ali || "-");
+                adicionarCelulaTabela(linha, item.startup || "-");
+                adicionarCelulaTabela(linha, item.contato || "-");
+
+                corpoTabela.appendChild(linha);
+            });
+        }
+
+        function adicionarCelulaTabela(linha, texto) {
+            const celula = document.createElement("td");
+            celula.textContent = texto || "-";
+            linha.appendChild(celula);
+        }
+
+        function definirTexto(id, valor) {
+            const elemento = document.getElementById(id);
+
+            if (elemento) {
+                elemento.textContent = valor;
+            }
+        }
+
+        function formatarDataHora(data) {
+            return data.toLocaleString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+        }
+
+        function formatarDataPlanilha(valor) {
+            if (!valor) {
+                return "-";
+            }
+
+            const data = new Date(valor);
+
+            if (isNaN(data.getTime())) {
+                return String(valor);
+            }
+
+            return data.toLocaleString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+        }
+
+        carregarDashboardSummit();
+
+        setInterval(function () {
+            carregarDashboardSummit();
+        }, 60000);
+    </script>
+
+</body>
+
+</html>

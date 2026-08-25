@@ -1,0 +1,344 @@
+.dashboard-summit {
+    width: 100%;
+    min-height: 100vh;
+    padding: 48px 5%;
+    box-sizing: border-box;
+}
+
+.dashboard-summit__conteudo {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.dashboard-summit__cabecalho {
+    margin-bottom: 32px;
+}
+
+.dashboard-summit__titulo {
+    margin: 0 0 12px 0;
+    font-size: clamp(30px, 4vw, 54px);
+    line-height: 1.1;
+}
+
+.dashboard-summit__descricao {
+    max-width: 760px;
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.dashboard-summit__status {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.dashboard-summit__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.dashboard-summit__cards--secundarios {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dashboard-card {
+    min-height: 130px;
+    padding: 22px;
+    border: 1px solid rgba(34, 212, 253, 0.25);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+
+.dashboard-card--principal {
+    border-color: rgba(173, 255, 47, 0.45);
+}
+
+.dashboard-card--menor {
+    min-height: 105px;
+}
+
+.dashboard-card__rotulo {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.dashboard-card__numero {
+    display: block;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1;
+    color: greenyellow;
+}
+
+.dashboard-card__nome {
+    display: block;
+    margin-bottom: 8px;
+    font-size: clamp(20px, 2.2vw, 30px);
+    line-height: 1.15;
+    color: #22d4fd;
+}
+
+.dashboard-card__detalhe {
+    font-size: 15px;
+    opacity: 0.85;
+}
+
+.dashboard-summit__graficos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 28px;
+}
+
+.dashboard-grafico {
+    padding: 24px;
+    border: 1px solid rgba(34, 212, 253, 0.22);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+    box-sizing: border-box;
+}
+
+.dashboard-grafico h2,
+.dashboard-summit__tabela-bloco h2 {
+    margin: 0 0 18px 0;
+    font-size: 22px;
+}
+
+.dashboard-grafico canvas {
+    width: 100%;
+    max-height: 360px;
+}
+
+.dashboard-summit__tabela-bloco {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid rgba(34, 212, 253, 0.22);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.dashboard-summit__tabela-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dashboard-summit__tabela {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+.dashboard-summit__tabela th,
+.dashboard-summit__tabela td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: left;
+    font-size: 14px;
+}
+
+.dashboard-summit__tabela th {
+    color: #22d4fd;
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+
+    .dashboard-summit__cards,
+    .dashboard-summit__cards--secundarios,
+    .dashboard-summit__graficos {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-summit {
+        padding: 36px 5%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .dashboard-card,
+    .dashboard-grafico,
+    .dashboard-summit__tabela-bloco {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .dashboard-summit__descricao {
+        font-size: 16px;
+    }
+}
+
+body,
+.dashboard-summit,
+.dashboard-summit * {
+    color: #f6f6f6;
+}
+
+.dashboard-summit {
+    background:
+        radial-gradient(circle at top left, rgba(34, 212, 253, 0.14), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(173, 255, 47, 0.10), transparent 30%),
+        #050816;
+}
+
+/* Cards com cores diferentes */
+.dashboard-summit__cards .dashboard-card:nth-child(1) {
+    background: linear-gradient(135deg, #073b4c, #0b7285);
+    border-color: rgba(34, 212, 253, 0.65);
+}
+
+.dashboard-summit__cards .dashboard-card:nth-child(2) {
+    background: linear-gradient(135deg, #3a0ca3, #4361ee);
+    border-color: rgba(67, 97, 238, 0.75);
+}
+
+.dashboard-summit__cards .dashboard-card:nth-child(3) {
+    background: linear-gradient(135deg, #7b2cbf, #9d4edd);
+    border-color: rgba(157, 78, 221, 0.75);
+}
+
+.dashboard-summit__cards .dashboard-card:nth-child(4) {
+    background: linear-gradient(135deg, #006466, #2a9d8f);
+    border-color: rgba(42, 157, 143, 0.75);
+}
+
+.dashboard-summit__cards--secundarios .dashboard-card:nth-child(1) {
+    background: linear-gradient(135deg, #1d3557, #457b9d);
+    border-color: rgba(69, 123, 157, 0.75);
+}
+
+.dashboard-summit__cards--secundarios .dashboard-card:nth-child(2) {
+    background: linear-gradient(135deg, #31572c, #4f772d);
+    border-color: rgba(79, 119, 45, 0.75);
+}
+
+.dashboard-summit__cards--secundarios .dashboard-card:nth-child(3) {
+    background: linear-gradient(135deg, #5f0f40, #9a031e);
+    border-color: rgba(154, 3, 30, 0.75);
+}
+
+.dashboard-card {
+    color: #ffffff;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
+}
+
+.dashboard-card__rotulo,
+.dashboard-card__detalhe {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.dashboard-card__numero,
+.dashboard-card__nome {
+    color: #ffffff;
+}
+
+/* Blocos dos gráficos */
+.dashboard-grafico,
+.dashboard-summit__tabela-bloco {
+    background: rgba(11, 18, 32, 0.94);
+    border-color: rgba(34, 212, 253, 0.32);
+    color: #f6f6f6;
+}
+
+.dashboard-grafico h2,
+.dashboard-summit__tabela-bloco h2 {
+    color: #ffffff;
+}
+
+/* Tabela */
+.dashboard-summit__tabela {
+    color: #f6f6f6;
+}
+
+.dashboard-summit__tabela th {
+    color: #22d4fd;
+}
+
+.dashboard-summit__tabela td {
+    color: #f6f6f6;
+}
+
+.dashboard-summit__tabela tr:hover td {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+/* =====================================================
+   CORREÇÃO ESTÁVEL DOS GRÁFICOS DA DASHBOARD
+===================================================== */
+
+.dashboard-summit__graficos {
+    width: 100%;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+}
+
+.dashboard-grafico {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px;
+    border: 1px solid rgba(34, 212, 253, 0.32);
+    border-radius: 18px;
+    background: rgba(11, 18, 32, 0.96);
+    box-sizing: border-box;
+}
+
+.dashboard-grafico h2 {
+    margin: 0 0 18px 0;
+    color: #ffffff;
+    font-size: 22px;
+}
+
+.dashboard-grafico__canvas-area {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    min-height: 360px;
+    min-width: 0;
+}
+
+.dashboard-grafico__canvas-area--ali {
+    height: 420px;
+    min-height: 420px;
+}
+
+.dashboard-grafico__canvas-area--donut {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.dashboard-grafico__canvas-area canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 900px) {
+    .dashboard-grafico {
+        padding: 18px;
+    }
+
+    .dashboard-grafico__canvas-area {
+        height: 320px;
+        min-height: 320px;
+    }
+
+    .dashboard-grafico__canvas-area--ali {
+        height: 460px;
+        min-height: 460px;
+    }
+}

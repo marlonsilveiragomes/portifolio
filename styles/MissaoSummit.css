@@ -407,3 +407,128 @@
         min-height: 160px;
     }
 }
+
+.input-wrapper select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+
+    border-radius: 8px;
+    border: 1px solid rgba(34, 212, 253, 0.45);
+
+    background-color: #050816;
+    color: #f6f6f6;
+
+    font-size: 16px;
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.input-wrapper select:focus {
+    outline: none;
+    border-color: #22d4fd;
+    box-shadow: 0 0 0 2px rgba(34, 212, 253, 0.18);
+}
+
+.input-wrapper select:disabled {
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+.input-wrapper select option {
+    background-color: #050816;
+    color: #f6f6f6;
+}
+
+/* =====================================================
+   SELECT DO NOME DO ALI
+===================================================== */
+
+.input-wrapper select.nomeAli {
+    width: 100%;
+    min-height: 54px;
+    padding: 0 18px;
+
+    box-sizing: border-box;
+
+    border: 2px solid #22d4fd;
+    border-radius: 8px;
+
+    background-color: #050816;
+    color: #f6f6f6;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+
+    cursor: pointer;
+}
+
+.input-wrapper select.nomeAli:focus {
+    outline: none;
+    border-color: #22d4fd;
+    box-shadow: 0 0 0 3px rgba(34, 212, 253, 0.22);
+}
+
+.input-wrapper select.nomeAli:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+
+    background-color: #050816;
+    color: #f6f6f6;
+    border-color: #22d4fd;
+}
+
+.input-wrapper select.nomeAli option {
+    background-color: #050816;
+    color: #f6f6f6;
+    font-size: 16px;
+}
+
+/* =====================================================
+   SELECT DO RESULTADO GERADO
+===================================================== */
+
+.input-wrapper select.resultadoGerado {
+    width: 100%;
+    min-height: 54px;
+    padding: 0 18px;
+
+    box-sizing: border-box;
+
+    border: 2px solid #22d4fd;
+    border-radius: 8px;
+
+    background-color: #050816;
+    color: #f6f6f6;
+
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+
+    cursor: pointer;
+}
+
+.input-wrapper select.resultadoGerado:focus {
+    outline: none;
+    border-color: #22d4fd;
+    box-shadow: 0 0 0 3px rgba(34, 212, 253, 0.22);
+}
+
+.input-wrapper select.resultadoGerado:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+
+    background-color: #050816;
+    color: #f6f6f6;
+    border-color: #22d4fd;
+}
+
+.input-wrapper select.resultadoGerado option {
+    background-color: #050816;
+    color: #f6f6f6;
+    font-size: 16px;
+}

@@ -52,7 +52,22 @@
                 <label>Nome do ALI:</label>
 
                 <div class="input-wrapper">
-                    <input type="text" class="nomeAli" maxlength="120" placeholder="Ex.: Marlon Silveira Gomes">
+                    <select class="nomeAli">
+                        <option value="">Selecione o ALI</option>
+                        <option value="André">André</option>
+                        <option value="Camila Vidal">Camila Vidal</option>
+                        <option value="Jo Garcia">Jo Garcia</option>
+                        <option value="Patrick">Patrick</option>
+                        <option value="Eliny">Eliny</option>
+                        <option value="Eduardo">Eduardo</option>
+                        <option value="Gabrielle">Gabrielle</option>
+                        <option value="Julia Carolina">Julia Carolina</option>
+                        <option value="Laura Souza">Laura Souza</option>
+                        <option value="Luana Rodrigues">Luana Rodrigues</option>
+                        <option value="Ricardo">Ricardo</option>
+                        <option value="William R.">William R.</option>
+                        <option value="Marlon S.">Marlon S.</option>
+                    </select>
 
                     <div class="btns-inline">
                         <button class="ok-btn" type="button" onclick="salvarValor('nomeAli', this)">OK</button>
@@ -216,8 +231,14 @@
                 <label>Qual resultado ou ganho a empresa pode gerar?</label>
 
                 <div class="input-wrapper">
-                    <input type="text" class="resultadoGerado" maxlength="700"
-                        placeholder="Ex.: Redução de custos, aumento de vendas, produtividade, inovação ou melhor gestão">
+                    <select class="resultadoGerado">
+                        <option value="">Selecione o principal resultado ou ganho</option>
+                        <option value="Aumenta Faturamento">Aumenta Faturamento</option>
+                        <option value="Melhora Gestão de Pessoas">Melhora Gestão de Pessoas</option>
+                        <option value="Otimiza Processos">Otimiza Processos</option>
+                        <option value="Reduz Custos">Reduz Custos</option>
+                        <option value="Melhora Marketing">Melhora Marketing</option>
+                    </select>
 
                     <div class="btns-inline">
                         <button class="ok-btn" type="button"
@@ -897,7 +918,7 @@
                 return;
             }
 
-            const campos = formulario.querySelectorAll("input, textarea");
+            const campos = formulario.querySelectorAll("input, textarea, select");
 
             campos.forEach(function (campo) {
                 campo.disabled = false;
